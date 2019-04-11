@@ -1,0 +1,55 @@
+@svg square {
+    @rect { 
+        fill: var(--color, black); 
+        width: 100%; 
+        height: 100%; 
+    } 
+}
+.select-container{
+    padding-top:100px;
+    overflow: hidden;
+}
+.cell{
+    text-align:center;
+    width: 786px;
+    height: 202px;
+    line-height: 202px;
+    overflow: hidden;
+    font-size:80px;
+    font-family: 'Arial Normal', 'Arial';
+    font-weight: 800;
+    border:1px solid rgba(228, 228, 228, 1);
+    border-left: 0px;
+    border-right: 0px;
+    border-image: svg(square param(--color #ddd)) 2 2 stretch;
+}
+.mg{
+    margin-top: 20px;
+}
+.img_background{
+    position: absolute;
+    margin-top: 10px;
+    margin-left:80px;
+    width: 150px;
+    height: 150px;
+    margin-top:10px;
+    background-color:#da0000; 
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    vertical-align: middle;
+    overflow:hidden;
+}
+.img{
+    width:72px;
+    height:72px;
+    display: inline-block;
+    margin-bottom:10px; 
+}
+.lf{
+    margin-left: -80px;
+}
+.mx{
+    width:96px;
+    height:72px;
+}
