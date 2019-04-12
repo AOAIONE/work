@@ -26,6 +26,14 @@ export default new Router({
       meta: {
         title: '选择身份'
       }
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/page/Home'),
+      meta: {
+        title: '首页'
+      }
     }
   ]
 })

@@ -8,6 +8,7 @@ import 'weui'
 import store from './store/store'
 import 'babel-polyfill'
 import './assets/css/reset.css'
+import './assets/css/common.css'
 import VueWechatTitle from 'vue-wechat-title'
 
 Vue.use(VueWechatTitle)
