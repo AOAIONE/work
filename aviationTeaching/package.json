@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "cssnano": "^4.1.10",
+    "font-awesome": "^4.7.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "postcss-aspect-ratio-mini": "^1.0.1",

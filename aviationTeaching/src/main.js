@@ -9,6 +9,7 @@ import store from './store/store'
 import 'babel-polyfill'
 import './assets/css/reset.css'
 import './assets/css/common.css'
+import 'font-awesome/css/font-awesome.min.css'
 import VueWechatTitle from 'vue-wechat-title'
 
 Vue.use(VueWechatTitle)

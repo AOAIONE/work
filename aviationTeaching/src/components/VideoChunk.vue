@@ -1,7 +1,12 @@
 <template>
   <div class="video_container">
     <div class="video_content ax_default">
-      <img :src="video.url" class="video_img">
+      <div class="video_img_lf">
+        <img class="video_img" :src="video.url">
+        <a class="playbtn">
+          <i class="fa fa-play fa-2x iplay" aria-hidden="true"></i>
+        </a>
+      </div>
       <div class="video_info">
         <p class="video_name">
           <span>{{video.title}}</span>
@@ -38,10 +43,17 @@ export default {
   margin-top: 30px;
 }
 .video_img {
-  width: 250px;
+  width: 100%;
   height: 180px;
 }
+.video_img_lf {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+}
 .video_info {
+  position: relative;
   margin-left: 40px;
   margin-top: 8px;
   word-wrap: break-word;
@@ -51,7 +63,6 @@ export default {
 }
 .video_user {
   text-align: left;
-  margin-top: 20px;
   font-weight: 410;
   font-style: normal;
   font-size: 24px;
@@ -60,5 +71,28 @@ export default {
 .video_date {
   float: right;
   margin-right: 40px;
+}
+.playbtn {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-color: white;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.5;
+  color: #111111;
+  transition: all 0.3s ease-in-out 0s;
+}
+.iplay {
+  margin-left: 10px;
+  margin-top: 10px;
 }
 </style>

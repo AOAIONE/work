@@ -34,6 +34,14 @@ export default new Router({
       meta: {
         title: '首页'
       }
+    },
+    {
+      path: '/classDetail',
+      name: 'ClassDetail',
+      component: () => import('@/page/ClassDetail'),
+      meta: {
+        title: '课表详情页'
+      }
     }
   ]
 })
