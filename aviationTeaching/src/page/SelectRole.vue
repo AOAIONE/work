@@ -1,7 +1,7 @@
 <template>
   <div class="select-container">
     <ul>
-      <li class="cell" v-for="tab in tabs" :key="tab.userId" @click=toRoute(tab.text)>
+      <li class="cell" v-for="tab in tabs" :key="tab.userId" @click=toRoute(tab.role)>
         <div class="img_background">
           <div class="img" :class="{mx:tab.isMx}" :style="{'background-image':'url('+tab.img+')','background-repate':'no-repeat','background-size':'cover'}"></div>
         </div>
@@ -30,12 +30,21 @@ export default {
     this.getRole()
   },
   methods: {
-    // ...mapMutations(['changeLogin']),
-    toRoute: function (id) {
+    ...mapMutations(['changeLogin']),
+    toRoute: function (text) {
       debugger
-      // selectRole(data).then(res => {
-
-      // })
+      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
+      let data = {
+        UserName: role.userName,
+        Password: role.passWord,
+        client_id: 'ro.client',
+        client_secret: 'secret',
+        scope: text + ' offline_access api1',
+        Grant_Type: 'password'
+      }
+      selectRole(data).then(res => {
+        debugger
+      })
     },
     // 页面初始化之前请求用户角色
     getRole: function () {
@@ -46,19 +55,19 @@ export default {
         let tab = {}
         switch (e.roleName) {
           case 'user':
-            tab = {text: '教务员', userId: e.userId, img: require('../assets/user_dean.png')}
+            tab = {text: '教务员', userId: e.userId, img: require('../assets/user_dean.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'schemer':
-            tab = {text: '计划员', userId: e.userId, img: require('../assets/user_planner.png')}
+            tab = {text: '计划员', userId: e.userId, img: require('../assets/user_planner.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'teacher':
-            tab = {text: '教员', id: 3, isLeft: true, img: require('../assets/user_student.png')}
+            tab = {text: '教员', id: 3, isLeft: true, img: require('../assets/user_student.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'student':
-            tab = {text: '学员', id: 4, isLeft: true, isMx: true, img: require('../assets/user_teacher.png')}
+            tab = {text: '学员', id: 4, isLeft: true, isMx: true, img: require('../assets/user_teacher.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           default:
