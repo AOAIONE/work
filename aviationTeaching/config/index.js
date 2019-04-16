@@ -12,17 +12,16 @@ module.exports = {
     proxyTable: {
       '/api': {
         // 目标 API 地址
-        target: 'https://easy-mock.com/mock/5a45f7b3105bf467fbd51960/example',
+        target: 'http://192.168.50.20:5000',
         // 如果要代理 websockets
         ws: true,
         // 将主机标头的原点更改为目标URL
         changeOrigin: true,
         pathRewrite: {
-          '^/api':''
+          '^/api': ''
         }
-    }
+      }
     },
-    
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

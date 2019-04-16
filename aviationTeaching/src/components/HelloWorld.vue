@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { demo } from '@/service/service'
+// import { demo } from '@/service/service'
 
 export default {
   name: 'HelloWorld',
@@ -47,7 +47,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
@@ -61,24 +62,23 @@ li {
 a {
   color: #42b983;
 }
-.test{
+.test {
   float: left;
   position: relative;
   width: 500px;
   background-color: red;
 }
-.test2{
-  width:200px;
+.test2 {
+  width: 200px;
   float: left;
   background-color: yellow;
 }
-.test1{
+.test1 {
   position: relative;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   width: 200px;
   margin-left: -100px;
   background-color: black;
-
 }
 </style>

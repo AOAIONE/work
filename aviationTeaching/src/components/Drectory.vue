@@ -5,7 +5,7 @@
         <span class="ico_text"></span>
       </p>
       <p class="content_title">
-        <span class="title_text">{{text}}</span>
+        <span class="title_text">{{drectory.text}}</span>
       </p>
     </div>
   </div>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: 'Drectory',
-  props: ['text']
+  props: ['drectory']
 }
 </script>
 <style lang="less" scoped>

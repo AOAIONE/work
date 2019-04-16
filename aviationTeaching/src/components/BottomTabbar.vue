@@ -63,7 +63,7 @@ export default {
   z-index: 4;
   bottom: 0;
   width: 100%;
-  background-color: #f7f7fa;
+  background-color: rgba(255, 255, 255, 1);
 }
 .tabbar__item {
   width: 150px;

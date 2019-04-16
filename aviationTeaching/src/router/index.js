@@ -42,6 +42,22 @@ export default new Router({
       meta: {
         title: '课表详情页'
       }
+    },
+    {
+      path: '/courseCenter',
+      name: 'CourseCenter',
+      component: () => import('@/page/CourseCenter'),
+      meta: {
+        title: '课件中心'
+      }
+    },
+    {
+      path: '/courseList',
+      name: 'CourseList',
+      component: () => import('@/page/CourseList'),
+      meta: {
+        title: '课件目录'
+      }
     }
   ]
 })

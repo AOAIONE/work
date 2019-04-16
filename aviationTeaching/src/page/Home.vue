@@ -3,7 +3,7 @@
         <!-- <div class="mgtop"></div> -->
         <h-title :title="title1"></h-title>
         <div class="top_container">
-            <h-drectory v-for="drectory in drectorys" :key="drectory.id" :text="drectory.text"></h-drectory>
+            <h-drectory v-for="drectory in drectorys" :key="drectory.id" :text="drectory"></h-drectory>
         </div>
         <h-title :title="title2"></h-title>
         <h-video-chunk v-for="video in videos" :key="video.id" :video="video"></h-video-chunk>

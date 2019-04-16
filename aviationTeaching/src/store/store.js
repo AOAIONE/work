@@ -4,17 +4,21 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  pj: 0,
-  count: 1
+  // 存储token
+  Authorization: localStorage.getItem('Authorization')
+    ? localStorage.getItem('Authorization')
+    : ''
 }
+
 const mutations = {
-  add (state) {
-    state.count += 1
-  },
-  reduce (state) {
-    state.count -= 1
+  // 修改token，并将token存入localStorage
+  changeLogin (state, user) {
+    state.Authorization = user.Authorization
+    console.log('store/index.js---到这里了!')
+    localStorage.setItem('Authorization', user.Authorization)
   }
 }
+
 export default new Vuex.Store({
   state,
   mutations

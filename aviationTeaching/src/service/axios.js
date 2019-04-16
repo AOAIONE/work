@@ -3,17 +3,33 @@ import axios from 'axios'
 
 // 创建axios实例
 const service = axios.create({
-  timeout: 30000, // 请求超时时间
-  headers: {'Content-Type': 'application/json'}
+  timeout: 30000, // 请求超时时间  withCredentials: true,
+  withCredentials: true, // 允许跨域携带token
+  headers: { 'Content-Type': 'application/json' }
 })
 // 添加request拦截器
-service.interceptors.request.use(config => {
-  return config
-}, error => {
-  Promise.reject(error)
-})
+// 异步请求前在header里加入token
+axios.interceptors.request.use(
+  config => {
+    if (
+      config.url === '/connect/token' ||
+      config.url === '/api/account_info/get_roles'
+    ) {
+      // 如果是登录和注册操作，则不需要携带header里面的token
+    } else {
+      if (localStorage.getItem('Authorization')) {
+        config.headers.Authorizatior = localStorage.getItem('Authorization')
+      }
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 // 添加respone拦截器
-service.interceptors.response.use(
+// 异步请求后，判断token是否过期
+axios.interceptors.response.use(
   response => {
     let res = {}
     res.status = response.status
@@ -21,10 +37,18 @@ service.interceptors.response.use(
     return res
   },
   error => {
-    if (error.response && error.response.status === 404) {
-    //   router.push('/blank.vue')
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          localStorage.removeItem('Authorization')
+          this.$router.push('/')
+          break
+        case 404:
+          //   router.push('/blank.vue')
+          break
+      }
+      return Promise.reject(error.response)
     }
-    return Promise.reject(error.response)
   }
 )
 
@@ -33,19 +57,21 @@ export function get (url, params = {}) {
   return service({
     url: url,
     method: 'get',
-    headers: {
-    },
+    headers: {},
     params
   })
 }
 
 // 封装post请求
-export function post (url, data = {}) {
+export function post (url, data = {}, headers = {}) {
   // 默认配置
   let sendObject = {
     url: url,
     method: 'post',
     data: data
+  }
+  if (headers.hasOwnProperty('Content-Type')) {
+    sendObject.headers = headers
   }
   sendObject.data = JSON.stringify(data)
   return service(sendObject)
@@ -68,4 +94,4 @@ export function deletes (url) {
   })
 }
 
-export {service}
+export { service }

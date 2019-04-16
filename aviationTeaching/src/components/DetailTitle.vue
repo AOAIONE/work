@@ -1,7 +1,7 @@
 <template>
   <div class="container ax_default">
     <p>
-      <a class="title_left">&lt;返回</a>
+      <a class="title_left" @click="back">&lt;返回</a>
       <span class="title_center">{{title}}</span>
     </p>
   </div>
@@ -11,8 +11,12 @@
 
 export default {
   name: 'DetailTitle',
-  props: ['title']
-
+  props: ['title'],
+  methods: {
+    back: function () {
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -24,7 +28,7 @@ export default {
   font-style: normal;
   text-align: left;
   border-bottom: 1px solid rgba(242, 242, 242, 1);
-  line-height: 56px;
+  line-height: 100px;
   background-color: rgba(255, 255, 255, 1);
 }
 .title_left {
@@ -38,6 +42,6 @@ export default {
   font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
   font-weight: 700;
   font-style: normal;
-  font-size: 26px;
+  font-size: 28px;
 }
 </style>
