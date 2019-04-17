@@ -12,7 +12,7 @@ import './assets/css/common.css'
 import axios from 'axios'
 import 'font-awesome/css/font-awesome.min.css'
 import VueWechatTitle from 'vue-wechat-title'
-import { baseUrl } from '@/assets/js/common.js'
+import baseUrl from '@/assets/js/common.js'
 import util from '@/utils/util.js'
 
 axios.defaults.baseURL = baseUrl
