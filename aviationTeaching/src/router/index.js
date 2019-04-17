@@ -66,6 +66,22 @@ export default new Router({
       meta: {
         title: '课件详细页'
       }
+    },
+    {
+      path: '/myCourse',
+      name: 'MyCourse',
+      component: () => import('@/page/MyCourse'),
+      meta: {
+        title: '我的课件'
+      }
+    },
+    {
+      path: '/myCourseDetail',
+      name: 'MyCourseDetail',
+      component: () => import('@/page/MyCourseDetail'),
+      meta: {
+        title: '我的课件'
+      }
     }
   ]
 })

@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="item ax_default">
+        <div class=""></div>
+        <div class="ax_default">
             <div class="item_content">
                 <label class="content_left">课件ID:</label>
                 <div class="content_right">
@@ -77,7 +78,7 @@ import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
 
 export default {
-  name: 'CourseDetail',
+  name: 'MyCourseDetail',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,

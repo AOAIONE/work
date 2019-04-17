@@ -1,8 +1,8 @@
 <template>
-    <p class="detail_content ax_default">
-        <span>{{detail.key}}:</span>
-        <span>&nbsp;&nbsp;{{detail.value}}</span>
-    </p>
+  <p class="detail_content ax_default">
+    <span>{{detail.key}}:</span>
+    <span>&nbsp;&nbsp;{{detail.value}}</span>
+  </p>
 </template>
 <script>
 export default {

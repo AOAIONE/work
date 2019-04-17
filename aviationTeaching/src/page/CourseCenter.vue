@@ -1,9 +1,9 @@
 <template>
-    <div class="course_container container">
-        <c-title :title="title1"></c-title>
-        <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
-        <bottom-tabbar></bottom-tabbar>
-    </div>
+  <div class="container">
+    <c-title :title="title1"></c-title>
+    <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
+    <bottom-tabbar></bottom-tabbar>
+  </div>
 </template>
 <script>
 import title from '@/components/Title'

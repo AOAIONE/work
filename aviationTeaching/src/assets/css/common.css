@@ -16,3 +16,47 @@
   overflow-y: auto;
   background-color: rgba(245, 245, 245, 1);
 }
+
+/*详情页公用样式*/
+.item {
+  margin-top: 100px;
+}
+.item_content {
+  margin-left: 20px;
+  padding-left: 50px;
+  width: 750px;
+  height: 86px;
+  font-family: "FontAwesome Regular", "FontAwesome";
+  font-weight: 410;
+  font-style: normal;
+  font-size: 28px;
+  color: #000000;
+  line-height: 86px;
+  border: 1px solid rgba(242, 242, 242, 1);
+  background: inherit;
+  background-color: rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+  border-left: 0px;
+}
+.item_content::after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
+}
+.content_left {
+  width: 120px;
+  text-align: right;
+  float: left;
+}
+.content_right {
+  position: relative;
+  margin-left: 160px;
+}
+.content_right_wrap {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+/*详情页公用样式结束*/
