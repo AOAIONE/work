@@ -60,9 +60,9 @@ export default new Router({
       }
     },
     {
-      path: '/courseDetail',
-      name: 'CourseDetail',
-      component: () => import('@/page/CourseDetail'),
+      path: '/courseCenterDetail',
+      name: 'CourseCenterDetail',
+      component: () => import('@/page/CourseCenterDetail'),
       meta: {
         title: '课件详细页'
       }
@@ -80,7 +80,63 @@ export default new Router({
       name: 'MyCourseDetail',
       component: () => import('@/page/MyCourseDetail'),
       meta: {
-        title: '我的课件'
+        title: '我的课件详情'
+      }
+    },
+    {
+      path: '/readStatistics',
+      name: 'ReadStatistics',
+      component: () => import('@/page/ReadStatistics'),
+      meta: {
+        title: '阅读统计'
+      }
+    },
+    {
+      path: '/readUserDetail',
+      name: 'ReadUserDetail',
+      component: () => import('@/page/ReadUserDetail'),
+      meta: {
+        title: '阅读人详情'
+      }
+    },
+    {
+      path: '/assignRead',
+      name: 'AssignRead',
+      component: () => import('@/page/AssignRead'),
+      meta: {
+        title: '指定阅读课件'
+      }
+    },
+    {
+      path: '/assignReadDetail',
+      name: 'AssignReadDetail',
+      component: () => import('@/page/AssignReadDetail'),
+      meta: {
+        title: '指定阅读课件详情'
+      }
+    },
+    {
+      path: '/myApplyCourse',
+      name: 'MyApplyCourse',
+      component: () => import('@/page/MyApplyCourse'),
+      meta: {
+        title: '我申请的课件'
+      }
+    },
+    {
+      path: '/selectTeacher',
+      name: 'SelectTeacher',
+      component: () => import('@/page/SelectTeacher'),
+      meta: {
+        title: '选择教员'
+      }
+    },
+    {
+      path: '/teacherDetail',
+      name: 'TeacherDetail',
+      component: () => import('@/page/TeacherDetail'),
+      meta: {
+        title: '教员详细信息'
       }
     }
   ]

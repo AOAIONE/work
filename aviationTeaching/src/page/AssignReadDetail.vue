@@ -1,7 +1,11 @@
 <template>
-    <div class="container">
+    <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
-        <div class="item ax_default">
+        <div class="item video_wrap">
+            <!-- <img :src="detail.img"> -->
+            <iframe id="iframe" class="ifr" src="http://demo-scal.ccar142.com//upload/data/kejian/jiaowu/6/%E7%89%B9%E6%83%85%E7%A8%8B%E5%BA%8F/index.htm" frameborder="0"></iframe>
+        </div>
+        <div class="myitem ax_default">
             <div class="item_content">
                 <label class="content_left">课件ID:</label>
                 <div class="content_right">
@@ -11,7 +15,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">课件标题:</label>
+                <label class="content_left">适用课程:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.title}}
@@ -19,7 +23,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">适用课程:</label>
+                <label class="content_left">发布者:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.kecheng}}
@@ -27,7 +31,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">课件类型:</label>
+                <label class="content_left">备注:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.leixing}}
@@ -35,7 +39,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">发布者:</label>
+                <label class="content_left">直排时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.fabu}}
@@ -43,7 +47,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">发布时间:</label>
+                <label class="content_left">状态:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.time}}
@@ -51,7 +55,7 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">备注:</label>
+                <label class="content_left">学习次数:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.beizhu}}
@@ -59,11 +63,18 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">阅读权限:</label>
+                <label class="content_left">总学习时长:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="btn">立即申请</a>
-                        <a class="albtn" v-if="true">已申请</a>
+                        {{detail.beizhu}}
+                    </div>
+                </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">最近学习时间:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.beizhu}}
                     </div>
                 </div>
             </div>
@@ -75,9 +86,8 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
-
 export default {
-  name: 'CourseDetail',
+  name: 'AssignReadDetail',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
@@ -87,41 +97,23 @@ export default {
     return {
       title: '发动机火警ECAM程序',
       detail:
-        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas'}
+        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas', img: 'http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg'}
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.btn {
-  display: inline-block;
-  width: 142px;
-  height: 52px;
-  font-family: "微软雅黑";
-  font-weight: 410;
-  font-style: normal;
-  font-size: 24px;
-  text-align: center;
-  color: #0079fe;
-  line-height: 52px;
-  box-sizing: border-box;
-  border: 1px solid rgba(0, 121, 254, 1);
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 60px;
+.myitem {
+  margin-top: 70px;
 }
-.albtn {
-  display: inline-block;
-  width: 120px;
-  height: 42px;
-  font-family: "微软雅黑";
-  font-weight: 410;
-  font-style: normal;
-  font-size: 24px;
-  text-align: center;
-  color: #0079fe;
-  line-height: 42px;
-  box-sizing: border-box;
-  background-color: rgba(201, 201, 201, 1);
-  border-radius: 60px;
+.ifr {
+  width: 100%;
+  height: 100%;
+}
+.video_wrap {
+  width: 100%;
+  height: 408px;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
 }
 </style>

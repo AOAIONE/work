@@ -9,14 +9,20 @@
 }
 .container {
   position: absolute;
-  width: 100%;
+  width: 750px;
   height: 100%;
   top: 0;
   left: 0;
   overflow-y: auto;
   background-color: rgba(245, 245, 245, 1);
 }
-
+.pdbottom {
+  padding-bottom: 150px;
+}
+.linka {
+  font-size: 28px;
+  color: #2faaff;
+}
 /*详情页公用样式*/
 .item {
   margin-top: 100px;
@@ -45,13 +51,13 @@
   height: 0;
 }
 .content_left {
-  width: 120px;
-  text-align: right;
+  width: 180px;
+  text-align: left;
   float: left;
 }
 .content_right {
   position: relative;
-  margin-left: 160px;
+  margin-left: 190px;
 }
 .content_right_wrap {
   display: inline-block;
