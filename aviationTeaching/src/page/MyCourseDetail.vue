@@ -6,62 +6,7 @@
             <iframe id="iframe" class="ifr" src="http://demo-scal.ccar142.com//upload/data/kejian/jiaowu/6/%E7%89%B9%E6%83%85%E7%A8%8B%E5%BA%8F/index.htm" frameborder="0"></iframe>
         </div>
         <div class="myitem ax_default">
-            <div class="item_content">
-                <label class="content_left">课件ID:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.id}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">课件标题:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.title}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">适用课程:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.kecheng}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">课件类型:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.leixing}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">发布者:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.fabu}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">发布时间:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.time}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">备注:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.beizhu}}
-                    </div>
-                </div>
-            </div>
+            <course-base-info :courseBase="detail"></course-base-info>
             <div class="item_content">
                 <label class="content_left">阅读统计:</label>
                 <div class="content_right">
@@ -78,13 +23,15 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
+import courseBaseInfo from '@/components/CourseBaseInfo'
 
 export default {
   name: 'MyCourseDetail',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
-    'detail-content': detailContent
+    'detail-content': detailContent,
+    'course-base-info': courseBaseInfo
   },
   data () {
     return {

@@ -38,10 +38,10 @@
       </div>
       <div class="table_content table_common" v-for="course in courses" :key="course.kid">
         <span class="flex1">
-          <a class="">{{course.kid}}</a>
+          <a class="linka">{{course.kid}}</a>
         </span>
         <span class="flex2">
-          <a class="">{{course.title}}</a>
+          <a class="linka">{{course.title}}</a>
         </span>
         <span class="flex1">
           {{course.fabu}}

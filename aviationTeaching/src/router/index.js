@@ -138,6 +138,30 @@ export default new Router({
       meta: {
         title: '教员详细信息'
       }
+    },
+    {
+      path: '/assignCourse',
+      name: 'AssignCourse',
+      component: () => import('@/page/AssignCourse'),
+      meta: {
+        title: '指派课件'
+      }
+    },
+    {
+      path: '/assignCourse',
+      name: 'AssignCourse',
+      component: () => import('@/page/AssignCourse'),
+      meta: {
+        title: '指派课件'
+      }
+    },
+    {
+      path: '/assignCourseDetail',
+      name: 'AssignCourseDetail',
+      component: () => import('@/page/AssignCourseDetail'),
+      meta: {
+        title: '指派课件详情'
+      }
     }
   ]
 })
