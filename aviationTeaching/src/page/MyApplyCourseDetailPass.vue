@@ -8,15 +8,7 @@
         <div class="myitem ax_default">
             <course-base-info :courseBase="detail"></course-base-info>
             <div class="item_content">
-                <label class="content_left">直排时间:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.fabu}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">状态:</label>
+                <label class="content_left">申请时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{detail.time}}
@@ -24,29 +16,14 @@
                 </div>
             </div>
             <div class="item_content">
-                <label class="content_left">学习次数:</label>
+                <label class="content_left">申请状态:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.beizhu}}
+                        {{detail.fabu}}
                     </div>
                 </div>
             </div>
-            <div class="item_content">
-                <label class="content_left">总学习时长:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.beizhu}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">最近学习时间:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.beizhu}}
-                    </div>
-                </div>
-            </div>
+
         </div>
         <bottom-tabbar></bottom-tabbar>
     </div>
@@ -55,14 +32,12 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import courseBaseInfo from '@/components/CourseBaseInfo'
-
 export default {
-  name: 'AssignReadDetail',
+  name: 'MyApplyCourseDetailPass',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
     'course-base-info': courseBaseInfo
-
   },
   data () {
     return {

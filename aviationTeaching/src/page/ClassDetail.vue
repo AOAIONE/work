@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <!-- <detail-content v-for="detail in details" :key="detail.id" :detail="detail"></detail-content> -->
 
     <bottom-tabbar></bottom-tabbar>
   </div>
@@ -67,14 +66,12 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import detailContent from '@/components/DetailContent'
 
 export default {
   name: 'ClassDetail',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar,
-    'detail-content': detailContent
+    'bottom-tabbar': bottomTabbar
   },
   data () {
     return {

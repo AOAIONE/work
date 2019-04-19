@@ -162,6 +162,30 @@ export default new Router({
       meta: {
         title: '指派课件详情'
       }
+    },
+    {
+      path: '/myApplyCourseDetailPass',
+      name: 'MyApplyCourseDetailPass',
+      component: () => import('@/page/MyApplyCourseDetailPass'),
+      meta: {
+        title: '指派课件详情-已通过'
+      }
+    },
+    {
+      path: '/myApplyCourseDetailUnderway',
+      name: 'MyApplyCourseDetailUnderway',
+      component: () => import('@/page/MyApplyCourseDetailUnderway'),
+      meta: {
+        title: '指派课件详情-申请中'
+      }
+    },
+    {
+      path: '/myApplyCourseDetailNotPass',
+      name: 'MyApplyCourseDetailNotPass',
+      component: () => import('@/page/MyApplyCourseDetailNotPass'),
+      meta: {
+        title: '指派课件详情-未通过'
+      }
     }
   ]
 })

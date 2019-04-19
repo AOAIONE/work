@@ -50,7 +50,7 @@ import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 
 export default {
-  name: 'MyApplyCourse',
+  name: 'courseApplyApproval',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar

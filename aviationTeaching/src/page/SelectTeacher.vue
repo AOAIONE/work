@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="search_bar ax_default">
+        <div class="search_bar mar_top ax_default ">
             <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" />
             <a class="search_btn">搜索</a>
         </div>
@@ -57,5 +57,5 @@ export default {
 }
 </script>
 <style lang="less">
-@import "../styles/select-teacher.less";
+@import "../styles/course-common.less";
 </style>

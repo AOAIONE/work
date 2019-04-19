@@ -105,5 +105,5 @@ export default {
 }
 </script>
 <style lang="less">
-@import "../styles/my-course.less";
+@import "../styles/course-common.less";
 </style>
