@@ -34,6 +34,37 @@
   line-height: 42px;
   color: #000000;
 }
+/*个人中心公共样式*/
+.a-radio {
+  display: none;
+}
+.b-radio {
+  display: inline-block;
+  border: 1px solid #ccc;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  vertical-align: middle;
+  margin-right: 10px;
+  position: relative;
+}
+.b-radio:before {
+  content: "";
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  background: rgb(143, 188, 238);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50px;
+  display: none;
+}
+.a-radio:checked ~ .b-radio:before {
+  display: block;
+}
 /*详情页公用样式*/
 .item {
   margin-top: 100px;
@@ -70,10 +101,42 @@
   position: relative;
   margin-left: 190px;
 }
+
 .content_right_wrap {
   display: inline-block;
   width: 100%;
   position: relative;
   text-align: left;
+}
+.content_right_wrap .userPageInput {
+  /* display: inline-block; */
+  height: 50px;
+  /* width: 200px; */
+  line-height: 50px;
+  /* border-radius: 3px; */
+  outline: none;
+  font-size: 26px;
+  /* border: 1px solid #dcdee2; */
+  width: 100%;
+}
+.content_right_wrap label {
+  margin-right: 30px;
+}
+.user_comment {
+  margin-left: 20px;
+  padding-left: 30px;
+  width: 750px;
+  margin-top: 10px;
+  text-align: left;
+  height: 150px;
+  font-family: "FontAwesome Regular", "FontAwesome";
+  font-weight: 410;
+  font-style: normal;
+  font-size: 28px;
+  color: #000000;
+  background: inherit;
+  box-sizing: border-box;
+}
+.user_comment textarea {
 }
 /*详情页公用样式结束*/

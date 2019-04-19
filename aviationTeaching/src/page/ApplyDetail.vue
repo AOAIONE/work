@@ -4,7 +4,31 @@
         <div class="item ax_default">
             <course-base-info :courseBase="detail"></course-base-info>
             <div class="item_content">
-                <label class="content_left">指派课件:</label>
+                <label class="content_left">申请人:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        赵槐
+                    </div>
+                </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">申请时间:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        2017-09-29
+                    </div>
+                </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">申请状态:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        已通过
+                    </div>
+                </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">操作:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         <a class="course_tag">指派课件</a>

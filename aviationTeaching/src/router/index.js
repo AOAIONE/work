@@ -168,7 +168,7 @@ export default new Router({
       name: 'MyApplyCourseDetailPass',
       component: () => import('@/page/MyApplyCourseDetailPass'),
       meta: {
-        title: '指派课件详情-已通过'
+        title: '课件详情页-已通过'
       }
     },
     {
@@ -176,7 +176,7 @@ export default new Router({
       name: 'MyApplyCourseDetailUnderway',
       component: () => import('@/page/MyApplyCourseDetailUnderway'),
       meta: {
-        title: '指派课件详情-申请中'
+        title: '课件详情页-申请中'
       }
     },
     {
@@ -184,7 +184,78 @@ export default new Router({
       name: 'MyApplyCourseDetailNotPass',
       component: () => import('@/page/MyApplyCourseDetailNotPass'),
       meta: {
-        title: '指派课件详情-未通过'
+        title: '课件详情页-未通过'
+      }
+    },
+    {
+      path: '/courseApplyApproval',
+      name: 'CourseApplyApproval',
+      component: () => import('@/page/CourseApplyApproval'),
+      meta: {
+        title: '课件申请批复'
+      }
+    },
+    {
+      path: '/applyDetail',
+      name: 'ApplyDetail',
+      component: () => import('@/page/ApplyDetail'),
+      meta: {
+        title: '课件申请批复详情页'
+      }
+    },
+    {
+      path: '/userIndex',
+      name: 'UserIndex',
+      component: () => import('@/page/usersetting/UserIndex'),
+      meta: {
+        title: '个人中心'
+      }
+    },
+    {
+      path: '/dataComplete',
+      name: 'DataComplete',
+      component: () => import('@/page/usersetting/DataComplete'),
+      meta: {
+        title: '资料完善'
+      }
+    },
+    {
+      path: '/passwordModifi',
+      name: 'PasswordModifi',
+      component: () => import('@/page/usersetting/PasswordModifi'),
+      meta: {
+        title: '密码修改'
+      }
+    },
+    {
+      path: '/feedBack',
+      name: 'FeedBack',
+      component: () => import('@/page/usersetting/FeedBack'),
+      meta: {
+        title: '系统意见反馈'
+      }
+    },
+    {
+      path: '/converRole',
+      name: 'ConverRole',
+      component: () => import('@/page/usersetting/ConverRole'),
+      meta: {
+        title: '切换身份'
+      }
+    },
+    {
+      path: '/unbound',
+      name: 'Unbound',
+      component: () => import('@/page/usersetting/Unbound'),
+      meta: {
+        title: '解除绑定'
+      }
+    },
+    {
+      path: '*',
+      component: () => import('@/page/404'),
+      meta: {
+        title: '页面未找到'
       }
     }
   ]
