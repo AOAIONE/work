@@ -52,6 +52,7 @@ header,
 hgroup,
 menu,
 nav,
+textarea,
 section {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

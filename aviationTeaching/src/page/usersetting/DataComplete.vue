@@ -68,9 +68,13 @@
             </div>
             <div class="user_comment">
                 <p>备注:</p>
-                <textarea placeholder="请输入" maxlength="500" @input="descInput" v-model="user.beizhu" />
-                <span>{{txtVal}}/500</span>
+                <textarea placeholder="请输入" maxlength="300" @input="descInput" v-model="user.beizhu" />
+                <span>{{txtVal}}/300</span>
             </div>
+            <p class="operation">
+                <a class="user_btn save">保存</a>
+                <a class="user_btn cancel">取消</a>
+            </p>
         </div>
         <bottom-tabbar></bottom-tabbar>
     </div>
@@ -97,20 +101,51 @@ export default {
         number: '',
         address: '',
         beizhu: ''
-      },
-      methods: {
-        descInput: function () {
-          debugger
-          let user = this.user
-          this.txtVal = user.beizhu.length
-        }
       }
     }
+  },
+  methods: {
+    // 显示Textarea里面的内容字数
+    descInput: function () {
+      let user = this.user
+      this.txtVal = user.beizhu.length
+    }
   }
+
 }
 </script>
 <style lang="less" scoped>
 .useritem {
   margin-top: 110px;
+}
+.user_comment {
+  margin-left: 20px;
+  padding-left: 30px;
+  width: 750px;
+  height: 240px;
+  margin-top: 10px;
+  text-align: left;
+  font-family: "FontAwesome Regular", "FontAwesome";
+  font-weight: 410;
+  font-style: normal;
+  font-size: 28px;
+  color: #000000;
+  background: inherit;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.user_comment textarea {
+  margin-left: -30px;
+  width: 750px;
+  height: 200px;
+  font-size: 14px;
+  outline: none;
+}
+.user_comment span {
+  position: absolute;
+  right: 30px;
+  bottom: 0;
+  color: #d5d5d5;
 }
 </style>

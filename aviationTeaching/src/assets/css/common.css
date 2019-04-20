@@ -67,7 +67,7 @@
 }
 /*详情页公用样式*/
 .item {
-  margin-top: 100px;
+  margin-top: 110px;
 }
 .item_content {
   margin-left: 20px;
@@ -122,21 +122,32 @@
 .content_right_wrap label {
   margin-right: 30px;
 }
-.user_comment {
-  margin-left: 20px;
-  padding-left: 30px;
-  width: 750px;
-  margin-top: 10px;
-  text-align: left;
-  height: 150px;
-  font-family: "FontAwesome Regular", "FontAwesome";
-  font-weight: 410;
+.operation {
+  margin-top: 40px;
+}
+.user_btn {
+  display: inline-block;
+  width: 154px;
+  height: 58px;
+  background: inherit;
+  border: none;
+  border-radius: 120px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-family: "微软雅黑";
+  font-weight: 700;
   font-style: normal;
   font-size: 28px;
-  color: #000000;
-  background: inherit;
-  box-sizing: border-box;
+  color: #ffffff;
+  line-height: 58px;
 }
-.user_comment textarea {
+.save {
+  background-color: rgba(0, 121, 254, 1);
+}
+
+.cancel {
+  margin-left: 40px;
+  background-color: rgba(134, 134, 134, 1);
 }
 /*详情页公用样式结束*/
