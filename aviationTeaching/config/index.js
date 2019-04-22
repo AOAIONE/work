@@ -10,9 +10,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      '/authorization': {
         // 目标 API 地址
-        target: 'http://192.168.50.20:5000',
+        target: 'http://192.168.0.138:9099',
+        // 如果要代理 websockets
+        ws: true,
+        // 将主机标头的原点更改为目标URL
+        changeOrigin: true,
+        pathRewrite: {
+          '^/authorization': ''
+        }
+      },
+      '/api': {
+        // 授权服务器目标 API 地址
+        target: 'http://192.168.0.138:9099',
         // 如果要代理 websockets
         ws: true,
         // 将主机标头的原点更改为目标URL

@@ -19,13 +19,43 @@ export default {
   data () {
     return {
       title1: {text: '课件中心', show: false},
-      drectorys: [
-        {text: '课件目录', id: 1},
-        {text: '我的课件', id: 2},
-        {text: '指派课件', id: 3},
-        {text: '我申请的课件', id: 4},
-        {text: '课件申请批复', id: 5}
+      drectorys: []
+    }
+  },
+  created () {
+    // 课件中心目录切换
+    this.drectoryCut()
+  },
+  methods: {
+    drectoryCut: function () {
+      let drectorys1 = [{text: '课件目录', id: 1, path: '/courseList'},
+        {text: '我的课件', id: 2, path: '/myCourse'},
+        {text: '指派课件', id: 3, path: '/assignCourse'},
+        {text: '我申请的课件', id: 4, path: '/myApplyCourse'},
+        {text: '课件申请批复', id: 5, path: '/courseApplyApproval'}
       ]
+      let drectorys2 = [{text: '课件目录', id: 1, path: '/courseList'},
+        {text: '我的课件', id: 2, path: '/myCourse'},
+        {text: '指派课件', id: 3, path: '/assignCourse'},
+        {text: '指定阅读课件', id: 4, path: '/assignRead'},
+        {text: '我申请的课件', id: 5, path: '/myApplyCourse'},
+        {text: '课件申请批复', id: 6, path: '/courseApplyApproval'}
+      ]
+      let drectorys3 = [{text: '课件目录', id: 1, path: '/courseList'},
+        {text: '我申请的课件', id: 4, path: '/myApplyCourse'},
+        {text: '教员指派课件', id: 5, path: '/teacherAssignCourse'}]
+      let currentRole = localStorage.getItem('currentRole')
+      switch (currentRole) {
+        case 'user':
+          this.drectorys = drectorys1
+          break
+        case 'teacher':
+          this.drectorys = drectorys2
+          break
+        case 'student':
+          this.drectorys = drectorys3
+          break
+      }
     }
   }
 }

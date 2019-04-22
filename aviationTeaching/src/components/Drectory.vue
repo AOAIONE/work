@@ -1,6 +1,6 @@
 <template>
   <div class="drectory_container">
-    <div class="content">
+    <div class="content" @click="toRoute(drectory.path)">
       <p class="content_ico">
         <span class="ico_text"></span>
       </p>
@@ -13,7 +13,12 @@
 <script>
 export default {
   name: 'Drectory',
-  props: ['drectory']
+  props: ['drectory'],
+  methods: {
+    toRoute: function (path) {
+      this.$router.push(path)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -14,7 +14,6 @@ const mutations = {
   // 修改token，并将token存入localStorage
   changeLogin (state, user) {
     state.Authorization = user.Authorization
-    console.log('store/index.js---到这里了!')
     localStorage.setItem('Authorization', user.Authorization)
   }
 }

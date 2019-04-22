@@ -41,6 +41,13 @@ const util = {
       padding: CryptoJS.pad.ZeroPadding
     })
     return decrypted.toString(CryptoJS.enc.Utf8)
+  },
+  /**
+   * ios Android 时间转化时间戳兼容
+   */
+  formatTimeStamp () {
+    return Date.parse(new Date()) || Date.parse(new Date())
   }
 }
+
 export default util

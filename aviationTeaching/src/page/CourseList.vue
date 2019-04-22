@@ -15,16 +15,6 @@
         </select>
       </div>
     </div>
-    <div class="">
-      <select style="width:200px;" onmousedown="javascript:return false;">
-        <option>22342423</option>
-      </select>
-    </div>
-    <div class="">
-      <select style="width:200px;">
-        <option>22342423</option>
-      </select>
-    </div>
     <div class="search_bar ax_default">
       <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" />
       <a class="search_btn">搜索</a>
@@ -58,6 +48,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { list, courseTypeList } from '@/service/service'
 
 export default {
   name: 'CourseList',
@@ -110,6 +101,28 @@ export default {
       },
       triggerDisplayData: false
     })
+  },
+  methods: {
+    getCourseList: function () {
+      courseTypeList().then(res => {
+        debugger
+      })
+      let data = {
+        'type_id': 0,
+        'privilege': 'string',
+        'status': 'string',
+        'keyword': 'string',
+        'page_index': 0,
+        'page_count': 0
+      }
+      list(data).then(res => {
+
+      })
+    }
+
+  },
+  created () {
+    this.getCourseList()
   }
 
 }

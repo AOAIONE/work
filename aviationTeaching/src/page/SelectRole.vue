@@ -1,7 +1,7 @@
 <template>
   <div class="select-container">
     <ul>
-      <li class="cell" v-for="tab in tabs" :key="tab.userId" @click=toRoute(tab.role)>
+      <li class="cell" v-for="tab in tabs" :key="tab.userId" @click="toRoute(tab.role)">
         <div class="img_background">
           <div class="img" :class="{mx:tab.isMx}" :style="{'background-image':'url('+tab.img+')','background-repate':'no-repeat','background-size':'cover'}"></div>
         </div>
@@ -18,12 +18,8 @@ export default {
   name: 'SelectRole',
   data () {
     return {
-      tabs: [
-        // {text: '教务员', id: 1, isMg: false, img: require('../assets/user_dean.png')},
-        // {},
-        // {text: '教员', id: 3, isMg: true, isLeft: true, img: require('../assets/user_student.png')},
-        // {text: '学员', id: 4, isMg: true, isLeft: true, isMx: true, img: require('../assets/user_teacher.png')}
-      ]
+      userToken: '',
+      tabs: []
     }
   },
   created () {
@@ -32,8 +28,8 @@ export default {
   methods: {
     ...mapMutations(['changeLogin']),
     toRoute: function (text) {
-      debugger
-      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
+      let that = this
+      let role = JSON.parse(that.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let data = {
         UserName: role.userName,
         Password: role.passWord,
@@ -43,13 +39,19 @@ export default {
         Grant_Type: 'password'
       }
       selectRole(data).then(res => {
-        debugger
+        that.userToken = 'Bearer' + res.data.access_token
+        localStorage.setItem('refreshToken', res.data.refresh_token)
+        let tokenDeadline = that.$myUtil.formatTimeStamp(new Date()) + res.data.expires_in * 1000
+        localStorage.setItem('tokenDeadline', tokenDeadline)
+        localStorage.setItem('currentRole', text)
+        that.changeLogin({Authorization: that.userToken})
+        that.$router.push('/home')
       })
     },
     // 页面初始化之前请求用户角色
     getRole: function () {
       let that = this
-      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
+      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法解密
       let roleMapperNames = role.roleMapperNames
       roleMapperNames.forEach(e => {
         let tab = {}

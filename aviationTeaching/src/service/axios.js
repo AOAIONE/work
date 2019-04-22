@@ -1,9 +1,11 @@
 import axios from 'axios'
+import Qs from 'qs'
+
 // import router from '../router'
 
 // 创建axios实例
 const service = axios.create({
-  timeout: 30000, // 请求超时时间  withCredentials: true,
+  timeout: 30000, // 请求超时时间
   withCredentials: true, // 允许跨域携带token
   headers: { 'Content-Type': 'application/json' }
 })
@@ -18,7 +20,7 @@ axios.interceptors.request.use(
       // 如果是登录和注册操作，则不需要携带header里面的token
     } else {
       if (localStorage.getItem('Authorization')) {
-        config.headers.Authorizatior = localStorage.getItem('Authorization')
+        config.headers.Authorization = localStorage.getItem('Authorization')
       }
     }
     return config
@@ -41,7 +43,7 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           localStorage.removeItem('Authorization')
-          this.$router.push('/')
+          this.$router.push('/login')
           break
         case 404:
           //   router.push('/blank.vue')
@@ -52,12 +54,12 @@ axios.interceptors.response.use(
   }
 )
 
-export function get (url, params = {}) {
+export function get (url, params = {}, headers = {}) {
   params.t = new Date().getTime() // get方法加一个时间参数,解决ie下可能缓存问题.
   return service({
     url: url,
     method: 'get',
-    headers: {},
+    // headers: {},
     params
   })
 }
@@ -72,8 +74,10 @@ export function post (url, data = {}, headers = {}) {
   }
   if (headers.hasOwnProperty('Content-Type')) {
     sendObject.headers = headers
+    sendObject.data = Qs.stringify(data)
+  } else {
+    sendObject.data = JSON.stringify(data)
   }
-  sendObject.data = JSON.stringify(data)
   return service(sendObject)
 }
 
@@ -93,5 +97,5 @@ export function deletes (url) {
     headers: {}
   })
 }
-
+debugger
 export { service }

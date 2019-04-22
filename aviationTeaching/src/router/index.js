@@ -204,6 +204,14 @@ export default new Router({
       }
     },
     {
+      path: '/teacherAssignCourse',
+      name: 'TeacherAssignCourse',
+      component: () => import('@/page/TeacherAssignCourse'),
+      meta: {
+        title: '教员指派课件'
+      }
+    },
+    {
       path: '/userIndex',
       name: 'UserIndex',
       component: () => import('@/page/usersetting/UserIndex'),
