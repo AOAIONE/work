@@ -1,15 +1,14 @@
 <template>
-    <div class="container">
-        <div class="mgtop"></div>
-        <div class="user_name">张凡</div>
-        <p v-for="tag in tags" :key="tag.id" class="user_content ax_default">
-            <!-- <router-link>{{tag.title}}</router-link> -->
-            {{tag.title}}
-        </p>
-        <router-view></router-view>
+  <div class="container">
+    <div class="mgtop"></div>
+    <div class="user_name">张凡</div>
+    <p v-for="tag in tags" :key="tag.id" class="user_content ax_default">
+      <!-- <router-link>{{tag.title}}</router-link> -->
+      {{tag.title}}
+    </p>
 
-        <bottom-tabbar></bottom-tabbar>
-    </div>
+    <bottom-tabbar></bottom-tabbar>
+  </div>
 </template>
 <script>
 import bottomTabbar from '@/components/BottomTabbar'

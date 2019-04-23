@@ -72,8 +72,8 @@
                 <span>{{txtVal}}/300</span>
             </div>
             <p class="operation">
-                <a class="user_btn save">保存</a>
-                <a class="user_btn cancel">取消</a>
+                <a class="user_btn save_btn">保存</a>
+                <a class="user_btn cancel_btn">取消</a>
             </p>
         </div>
         <bottom-tabbar></bottom-tabbar>

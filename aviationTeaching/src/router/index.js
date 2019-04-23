@@ -260,6 +260,14 @@ export default new Router({
       }
     },
     {
+      path: '/classSchedule',
+      name: 'ClassSchedule',
+      component: () => import('@/page/ClassSchedule'),
+      meta: {
+        title: '课表'
+      }
+    },
+    {
       path: '*',
       component: () => import('@/page/404'),
       meta: {

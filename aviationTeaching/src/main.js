@@ -16,7 +16,7 @@ import baseUrl from '@/assets/js/common.js'
 import util from '@/utils/util.js'
 import { selectRole } from '@/service/service'
 
-axios.defaults.baseURL = baseUrl
+// axios.defaults.baseURL = baseUrl
 Vue.use(VueWechatTitle)
 Vue.prototype.$weui = weui
 Vue.prototype.$axios = axios
@@ -47,7 +47,8 @@ setInterval(function () {
         refresh_token: refreshToken
       }
       selectRole(data).then(res => {
-        let userToken = 'Bearer' + res.data.access_token
+        console.log('token刷新')
+        let userToken = 'Bearer ' + res.data.access_token
         localStorage.setItem('refreshToken', res.data.refresh_token)
         let tokenDeadline =
           util.formatTimeStamp(new Date()) + res.data.expires_in * 1000

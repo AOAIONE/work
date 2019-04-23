@@ -6,21 +6,26 @@ import Qs from 'qs'
 // 创建axios实例
 const service = axios.create({
   timeout: 30000, // 请求超时时间
-  withCredentials: true, // 允许跨域携带token
-  headers: { 'Content-Type': 'application/json' }
+  // withCredentials: true, // 允许跨域携带token
+  headers: { 'Content-Type': 'application/json' },
+  baseURL: 'http://192.168.0.138:9099'
 })
+
 // 添加request拦截器
 // 异步请求前在header里加入token
-axios.interceptors.request.use(
+service.interceptors.request.use(
   config => {
     if (
       config.url === '/connect/token' ||
       config.url === '/api/account_info/get_roles'
     ) {
       // 如果是登录和注册操作，则不需要携带header里面的token
+      // 更改服务器地址
+      config.baseURL = 'http://192.168.0.138:5000'
     } else {
       if (localStorage.getItem('Authorization')) {
         config.headers.Authorization = localStorage.getItem('Authorization')
+        config.baseURL = 'http://192.168.0.138:9099'
       }
     }
     return config
@@ -31,7 +36,7 @@ axios.interceptors.request.use(
 )
 // 添加respone拦截器
 // 异步请求后，判断token是否过期
-axios.interceptors.response.use(
+service.interceptors.response.use(
   response => {
     let res = {}
     res.status = response.status
@@ -42,8 +47,8 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          localStorage.removeItem('Authorization')
-          this.$router.push('/login')
+          // localStorage.removeItem('Authorization')
+          // this.$router.push('/login')
           break
         case 404:
           //   router.push('/blank.vue')
@@ -59,7 +64,7 @@ export function get (url, params = {}, headers = {}) {
   return service({
     url: url,
     method: 'get',
-    // headers: {},
+    headers: {},
     params
   })
 }
@@ -97,5 +102,5 @@ export function deletes (url) {
     headers: {}
   })
 }
-debugger
+
 export { service }

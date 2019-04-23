@@ -39,7 +39,7 @@ export default {
         Grant_Type: 'password'
       }
       selectRole(data).then(res => {
-        that.userToken = 'Bearer' + res.data.access_token
+        that.userToken = 'Bearer ' + res.data.access_token
         localStorage.setItem('refreshToken', res.data.refresh_token)
         let tokenDeadline = that.$myUtil.formatTimeStamp(new Date()) + res.data.expires_in * 1000
         localStorage.setItem('tokenDeadline', tokenDeadline)
