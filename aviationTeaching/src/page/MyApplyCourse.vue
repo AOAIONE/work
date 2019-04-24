@@ -48,6 +48,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { list, courseTypeList, applyCourseList } from '@/service/service'
 
 export default {
   name: 'MyApplyCourse',
@@ -57,23 +58,70 @@ export default {
   },
   data () {
     return {
-      title: '课件目录',
+      title: '我申请的课件',
       courseList: '全部',
       permission: '全部',
-      courseLists: [
-        {id: '1', value: '周一'},
-        {id: '2', value: '周二'},
-        {id: '3', value: '周三'}
-      ],
+      courseLists: [],
       limits: [
-        {id: '1', value: '教员'},
-        {id: '2', value: '学员'}
-      ],
-      courses: [
-        {kid: '101', title: '启动活门', fabu: '赵槐啊', time: '2018-12-22'},
-        {kid: '102', title: '目视', fabu: '测试', time: '2018-12-23'}
+        {id: '1', value: '申请中'},
+        {id: '2', value: '已通过'},
+        {id: '3', value: '未通过'}
 
-      ]
+      ],
+      courses: [],
+      type_id: 0,
+      page_index: 1,
+      page_count: 8,
+      keyword: '',
+      privilege: 'all'
+    }
+  },
+  methods: {
+    getCourseList: function () {
+      let that = this
+      courseTypeList().then(res => {
+        let data = res.data.data
+        data.forEach(d => {
+          let courseList = {}
+          courseList = {'id': d.id, 'value': d.name}
+          that.courseLists.push(courseList)
+        })
+      })
+      let data = {
+        'type_id': that.type_id,
+        'privilege': that.privilege,
+        'status': 'all',
+        'keyword': that.keyword,
+        'page_index': that.page_index,
+        'page_count': that.page_count
+      }
+      list(data).then(res => {
+        that.courses = res.data.data
+        let mobileSelect1 = new MobileSelect({
+          trigger: '#trigger',
+          title: '课件分类',
+          wheels: [
+            {data: that.courseLists}
+          ],
+          callback: function (indexArr, data) {
+            that.courseList = data[0].value
+            that.type_id = data[0].id
+          },
+          triggerDisplayData: false
+        })
+        let mobileSelect2 = new MobileSelect({
+          trigger: '#trigger1',
+          title: '申请状态',
+          wheels: [
+            {data: that.limits}
+          ],
+          callback: function (indexArr, data) {
+            that.permission = data[0].value
+            that.privilege = data[0].value
+          },
+          triggerDisplayData: false
+        })
+      })
     }
   },
   mounted () {

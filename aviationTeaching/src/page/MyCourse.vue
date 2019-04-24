@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="courseList_container container">
         <detail-title :title="title"></detail-title>
         <div class="select_bar ax_default">
             <span>课件分类:&nbsp;</span>
@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class="search_bar ax_default">
-            <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" />
-            <a class="search_btn">搜索</a>
+            <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+            <a class="search_btn" @click="getCourseList()">搜索</a>
         </div>
         <div class="table_wrap ax_default">
             <div class="table_title table_common">
@@ -26,18 +26,18 @@
                 <span class="flex1">课件类型</span>
                 <span class="flex1">添加时间</span>
             </div>
-            <div class="table_content table_common" v-for="course in courses" :key="course.kid">
+            <div class="table_content table_common" v-for="course in courses" :key="course.id">
                 <span class="flex1">
-                    <a class="linka">{{course.kid}}</a>
+                    <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
                 </span>
                 <span class="flex2">
-                    <a class="linka">{{course.title}}</a>
+                    <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
                 </span>
                 <span class="flex1">
-                    {{course.类型}}
+                    {{course.privilege}}
                 </span>
                 <span class="flex1">
-                    {{course.time}}
+                    {{course.add_time}}
                 </span>
             </div>
         </div>
@@ -48,6 +48,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { list, courseTypeList } from '@/service/service'
 
 export default {
   name: 'MyCourse',
@@ -57,49 +58,87 @@ export default {
   },
   data () {
     return {
-      title: '课件目录',
+      title: '我的课件',
       courseList: '全部',
       permission: '全部',
-      courseLists: [
-        {id: '1', value: '周一'},
-        {id: '2', value: '周二'},
-        {id: '3', value: '周三'}
-      ],
+      courseLists: [],
       limits: [
-        {id: '1', value: '教员'},
-        {id: '2', value: '学员'}
-      ],
-      courses: [
-        {kid: '101', title: '启动活门', 类型: '测试', time: '2018-12-22'},
-        {kid: '102', title: '目视', 类型: '飞机', time: '2018-12-23'}
+        {id: '1', value: '共有'},
+        {id: '2', value: '私有'},
+        {id: '3', value: '所有'}
 
-      ]
+      ],
+      courses: [],
+      type_id: 0,
+      page_index: 1,
+      page_count: 8,
+      keyword: '',
+      privilege: 'all'
     }
   },
+  watch: {
+    'type_id': function () {
+      this.getCourseList()
+    },
+    'privilege': function () {
+      this.getCourseList()
+    }
+
+  },
+  methods: {
+    getCourseList: function () {
+      let that = this
+      courseTypeList().then(res => {
+        let data = res.data.data
+        data.forEach(d => {
+          let courseList = {}
+          courseList = {'id': d.id, 'value': d.name}
+          that.courseLists.push(courseList)
+        })
+      })
+      let data = {
+        'type_id': that.type_id,
+        'privilege': that.privilege,
+        'status': 'all',
+        'keyword': that.keyword,
+        'page_index': that.page_index,
+        'page_count': that.page_count
+      }
+      list(data).then(res => {
+        that.courses = res.data.data
+        let mobileSelect1 = new MobileSelect({
+          trigger: '#trigger',
+          title: '选择课件',
+          wheels: [
+            {data: that.courseLists}
+          ],
+          callback: function (indexArr, data) {
+            that.courseList = data[0].value
+            that.type_id = data[0].id
+          },
+          triggerDisplayData: false
+        })
+        let mobileSelect2 = new MobileSelect({
+          trigger: '#trigger1',
+          title: '课件权限',
+          wheels: [
+            {data: that.limits}
+          ],
+          callback: function (indexArr, data) {
+            that.permission = data[0].value
+            that.privilege = data[0].value
+          },
+          triggerDisplayData: false
+        })
+      })
+    },
+    toDetail: function (id) {
+      this.$router.push({path: '/myCourseDetail', query: {'id': id}})
+    }
+
+  },
   mounted () {
-    let that = this
-    let mobileSelect1 = new MobileSelect({
-      trigger: '#trigger',
-      title: '选择课件',
-      wheels: [
-        {data: that.courseLists}
-      ],
-      callback: function (indexArr, data) {
-        console.log(data)
-      },
-      triggerDisplayData: false
-    })
-    let mobileSelect2 = new MobileSelect({
-      trigger: '#trigger1',
-      title: '课件权限',
-      wheels: [
-        {data: that.limits}
-      ],
-      callback: function (indexArr, data) {
-        console.log(data)
-      },
-      triggerDisplayData: false
-    })
+    this.getCourseList()
   }
 
 }

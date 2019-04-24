@@ -6,7 +6,7 @@
                 <label class="content_left">教员ID:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.id}}
+                        {{(detail.designated_user_info).user_id}}
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <label class="content_left">身份证号:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.name}}
+                        {{detail.designated_user_info.id_card_no}}
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <label class="content_left">手机号:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.leixing}}
+                        {{detail.designated_user_info.phone_no}}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <label class="content_left">课件分配:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.kehao}}
+                        <a class="course_tag1" @click="relieve(detail)">解除分配</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <label class="content_left">学习进度:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.way}}
+                        {{detail.learning_status}}
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <label class="content_left">学习次数:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.time}}
+                        {{detail.learning_count}}
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <label class="content_left">总学习时长:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.ladeTime}}
+                        {{detail.total_learning_time}}
                     </div>
                 </div>
             </div>
@@ -62,15 +62,15 @@
                 <label class="content_left">最近学习时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.ladeTime}}
+                        {{detail.last_learning_time}}
                     </div>
                 </div>
             </div>
-            <div class="item_content">
+            <div class="item_content" v-if="detail.learning_status==='进行中'">
                 <label class="content_left">修改学习状态:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.ladeTime}}
+                        <a class="course_tag" @click="modifiLearningStatus()" style="backgorund-color:#66cccc;">任务已完成</a>
                     </div>
                 </div>
             </div>
@@ -82,6 +82,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
+import { teacherDetail, delCourseAssign } from '@/service/service'
 
 export default {
   name: 'TeacherDetail',
@@ -93,9 +94,30 @@ export default {
   data () {
     return {
       title: '赵槐',
-      detail:
-        {id: 1, name: '赵槐', kecheng: '型别等级训练', leixing: '测试', kehao: '赵槐', way: '指定阅读', time: '2018-12-09', ladeTime: '2018-09-08'}
+      detail: {}
     }
+  },
+  methods: {
+    getTeacherDetail: function () {
+      let data = {'taskId': this.$route.query.task_id}
+      teacherDetail(data).then(res => {
+        this.detail = res.data.data
+      })
+    },
+    // 解除分配
+    relieve: function (detail) {
+      let data = {'taskId': this.$route.query.task_id}
+      delCourseAssign(data).then(res => {
+        swal('Oops', 'Something went wrong!', 'error')
+      })
+    },
+    // 更改任务完成状态
+    modifiLearningStatus: function () {
+      swal('Oops', 'Something went wrong!', 'error')
+    }
+  },
+  mounted () {
+    this.getTeacherDetail()
   }
 }
 </script>

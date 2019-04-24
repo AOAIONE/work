@@ -147,7 +147,7 @@ a {
   font-family: "宋体", Microsoft YaHei, Tahoma, Arial, sans-serif;
 }
 a:hover {
-  color: #fff;
+  /* color: #fff; */
   text-decoration: none;
 }
 ul,

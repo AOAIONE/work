@@ -37,7 +37,7 @@ export default {
   margin-left: 50px;
 }
 .title_center {
-  margin-left: 200px;
+  margin-left: 150px;
   height: 38px;
   font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
   font-weight: 700;

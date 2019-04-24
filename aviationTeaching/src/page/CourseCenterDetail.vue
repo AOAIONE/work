@@ -7,8 +7,12 @@
                 <label class="content_left">阅读权限:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="btn">立即申请</a>
-                        <a class="albtn" v-if="true">已申请</a>
+                        <a class="btn" v-if="permissions==='allow_apply'">立即申请</a>
+                        <a class="albtn" v-if="permissions==='apply_passed'">申请通过</a>
+                        <a class="albtn" v-if="permissions==='designated'">指定阅读</a>
+                        <a class="albtn" v-if="permissions==='apply_checking'">申请审核中</a>
+                        <a class="albtn" v-if="permissions==='mine'">我的课件</a>
+
                     </div>
                 </div>
             </div>
@@ -20,6 +24,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import courseBaseInfo from '@/components/CourseBaseInfo'
+import { detail } from '@/service/service'
 
 export default {
   name: 'CourseCenterDetail',
@@ -30,9 +35,32 @@ export default {
   },
   data () {
     return {
-      title: '发动机火警ECAM程序',
-      detail:
-        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas'}
+      title: '',
+      detail: {},
+      permissions: ''
+    }
+  },
+  mounted () {
+    this.getCourseCenterDetail()
+  },
+  methods: {
+    getCourseCenterDetail: function () {
+      let that = this
+      let data = {'id': this.$route.query.id}
+      detail(data).then(res => {
+        let data1 = res.data.data
+        that.detail = {
+          'id': data1.id,
+          'name': data1.name,
+          'corresponding_course': Array.isArray(data1.corresponding_course) ? data1.corresponding_course.join() : '',
+          'privilege': data1.privilege,
+          'publisher_name': data1.publisher_name,
+          'add_time': data1.add_time,
+          'note': data1.note
+        }
+        that.title = data1.name
+        that.permissions = data1.read_permission_status
+      })
     }
   }
 }

@@ -49,7 +49,7 @@ export default {
       let that = this
       let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let drectorys1 = [{text: '课表', id: 1},
-        {text: '课件中心', id: 2},
+        {text: '课件中心', id: 2, path: '/courseCenter'},
         {text: '消息通知', id: 3},
         {text: '模拟机排课表', id: 4}]
       let drectorys2 = [{text: '课表', id: 1},

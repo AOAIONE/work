@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Qs from 'qs'
 
-// import router from '../router'
+import router from '../router'
 
 // 创建axios实例
 const service = axios.create({
@@ -47,8 +47,8 @@ service.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // localStorage.removeItem('Authorization')
-          // this.$router.push('/login')
+          localStorage.removeItem('Authorization')
+          router.push('/login')
           break
         case 404:
           //   router.push('/blank.vue')

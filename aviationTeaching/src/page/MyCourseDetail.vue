@@ -1,29 +1,31 @@
 <template>
-    <div class="container pdbottom">
-        <detail-title :title="title"></detail-title>
-        <div class="item video_wrap">
-            <!-- <img :src="detail.img"> -->
-            <iframe id="iframe" class="ifr" src="http://demo-scal.ccar142.com//upload/data/kejian/jiaowu/6/%E7%89%B9%E6%83%85%E7%A8%8B%E5%BA%8F/index.htm" frameborder="0"></iframe>
-        </div>
-        <div class="myitem ax_default">
-            <course-base-info :courseBase="detail"></course-base-info>
-            <div class="item_content">
-                <label class="content_left">阅读统计:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        <a class="btn">查看阅读统计</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <bottom-tabbar></bottom-tabbar>
+  <div class="container pdbottom">
+    <detail-title :title="title"></detail-title>
+    <div class="video_wrap">
+      <my-player :video="video"></my-player>
     </div>
+    <div class="ax_default">
+      <course-base-info :courseBase="detail"></course-base-info>
+      <div class="item_content">
+        <label class="content_left">阅读统计:</label>
+        <div class="content_right">
+          <div class="content_right_wrap">
+            <a class="btn">查看阅读统计</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <bottom-tabbar></bottom-tabbar>
+  </div>
 </template>
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
 import courseBaseInfo from '@/components/CourseBaseInfo'
+import myPlayer from '@/components/MyPlayer'
+
+import { detail } from '@/service/service'
 
 export default {
   name: 'MyCourseDetail',
@@ -31,14 +33,42 @@ export default {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
     'detail-content': detailContent,
-    'course-base-info': courseBaseInfo
+    'course-base-info': courseBaseInfo,
+    'my-player': myPlayer
   },
   data () {
     return {
-      title: '发动机火警ECAM程序',
-      detail:
-        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas', img: 'http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg'}
+      title: '',
+      detail: {},
+      video: {
+        'videoUrl': 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+        'state': true,
+        'poster': 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg'
+      }
     }
+  },
+  methods: {
+    getMyCourseDetail: function () {
+      let that = this
+      let data = {'id': this.$route.query.id}
+      detail(data).then(res => {
+        let data1 = res.data.data
+        that.detail = {
+          'id': data1.id,
+          'name': data1.name,
+          'corresponding_course': Array.isArray(data1.corresponding_course) ? data1.corresponding_course.join() : '',
+          'privilege': data1.privilege,
+          'publisher_name': data1.publisher_name,
+          'add_time': data1.add_time,
+          'note': data1.note
+        }
+        that.title = data1.name
+        that.permissions = data1.read_permission_status
+      })
+    }
+  },
+  mounted () {
+    this.getMyCourseDetail()
   }
 }
 </script>
@@ -66,9 +96,12 @@ export default {
   border-radius: 10px;
 }
 .video_wrap {
-  width: 100%;
+  width: 750px;
   height: 408px;
+  margin-top: 100px;
   -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  // position: relative;
+  // overflow-y: scroll;
+  // overflow: hidden;
 }
 </style>

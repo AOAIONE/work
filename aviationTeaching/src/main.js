@@ -15,9 +15,13 @@ import VueWechatTitle from 'vue-wechat-title'
 import baseUrl from '@/assets/js/common.js'
 import util from '@/utils/util.js'
 import { selectRole } from '@/service/service'
+import VueVideoPlayer from 'vue-video-player'
+import swal from 'sweetalert'
 
 // axios.defaults.baseURL = baseUrl
 Vue.use(VueWechatTitle)
+Vue.use(VueVideoPlayer)
+
 Vue.prototype.$weui = weui
 Vue.prototype.$axios = axios
 Vue.prototype.$myUtil = util

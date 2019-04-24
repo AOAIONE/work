@@ -34,6 +34,17 @@
   line-height: 42px;
   color: #000000;
 }
+.course_tag1 {
+  text-align: center;
+  display: inline-block;
+  background-color: #cccc00;
+  border-radius: 20px;
+  font-size: 24px;
+  width: 120px;
+  height: 42px;
+  line-height: 42px;
+  color: #000000;
+}
 /*个人中心公共样式*/
 .a-radio {
   display: none;
@@ -70,7 +81,7 @@
   margin-top: 110px;
 }
 .item_content {
-  margin-left: 20px;
+  /* margin-left: 20px; */
   padding-left: 30px;
   width: 750px;
   height: 86px;

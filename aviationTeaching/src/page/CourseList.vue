@@ -28,10 +28,10 @@
       </div>
       <div class="table_content table_common" v-for="course in courses" :key="course.id">
         <span class="flex1">
-          <a class="linka">{{course.id}}</a>
+          <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
         </span>
         <span class="flex2">
-          <a class="linka">{{course.name}}</a>
+          <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
         </span>
         <span class="flex1">
           {{course.publisher_name}}
@@ -132,38 +132,13 @@ export default {
         })
       })
     },
-    changeTyle (val) {
-      this.type_id = val
+    toDetail: function (id) {
+      this.$router.push({path: '/courseCenterDetail', query: {'id': id}})
     }
 
   },
   mounted () {
     this.getCourseList()
-    // let that = this
-    // let mobileSelect1 = new MobileSelect({
-    //   trigger: '#trigger',
-    //   title: '选择课件',
-    //   wheels: [
-    //     {data: that.courseLists}
-    //   ],
-    //   callback: function (indexArr, data) {
-    //     that.courseList = data[0].value
-    //     that.type_id = data[0].id
-    //   },
-    //   triggerDisplayData: false
-    // })
-    // let mobileSelect2 = new MobileSelect({
-    //   trigger: '#trigger1',
-    //   title: '课件权限',
-    //   wheels: [
-    //     {data: that.limits}
-    //   ],
-    //   callback: function (indexArr, data) {
-    //     that.permission = data[0].value
-    //     that.privilege = data[0].value
-    //   },
-    //   triggerDisplayData: false
-    // })
   }
 
 }

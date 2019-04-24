@@ -12,7 +12,7 @@
             <label class="content_left">课件标题:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.title}}
+                    {{courseBase.name}}
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <label class="content_left">适用课程:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.kecheng}}
+                    {{courseBase.corresponding_course}}
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <label class="content_left">课件类型:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.leixing}}
+                    {{courseBase.privilege}}
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <label class="content_left">发布者:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.fabu}}
+                    {{courseBase.publisher_name}}
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <label class="content_left">发布时间:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.time}}
+                    {{courseBase.add_time}}
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <label class="content_left">备注:</label>
             <div class="content_right">
                 <div class="content_right_wrap">
-                    {{courseBase.beizhu}}
+                    {{courseBase.note}}
                 </div>
             </div>
         </div>
@@ -65,3 +65,5 @@ export default {
   props: ['courseBase']
 }
 </script>
+<style lang="less">
+</style>
