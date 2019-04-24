@@ -82,6 +82,8 @@
 <script>
 import DetailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { getInfo } from '@/service/service'
+
 export default {
   name: 'DataComplete',
   components: {
@@ -109,7 +111,14 @@ export default {
     descInput: function () {
       let user = this.user
       this.txtVal = user.beizhu.length
+    },
+    getUserInfo: function () {
+      getInfo().then(res => {
+      })
     }
+  },
+  mounted () {
+    this.getUserInfo()
   }
 
 }

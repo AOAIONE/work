@@ -1,15 +1,15 @@
 <template>
-    <div class="container">
-        <detail-title :title="title"></detail-title>
-        <div class="item unbound_content ax_default ">
-            <p> 是否确认解除绑定</p>
-        </div>
-        <p class="operation">
-            <a class="user_btn save_btn">确定</a>
-            <a class="user_btn cancel_btn">取消</a>
-        </p>
-        <bottom-tabbar></bottom-tabbar>
+  <div class="container">
+    <detail-title :title="title"></detail-title>
+    <div class="item unbound_content ax_default ">
+      <p> 是否确认解除绑定</p>
     </div>
+    <p class="operation">
+      <a class="user_btn save_btn">确定</a>
+      <a class="user_btn cancel_btn">取消</a>
+    </p>
+    <bottom-tabbar></bottom-tabbar>
+  </div>
 </template>
 <script>
 import detailTitle from '@/components/DetailTitle'

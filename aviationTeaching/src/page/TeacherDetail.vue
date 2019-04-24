@@ -108,12 +108,14 @@ export default {
     relieve: function (detail) {
       let data = {'taskId': this.$route.query.task_id}
       delCourseAssign(data).then(res => {
-        swal('Oops', 'Something went wrong!', 'error')
+        if (res.data.is_success) {
+          swal('', '解除分配成功!', 'success')
+        }
       })
     },
     // 更改任务完成状态
     modifiLearningStatus: function () {
-      swal('Oops', 'Something went wrong!', 'error')
+      swal('', '任务状态更改成功!', 'success')
     }
   },
   mounted () {

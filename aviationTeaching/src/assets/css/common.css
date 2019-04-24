@@ -153,11 +153,11 @@
   color: #ffffff;
   line-height: 58px;
 }
-.saveBtn {
+.save_btn {
   background-color: rgba(0, 121, 254, 1);
 }
 
-.cancelBtn {
+.cancel_btn {
   margin-left: 40px;
   background-color: rgba(134, 134, 134, 1);
 }

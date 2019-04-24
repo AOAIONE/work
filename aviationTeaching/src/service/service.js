@@ -39,3 +39,11 @@ export const applyCourseList = data => {
 export const delCourseAssign = data => {
   return get('/api/course_ware/del_course_designate_student', data)
 }
+// 获取账号信息
+export const getInfo = () => {
+  return get('/api/account/api/account/get_info')
+}
+// 获取账号信息
+export const changePassword = data => {
+  return post('/api/account/change_password', data)
+}

@@ -3,7 +3,7 @@
     <div class="title_content">
       <p>
         <span>{{title.text}}</span>
-        <span v-if="title.show" class="title_right_1" @cliack="to">更多 </span>
+        <span v-if="title.show" class="title_right_1 iconfont" @cliack="to">更多 &#xe600;</span>
       </p>
     </div>
   </div>

@@ -26,12 +26,12 @@
                 <span class="flex1">申请状态</span>
                 <span class="flex1">申请时间</span>
             </div>
-            <div class="table_content table_common" v-for="course in courses" :key="course.kid">
+            <div class="table_content table_common" v-for="course in courses" :key="course.id">
                 <span class="flex1">
-                    <a class="linka">{{course.kid}}</a>
+                    <a class="linka">{{course.id}}</a>
                 </span>
                 <span class="flex2">
-                    <a class="linka">{{course.title}}</a>
+                    <a class="linka">{{course.name}}</a>
                 </span>
                 <span class="flex1">
                     {{course.fabu}}
@@ -48,7 +48,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { list, courseTypeList, applyCourseList } from '@/service/service'
+import { courseTypeList, applyCourseList } from '@/service/service'
 
 export default {
   name: 'MyApplyCourse',
@@ -73,11 +73,12 @@ export default {
       page_index: 1,
       page_count: 8,
       keyword: '',
-      privilege: 'all'
+      privilege: 'all',
+      status: ''
     }
   },
   methods: {
-    getCourseList: function () {
+    getApplyCourseList: function () {
       let that = this
       courseTypeList().then(res => {
         let data = res.data.data
@@ -90,12 +91,12 @@ export default {
       let data = {
         'type_id': that.type_id,
         'privilege': that.privilege,
-        'status': 'all',
+        'status': that.status,
         'keyword': that.keyword,
         'page_index': that.page_index,
         'page_count': that.page_count
       }
-      list(data).then(res => {
+      applyCourseList(data).then(res => {
         that.courses = res.data.data
         let mobileSelect1 = new MobileSelect({
           trigger: '#trigger',
@@ -125,31 +126,8 @@ export default {
     }
   },
   mounted () {
-    let that = this
-    let mobileSelect1 = new MobileSelect({
-      trigger: '#trigger',
-      title: '课件分类',
-      wheels: [
-        {data: that.courseLists}
-      ],
-      callback: function (indexArr, data) {
-        console.log(data)
-      },
-      triggerDisplayData: false
-    })
-    let mobileSelect2 = new MobileSelect({
-      trigger: '#trigger1',
-      title: '申请状态',
-      wheels: [
-        {data: that.limits}
-      ],
-      callback: function (indexArr, data) {
-        console.log(data)
-      },
-      triggerDisplayData: false
-    })
+    this.getApplyCourseList()
   }
-
 }
 </script>
 <style lang="less">

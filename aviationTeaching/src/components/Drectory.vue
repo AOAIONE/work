@@ -2,7 +2,7 @@
   <div class="drectory_container">
     <div class="content" @click="toRoute(drectory.path)">
       <p class="content_ico">
-        <span class="ico_text"></span>
+        <span class="ico_text iconfont" v-html="drectory.icon"></span>
       </p>
       <p class="content_title">
         <span class="title_text">{{drectory.text}}</span>
@@ -49,8 +49,9 @@ export default {
   line-height: 40px;
 }
 .ico_text {
-  font-family: "FontAwesome Regular", "FontAwesome";
-  color: #cccccc;
+  // font-family: "FontAwesome Regular", "FontAwesome";
+  // color: #cccccc;
+  // font-size: 64px;
 }
 .title_text {
   font-family: "微软雅黑";

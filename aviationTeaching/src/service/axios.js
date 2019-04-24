@@ -21,11 +21,13 @@ service.interceptors.request.use(
     ) {
       // 如果是登录和注册操作，则不需要携带header里面的token
       // 更改服务器地址
-      config.baseURL = 'http://192.168.0.138:5000'
+      // config.baseURL = 'http://192.168.0.138:5000'
+      config.baseURL = 'http://demo-user.ccar142.com/'
     } else {
       if (localStorage.getItem('Authorization')) {
         config.headers.Authorization = localStorage.getItem('Authorization')
-        config.baseURL = 'http://192.168.0.138:9099'
+        // config.baseURL = 'http://192.168.0.138:9099'
+        config.baseURL = 'http://demo-wjx.ccar142.com'
       }
     }
     return config

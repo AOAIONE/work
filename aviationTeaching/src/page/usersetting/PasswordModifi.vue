@@ -17,8 +17,8 @@
                 </div>
             </div>
             <p class="operation">
-                <a class="user_btn save_btn">保存</a>
-                <a class="user_btn cancel_btn">取消</a>
+                <a class="user_btn save_btn" @click="changePassword()">保存</a>
+                <a class="user_btn cancel_btn" @click="cancel()">取消</a>
             </p>
             <bottom-tabbar></bottom-tabbar>
         </div>
@@ -27,6 +27,8 @@
 <script>
 import DetailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { changePassword } from '@/service/service'
+
 export default {
   name: 'PasswordModifi',
   components: {
@@ -42,6 +44,17 @@ export default {
     }
   },
   methods: {
+    changePassword: function () {
+      let data = {
+
+      }
+      changePassword(data).then(res => {
+
+      })
+    },
+    cancel: function () {
+      this.$router.go(-1)
+    }
   }
 
 }

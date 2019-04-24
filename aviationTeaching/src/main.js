@@ -17,7 +17,7 @@ import util from '@/utils/util.js'
 import { selectRole } from '@/service/service'
 import VueVideoPlayer from 'vue-video-player'
 import swal from 'sweetalert'
-
+import './assets/iconfont/iconfont.css'
 // axios.defaults.baseURL = baseUrl
 Vue.use(VueWechatTitle)
 Vue.use(VueVideoPlayer)

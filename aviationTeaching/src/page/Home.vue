@@ -48,13 +48,13 @@ export default {
     drectoryCut: function () {
       let that = this
       let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
-      let drectorys1 = [{text: '课表', id: 1},
-        {text: '课件中心', id: 2, path: '/courseCenter'},
-        {text: '消息通知', id: 3},
-        {text: '模拟机排课表', id: 4}]
-      let drectorys2 = [{text: '课表', id: 1},
-        {text: '消息通知', id: 3},
-        {text: '模拟机排课表', id: 4}]
+      let drectorys1 = [{text: '课表', id: 1, icon: '&#xe65e;'},
+        {text: '课件中心', id: 2, path: '/courseCenter', icon: '&#xe8ab;'},
+        {text: '消息通知', id: 3, icon: '&#xe608;'},
+        {text: '模拟机排课表', id: 4, icon: '&#xe625;'}]
+      let drectorys2 = [{text: '课表', id: 1, icon: '&#xe65e;'},
+        {text: '消息通知', id: 3, icon: '&#xe608;'},
+        {text: '模拟机排课表', id: 4, icon: '&#xe625;'}]
       let currentRole = localStorage.getItem('currentRole')
       switch (currentRole) {
         case 'user':

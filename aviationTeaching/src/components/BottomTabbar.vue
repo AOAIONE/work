@@ -2,7 +2,7 @@
     <div class="tabbar_container">
         <a href="javascript:;" class="tabbar__item">
             <p class="item_top">
-                <span></span>
+                <span class="iconfont">&#xe601;</span>
             </p>
             <p>
                 <span class="item_bottom">首页</span>
@@ -10,7 +10,7 @@
         </a>
         <a href="javascript:;" class="tabbar__item">
             <p class="item_top">
-                <span></span>
+                <span class="iconfont">&#xe65e;</span>
             </p>
             <p>
                 <span class="item_bottom">课表</span>
@@ -18,7 +18,7 @@
         </a>
         <a href="javascript:;" class="tabbar__item">
             <p class="item_top">
-                <span></span>
+                <span class="iconfont">&#xe8ab;</span>
             </p>
             <p>
                 <span class="item_bottom">课件</span>
@@ -26,7 +26,7 @@
         </a>
         <a href="javascript:;" class="tabbar__item">
             <p class="item_top">
-                <span></span>
+                <span class="iconfont">&#xe608;</span>
                 <span class="item_badge ax_default">
                     <span class="badge_wrap">
                         <span class="badge">8</span>
@@ -39,7 +39,7 @@
         </a>
         <a href="javascript:;" class="tabbar__item">
             <p class="item_top">
-                <span></span>
+                <span class="iconfont">&#xe603;</span>
             </p>
             <p>
                 <span class="item_bottom">我的</span>
@@ -58,6 +58,7 @@ export default {
 
 <style lang="less" scoped>
 .tabbar_container {
+  box-shadow: 0 20px 6px rgba(0, 0, 0, 0.07);
   position: fixed;
   display: flex;
   z-index: 4;
