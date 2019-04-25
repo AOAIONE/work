@@ -1,19 +1,19 @@
 <template>
-    <div class="container">
-        <detail-title :title="title"></detail-title>
-        <div class="item ax_default">
-            <course-base-info :courseBase="detail"></course-base-info>
-            <div class="item_content">
-                <label class="content_left">指派课件:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        <a class="course_tag" @click="assignCourse(detail.id)">指派课件</a>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <detail-title :title="title"></detail-title>
+    <div class="item ax_default">
+      <course-base-info :courseBase="detail"></course-base-info>
+      <div class="item_content">
+        <label class="content_left">指派课件:</label>
+        <div class="content_right">
+          <div class="content_right_wrap">
+            <a class="course_tag" @click="assignCourse(detail.id)">指派课件</a>
+          </div>
         </div>
-        <bottom-tabbar></bottom-tabbar>
+      </div>
     </div>
+    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
+  </div>
 </template>
 <script>
 import detailTitle from '@/components/DetailTitle'

@@ -8,7 +8,7 @@
       <a class="user_btn save_btn">确定</a>
       <a class="user_btn cancel_btn">取消</a>
     </p>
-    <bottom-tabbar></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
   </div>
 </template>
 <script>

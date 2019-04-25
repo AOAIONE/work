@@ -27,7 +27,7 @@
                 </span>
             </div>
         </div>
-        <bottom-tabbar></bottom-tabbar>
+        <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
 </template>
 <script>

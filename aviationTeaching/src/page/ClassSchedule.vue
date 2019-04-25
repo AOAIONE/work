@@ -10,7 +10,7 @@
             </div> -->
     </div>
     <div class="course_content" id="coursesTable"></div>
-    <bottom-tabbar></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'table'"></bottom-tabbar>
   </div>
 </template>
 <script>

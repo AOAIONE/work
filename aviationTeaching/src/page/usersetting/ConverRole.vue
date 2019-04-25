@@ -3,7 +3,7 @@
     <detail-title :title="title"></detail-title>
     <div class="item role_content ax_default ">您当前的身份是“{{role}}”</div>
     <a v-if="role!==tab.text" class="conver_btn" v-for="tab in tabs" :key="tab.id" @click="coverRole(tab.role)">切换为“{{tab.text}}”</a>
-    <bottom-tabbar></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
   </div>
 </template>
 <script>

@@ -76,7 +76,7 @@
                 <a @click="cancel" class="user_btn cancel_btn ">取消</a>
             </p>
         </div>
-        <bottom-tabbar></bottom-tabbar>
+        <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
     </div>
 </template>
 <script>

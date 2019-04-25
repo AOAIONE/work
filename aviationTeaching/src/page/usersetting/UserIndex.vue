@@ -5,7 +5,7 @@
     <p v-for="tag in tags" :key="tag.id" class="user_content ax_default" @click="toRoute(tag.path)">
       <span class="iconfont user_icon" v-html="tag.icon"></span>{{tag.title}}
     </p>
-    <bottom-tabbar></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
   </div>
 </template>
 <script>

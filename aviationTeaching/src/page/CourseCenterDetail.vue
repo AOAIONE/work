@@ -1,24 +1,24 @@
 <template>
-    <div class="container">
-        <detail-title :title="title"></detail-title>
-        <div class="item ax_default">
-            <course-base-info :courseBase="detail"></course-base-info>
-            <div class="item_content">
-                <label class="content_left">阅读权限:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        <a class="btn" v-if="permissions==='allow_apply'">立即申请</a>
-                        <a class="albtn" v-if="permissions==='apply_passed'">申请通过</a>
-                        <a class="albtn" v-if="permissions==='designated'">指定阅读</a>
-                        <a class="albtn" v-if="permissions==='apply_checking'">申请审核中</a>
-                        <a class="albtn" v-if="permissions==='mine'">我的课件</a>
+  <div class="container">
+    <detail-title :title="title"></detail-title>
+    <div class="item ax_default">
+      <course-base-info :courseBase="detail"></course-base-info>
+      <div class="item_content">
+        <label class="content_left">阅读权限:</label>
+        <div class="content_right">
+          <div class="content_right_wrap">
+            <a class="btn" v-if="permissions==='allow_apply'">立即申请</a>
+            <a class="albtn" v-if="permissions==='apply_passed'">申请通过</a>
+            <a class="albtn" v-if="permissions==='designated'">指定阅读</a>
+            <a class="albtn" v-if="permissions==='apply_checking'">申请审核中</a>
+            <a class="albtn" v-if="permissions==='mine'">我的课件</a>
 
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <bottom-tabbar></bottom-tabbar>
+      </div>
     </div>
+    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
+  </div>
 </template>
 <script>
 import detailTitle from '@/components/DetailTitle'

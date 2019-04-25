@@ -1,6 +1,6 @@
 <template>
     <div class="tabbar_container">
-        <a href="javascript:;" @click="toRoute('/home')" class="tabbar__item">
+        <a href="javascript:;" :class="{activeMenu:activeStatus==='home'}" @click="toRoute('/home')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe601;</span>
             </p>
@@ -10,7 +10,7 @@
                 </span>
             </p>
         </a>
-        <a href="javascript:;" @click="toRoute('/classSchedule')" class="tabbar__item">
+        <a href="javascript:;" :class="{activeMenu:activeStatus==='Table'}" @click="toRoute('/classSchedule')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe65e;</span>
             </p>
@@ -20,7 +20,7 @@
                 </span>
             </p>
         </a>
-        <a href="javascript:;" v-if="showCourseCenter" @click="toRoute('/courseCenter')" class="tabbar__item">
+        <a href="javascript:;" v-if="showCourseCenter" :class="{activeMenu:activeStatus==='course'}" @click="toRoute('/courseCenter')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe8ab;</span>
             </p>
@@ -28,7 +28,7 @@
                 <span class="item_bottom">课件</span>
             </p>
         </a>
-        <a href="javascript:;" v-if="showMessage" @click="toRoute('')" class="tabbar__item">
+        <a href="javascript:;" v-if="showMessage" :class="{activeMenu:activeStatus==='news'}" @click="toRoute('')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe608;</span>
                 <span class="item_badge ax_default">
@@ -41,7 +41,7 @@
                 <span class="item_bottom">信息</span>
             </p>
         </a>
-        <a href="javascript:;" @click="toRoute('/userIndex')" class="tabbar__item">
+        <a href="javascript:;" :class="{activeMenu:activeStatus==='user'}" @click="toRoute('/userIndex')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe603;</span>
             </p>
@@ -54,6 +54,7 @@
 <script>
 export default {
   name: 'BottomTabbar',
+  props: ['activeStatus'],
   data () {
     return {
       showCourseCenter: true,
@@ -73,6 +74,11 @@ export default {
   },
   mounted () {
     this.showMenu()
+    this.localPath = window.location.hash.split('/')[1]
+  },
+  watch: {
+    'localPath': function (value) {
+    }
   }
 }
 </script>
@@ -142,5 +148,8 @@ export default {
   top: 2px;
   width: 50px;
   word-wrap: break-word;
+}
+.activeMenu {
+  color: #0079fe;
 }
 </style>

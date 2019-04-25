@@ -2,7 +2,7 @@
   <div class="container">
     <c-title :title="title1"></c-title>
     <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
-    <bottom-tabbar></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
   </div>
 </template>
 <script>

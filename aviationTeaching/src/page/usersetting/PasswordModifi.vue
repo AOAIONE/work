@@ -24,7 +24,7 @@
                 <a class="user_btn save_btn" @click="changePassword()">保存</a>
                 <a class="user_btn cancel_btn" @click="cancel()">取消</a>
             </p>
-            <bottom-tabbar></bottom-tabbar>
+            <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
         </div>
     </div>
 </template>
