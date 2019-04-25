@@ -12,7 +12,7 @@
           <span>{{video.title}}</span>
         </p>
         <p class="video_user">
-          <span> {{video.name}}</span>
+          <span>{{video.name}}</span>
           <span class="video_date">{{video.date}}</span>
         </p>
       </div>
@@ -33,14 +33,17 @@ export default {
 <style lang="less" scoped>
 .video_content {
   background-color: #f5f5f585;
-  width: 320px;
-  height: 300px;
+  width: 45%;
+  /*height: 300px;*/
   float: left;
   font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
   font-weight: 700;
   font-style: normal;
-  margin-left: 40px;
-  margin-top: 30px;
+  margin-left: 3%;
+  margin-top: 3%;
+}
+.video_container:last-of-type .video_content{
+  margin-bottom: 3%;
 }
 .video_img {
   width: 100%;
@@ -54,12 +57,13 @@ export default {
 }
 .video_info {
   position: relative;
-  margin-left: 40px;
-  margin-top: 8px;
+  padding:16px;
   word-wrap: break-word;
 }
 .video_name {
+  line-height: 40px;
   text-align: left;
+  font-size: 28px;
 }
 .video_user {
   text-align: left;

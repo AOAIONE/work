@@ -36,17 +36,22 @@ export default {
   font-weight: 410;
   font-style: normal;
 }
+.drectory_container:nth-child(3n){
+  border-right: 0;
+}
+.drectory_container:nth-child(3) ~ .drectory_container{
+  border-bottom:0;
+}
 .content {
   margin-top: 64px;
   word-wrap: break-word;
 }
-.content_ico {
+.content_ico span{
   font-size: 56px;
   line-height: 64px;
 }
 .content_title {
-  font-size: 28px;
-  line-height: 40px;
+  margin-top: 10px;
 }
 .ico_text {
   // font-family: "FontAwesome Regular", "FontAwesome";
@@ -56,5 +61,6 @@ export default {
 .title_text {
   font-family: "微软雅黑";
   color: #666666;
+  font-size: 24px;
 }
 </style>

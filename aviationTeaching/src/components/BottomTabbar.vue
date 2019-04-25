@@ -22,7 +22,7 @@
         </a>
         <a href="javascript:;" v-if="showCourseCenter" :class="{activeMenu:activeStatus==='course'}" @click="toRoute('/courseCenter')" class="tabbar__item">
             <p class="item_top">
-                <span class="iconfont">&#xe8ab;</span>
+                <span class="iconfont">&#xe602;</span>
             </p>
             <p>
                 <span class="item_bottom">课件</span>
@@ -30,7 +30,7 @@
         </a>
         <a href="javascript:;" v-if="showMessage" :class="{activeMenu:activeStatus==='news'}" @click="toRoute('')" class="tabbar__item">
             <p class="item_top">
-                <span class="iconfont">&#xe608;</span>
+                <span class="iconfont">&#xe611;</span>
                 <span class="item_badge ax_default">
                     <span class="badge_wrap">
                         <span class="badge">8</span>
@@ -85,7 +85,7 @@ export default {
 
 <style lang="less" scoped>
 .tabbar_container {
-  box-shadow: 0 20px 6px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 0 14px 0 #e2e2e2;
   position: fixed;
   display: flex;
   z-index: 4;
@@ -106,9 +106,13 @@ export default {
   width: 150px;
   word-wrap: break-word;
 }
-.item_top {
-  font-size: 48px;
+.item_top{
+  margin-top: 10px;
 }
+.item_top span.iconfont{
+  font-size: 42px;
+}
+
 .item_bottom {
   font-size: 24px;
 }
@@ -126,28 +130,21 @@ export default {
   display: inline-block;
 }
 .badge_wrap {
-  display: inline-block;
-  width: 45px;
-  height: 35px;
-  background: inherit;
+  position: absolute;
   background-color: rgba(249, 94, 90, 1);
+  left: 8px;
+  top: 2px;
+  padding:0 10px;
   border: none;
   border-radius: 26px;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  word-wrap: break-word;
   font-family: "微软雅黑 Regular", "微软雅黑";
   font-weight: 400;
-  font-style: normal;
   font-size: 22px;
   color: #ffffff;
-}
-.badge {
-  position: absolute;
-  left: 0px;
-  top: 2px;
-  width: 50px;
-  word-wrap: break-word;
 }
 .activeMenu {
   color: #0079fe;

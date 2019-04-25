@@ -1,7 +1,10 @@
 <template>
+
   <div class="container">
     <c-title :title="title1"></c-title>
+    <div class="top_container">
     <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
+    </div>
     <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
   </div>
 </template>

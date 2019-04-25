@@ -28,19 +28,18 @@ export default {
 <style lang="less" scoped>
 .title {
   width: 750px;
-  height: 100px;
+  height: 88px;
   font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
   font-weight: 700;
   font-style: normal;
   text-align: left;
-  line-height: 56px;
+  line-height: 88px;
   background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(242, 242, 242, 1);
+  border-bottom: 1px solid rgba(242, 242, 242, 1);
 }
 .title_content {
-  margin-left: 40px;
-  margin-top: 22px;
-  width: 710px;
+  padding-left: 40px;
+  color: #D7000F;
   word-wrap: break-word;
 }
 .title_right_1 {
