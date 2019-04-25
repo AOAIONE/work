@@ -268,6 +268,14 @@ export default new Router({
       }
     },
     {
+      path: '/news',
+      name: 'News',
+      component: () => import('@/page/News'),
+      meta: {
+        title: '课表'
+      }
+    },
+    {
       path: '*',
       component: () => import('@/page/404'),
       meta: {

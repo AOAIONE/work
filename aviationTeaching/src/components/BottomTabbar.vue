@@ -10,7 +10,7 @@
                 </span>
             </p>
         </a>
-        <a href="javascript:;" :class="{activeMenu:activeStatus==='Table'}" @click="toRoute('/classSchedule')" class="tabbar__item">
+        <a href="javascript:;" :class="{activeMenu:activeStatus==='table'}" @click="toRoute('/classSchedule')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe65e;</span>
             </p>
