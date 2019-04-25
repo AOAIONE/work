@@ -1,7 +1,7 @@
 <template>
   <div class="select-container">
     <ul>
-      <li class="cell" v-for="tab in tabs" :key="tab.userId" @click="toRoute(tab.role)">
+      <li class="cell" v-for="tab in tabs" :key="tab.id" @click="toRoute(tab.role)">
         <div class="img_background">
           <div class="img" :class="{mx:tab.isMx}" :style="{'background-image':'url('+tab.img+')','background-repate':'no-repeat','background-size':'cover'}"></div>
         </div>
@@ -57,19 +57,19 @@ export default {
         let tab = {}
         switch (e.roleName) {
           case 'user':
-            tab = {text: '教务员', userId: e.userId, img: require('../assets/user_dean.png'), role: e.roleName}
+            tab = {text: '教务员', id: 1, userId: e.userId, img: require('../assets/user_dean.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'schemer':
-            tab = {text: '计划员', userId: e.userId, img: require('../assets/user_planner.png'), role: e.roleName}
+            tab = {text: '计划员', id: 2, userId: e.userId, img: require('../assets/user_planner.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'teacher':
-            tab = {text: '教员', id: 3, isLeft: true, img: require('../assets/user_student.png'), role: e.roleName}
+            tab = {text: '教员', id: 3, userId: e.userId, isLeft: true, img: require('../assets/user_student.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           case 'student':
-            tab = {text: '学员', id: 4, isLeft: true, isMx: true, img: require('../assets/user_teacher.png'), role: e.roleName}
+            tab = {text: '学员', id: 4, userId: e.userId, isLeft: true, isMx: true, img: require('../assets/user_teacher.png'), role: e.roleName}
             that.tabs.push(tab)
             break
           default:

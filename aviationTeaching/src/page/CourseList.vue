@@ -86,7 +86,7 @@ export default {
 
   },
   methods: {
-    getCourseList: function () {
+    getCourseTypeList: function () {
       let that = this
       courseTypeList().then(res => {
         let data = res.data.data
@@ -108,24 +108,27 @@ export default {
           triggerDisplayData: false
         })
       })
-      let data = {
-        'type_id': that.type_id,
-        'privilege': that.privilege,
-        'status': 'all',
-        'keyword': that.keyword,
-        'page_index': that.page_index,
-        'page_count': that.page_count
-      }
-      list(data).then(res => {
-        that.courses = res.data.data
-      })
     },
     toDetail: function (id) {
       this.$router.push({path: '/courseCenterDetail', query: {'id': id}})
+    },
+    getCourseList: function () {
+      let data = {
+        'type_id': this.type_id,
+        'privilege': this.privilege,
+        'status': 'all',
+        'keyword': this.keyword,
+        'page_index': this.page_index,
+        'page_count': this.page_count
+      }
+      list(data).then(res => {
+        this.courses = res.data.data
+      })
     }
 
   },
   mounted () {
+    this.getCourseTypeList()
     this.getCourseList()
     let that = this
     let mobileSelect2 = new MobileSelect({
@@ -140,8 +143,6 @@ export default {
       },
       triggerDisplayData: false
     })
-  },
-  created () {
   }
 
 }

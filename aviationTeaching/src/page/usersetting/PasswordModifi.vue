@@ -3,13 +3,17 @@
         <detail-title :title="title"></detail-title>
         <div class="item ax_default">
             <div class="password_content">
-                <label>新密码:</label>
+                <label>新密码
+                    <span style="color:red;">*</span>
+                </label>
                 <div class="passwprd_right">
                     <input type="text" v-model="password" class="password_input" />
                 </div>
             </div>
             <div class="password_content">
-                <label>再次输入密码:</label>
+                <label>确认密码
+                    <span style="color:red;">*</span>
+                </label>
                 <div class="passwprd_right">
                     <div class="passwprd_right_wrap">
                         <input type="text" v-model="checkPassword" class="password_input" />
@@ -45,15 +49,32 @@ export default {
   },
   methods: {
     changePassword: function () {
+      if ((this.password).trim() === '') {
+        swal('', '请输入密码', 'warning')
+        return false
+      } else if ((this.checkPassword).trim() === '') {
+        swal('', '请输入确认密码', 'warning')
+        return false
+      } else if (this.password !== this.checkPassword) {
+        swal('', '两个密码框密码不一致！', 'warning')
+        return false
+      }
       let data = {
-
+        'password': this.password
       }
       changePassword(data).then(res => {
-
+        debugger
+        if (res.data.is_success === true) {
+          swal('', '密码修改成功！', 'success').then((value) => {
+            this.$router.push('/userIndex')
+          })
+        } else {
+          swal('', '操作失败！', 'error')
+        }
       })
     },
     cancel: function () {
-      this.$router.go(-1)
+      this.$router.push('/userIndex')
     }
   }
 

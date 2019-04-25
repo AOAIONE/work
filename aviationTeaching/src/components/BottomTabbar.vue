@@ -1,22 +1,26 @@
 <template>
     <div class="tabbar_container">
-        <a href="javascript:;" class="tabbar__item">
+        <a href="javascript:;" @click="toRoute('/home')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe601;</span>
             </p>
             <p>
-                <span class="item_bottom">首页</span>
+                <span class="item_bottom">
+                    首页
+                </span>
             </p>
         </a>
-        <a href="javascript:;" class="tabbar__item">
+        <a href="javascript:;" @click="toRoute('/classSchedule')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe65e;</span>
             </p>
             <p>
-                <span class="item_bottom">课表</span>
+                <span class="item_bottom">
+                    课表
+                </span>
             </p>
         </a>
-        <a href="javascript:;" class="tabbar__item">
+        <a href="javascript:;" v-if="showCourseCenter" @click="toRoute('/courseCenter')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe8ab;</span>
             </p>
@@ -24,7 +28,7 @@
                 <span class="item_bottom">课件</span>
             </p>
         </a>
-        <a href="javascript:;" class="tabbar__item">
+        <a href="javascript:;" v-if="showMessage" @click="toRoute('')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe608;</span>
                 <span class="item_badge ax_default">
@@ -37,7 +41,7 @@
                 <span class="item_bottom">信息</span>
             </p>
         </a>
-        <a href="javascript:;" class="tabbar__item">
+        <a href="javascript:;" @click="toRoute('/userIndex')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe603;</span>
             </p>
@@ -51,7 +55,24 @@
 export default {
   name: 'BottomTabbar',
   data () {
-    return {}
+    return {
+      showCourseCenter: true,
+      showMessage: true
+    }
+  },
+  methods: {
+    toRoute: function (path) {
+      this.$router.push(path)
+    },
+    showMenu: function () {
+      if (localStorage.getItem('currentRole') === 'schemer') {
+        this.showCourseCenter = false
+        this.showMessage = false
+      }
+    }
+  },
+  mounted () {
+    this.showMenu()
   }
 }
 </script>

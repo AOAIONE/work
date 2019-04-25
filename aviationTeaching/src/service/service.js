@@ -41,9 +41,13 @@ export const delCourseAssign = data => {
 }
 // 获取账号信息
 export const getInfo = () => {
-  return get('/api/account/api/account/get_info')
+  return get('/api/account/get_info')
 }
 // 获取账号信息
 export const changePassword = data => {
   return post('/api/account/change_password', data)
+}
+// 更改用户信息
+export const changeInfo = data => {
+  return post('/api/account/change_info', data)
 }
