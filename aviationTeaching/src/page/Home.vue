@@ -1,6 +1,5 @@
 <template>
   <div class="home_container">
-    <!-- <div class="mgtop"></div> -->
     <h-title :title="title1"></h-title>
     <div class="top_container">
       <h-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></h-drectory>
@@ -41,13 +40,13 @@ export default {
     }
   },
   created () {
-    // 首页热门分录安装角色切换
+    // 首页热门分录装角色切换
     this.drectoryCut()
   },
   methods: {
     drectoryCut: function () {
       let that = this
-      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
+      // let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let drectorys1 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe65e;'},
         {text: '课件中心', id: 2, path: '/courseCenter', icon: '&#xe8ab;'},
         {text: '消息通知', id: 3, icon: '&#xe608;'},
@@ -70,30 +69,6 @@ export default {
           that.drectorys = drectorys1
           break
       }
-      // roleMapperNames.forEach(e => {
-      //   let drectory = {}
-      //   switch (e.roleName) {
-      //     case 'user':
-      //       drectory = {text: '教务员', userId: e.userId, img: require('../assets/user_dean.png'), role: e.roleName}
-      //       this.tabs.push(tab)
-      //       break
-      //     case 'schemer':
-      //       tab = {text: '计划员', userId: e.userId, img: require('../assets/user_planner.png'), role: e.roleName}
-      //       this.tabs.push(tab)
-      //       break
-      //     case 'teacher':
-      //       tab = {text: '教员', id: 3, isLeft: true, img: require('../assets/user_student.png'), role: e.roleName}
-      //       this.tabs.push(tab)
-      //       break
-      //     case 'student':
-      //       tab = {text: '学员', id: 4, isLeft: true, isMx: true, img: require('../assets/user_teacher.png'), role: e.roleName}
-      //       this.tabs.push(tab)
-      //       break
-      //     default:
-      //       console.log('角色请求出错')
-      //       break
-      //   }
-      // })
     }
   }
 
