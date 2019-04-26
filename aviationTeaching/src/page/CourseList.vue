@@ -17,7 +17,7 @@
     </div>
     <div class="search_bar ax_default">
       <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-      <a class="search_btn" @click="getCourseList()">搜索</a>
+      <a class="search_btn" @click="getCourseList">搜索</a>
     </div>
     <div class="table_wrap ax_default">
       <div class="table_title table_common">

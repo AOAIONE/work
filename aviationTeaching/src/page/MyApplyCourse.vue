@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class="search_bar ax_default">
-            <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" />
-            <a class="search_btn">搜索</a>
+            <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+            <a class="search_btn" @click="search">搜索</a>
         </div>
         <div class="table_wrap ax_default">
             <div class="table_title table_common">
@@ -33,11 +33,17 @@
                 <span class="flex2">
                     <a class="linka">{{course.name}}</a>
                 </span>
-                <span class="flex1">
-                    {{course.fabu}}
+                <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
+                    {{course.application_status|statusConver}}
+                </span>
+                <span class="flex1" v-else-if="course.application_status==='apply_refused'" style="color:#009966;">
+                    {{course.application_status|statusConver}}
+                </span>
+                <span class="flex1" v-else>
+                    {{course.application_status|statusConver}}
                 </span>
                 <span class="flex1">
-                    {{course.time}}
+                    {{course.application_time}}
                 </span>
             </div>
         </div>
@@ -73,12 +79,37 @@ export default {
       page_index: 1,
       page_count: 8,
       keyword: '',
-      privilege: 'all',
-      status: ''
+      privilege: '',
+      status: 'all'
+    }
+  },
+  watch: {
+    'type_id': function () {
+      this.getApplyCourseList()
+    },
+    'privilege': function () {
+      this.getApplyCourseList()
+    }
+  },
+  filters: {
+    statusConver: function (value) {
+      if (!value) return ''
+      let newValue
+      switch (value) {
+        case 'apply_checking':
+          newValue = '申请中'
+          break
+        case 'apply_passed':
+          newValue = '已通过'
+          break
+        default:
+          newValue = '未通过'
+      }
+      return newValue
     }
   },
   methods: {
-    getApplyCourseList: function () {
+    getApplyCourseTypeList: function () {
       let that = this
       courseTypeList().then(res => {
         let data = res.data.data
@@ -87,17 +118,6 @@ export default {
           courseList = {'id': d.id, 'value': d.name}
           that.courseLists.push(courseList)
         })
-      })
-      let data = {
-        'type_id': that.type_id,
-        'privilege': that.privilege,
-        'status': that.status,
-        'keyword': that.keyword,
-        'page_index': that.page_index,
-        'page_count': that.page_count
-      }
-      applyCourseList(data).then(res => {
-        that.courses = res.data.data
         let mobileSelect1 = new MobileSelect({
           trigger: '#trigger',
           title: '课件分类',
@@ -110,23 +130,52 @@ export default {
           },
           triggerDisplayData: false
         })
-        let mobileSelect2 = new MobileSelect({
-          trigger: '#trigger1',
-          title: '申请状态',
-          wheels: [
-            {data: that.limits}
-          ],
-          callback: function (indexArr, data) {
-            that.permission = data[0].value
-            that.privilege = data[0].value
-          },
-          triggerDisplayData: false
-        })
       })
+    },
+    getApplyCourseList: function () {
+      let that = this
+      let data = {
+        'type_id': that.type_id,
+        'privilege': '',
+        'status': that.status,
+        'keyword': that.keyword,
+        'page_index': that.page_index,
+        'page_count': that.page_count }
+      applyCourseList(data).then(res => {
+        that.courses = res.data.data
+      })
+    },
+    search: function () {
+      this.getApplyCourseList()
     }
   },
   mounted () {
+    let that = this
+    this.getApplyCourseTypeList()
     this.getApplyCourseList()
+    let mobileSelect2 = new MobileSelect({
+      trigger: '#trigger1',
+      title: '申请状态',
+      wheels: [
+        {data: that.limits}
+      ],
+      callback: function (indexArr, data) {
+        that.permission = data[0].value
+        switch (data[0].id) {
+          case '1':
+            that.status = 'applying'
+            break
+          case '2':
+            that.status = 'passed'
+            break
+          default:
+            that.status = 'refused'
+            break
+        }
+        that.privilege = data[0].value
+      },
+      triggerDisplayData: false
+    })
   }
 }
 </script>
