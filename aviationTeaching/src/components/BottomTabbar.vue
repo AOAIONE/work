@@ -28,7 +28,7 @@
                 <span class="item_bottom">课件</span>
             </p>
         </a>
-        <a href="javascript:;" v-if="showMessage" :class="{activeMenu:activeStatus==='news'}" @click="toRoute('')" class="tabbar__item">
+        <a href="javascript:;" v-if="showMessage" :class="{activeMenu:activeStatus==='news'}" @click="toRoute('/news')" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe611;</span>
                 <span class="item_badge ax_default">
@@ -106,10 +106,10 @@ export default {
   width: 150px;
   word-wrap: break-word;
 }
-.item_top{
+.item_top {
   margin-top: 10px;
 }
-.item_top span.iconfont{
+.item_top span.iconfont {
   font-size: 42px;
 }
 
@@ -134,7 +134,7 @@ export default {
   background-color: rgba(249, 94, 90, 1);
   left: 8px;
   top: 2px;
-  padding:0 10px;
+  padding: 0 10px;
   border: none;
   border-radius: 26px;
   -moz-box-shadow: none;
