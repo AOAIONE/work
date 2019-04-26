@@ -134,7 +134,7 @@
   margin-right: 30px;
 }
 .operation {
-  margin-top: 40px;
+  margin-top: 80px;
 }
 .user_btn {
   display: inline-block;
@@ -154,7 +154,7 @@
   line-height: 58px;
 }
 .save_btn {
-  background-color: rgba(0, 121, 254, 1);
+  background-color: #d7000f;
 }
 
 .cancel_btn {

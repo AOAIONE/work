@@ -7,15 +7,15 @@
                 <div class="content_right">
                     <div class="content_right_wrap">
                         <label>
-                            <input type="radio" name="1" id="" class="a-radio" :checked="opinion.leixing==0?true:false">
+                            <input type="radio" name="1" id='1' class="a-radio" @click="radioSelect('bug项')">
                             <span class="b-radio"></span>bug项
                         </label>
                         <label>
-                            <input type="radio" name="1" id="" class="a-radio" :checked="opinion.leixing==1?true:false">
+                            <input type="radio" name="1" id='2' class="a-radio" @click="radioSelect('功能优化')">
                             <span class="b-radio"></span>功能优化
                         </label>
                         <label>
-                            <input type="radio" name="1" id="" class="a-radio" :checked="opinion.leixing==2?true:false">
+                            <input type="radio" name="1" id='3' class="a-radio" @click="radioSelect('建议')">
                             <span class="b-radio"></span>建议
                         </label>
                     </div>
@@ -25,13 +25,13 @@
                 <label class="content_left">反馈项:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <input type="text" v-model="opinion.address" class="opinion_input" />
+                        <input type="text" v-model="opinion.title" class="opinion_input" />
                     </div>
                 </div>
             </div>
             <div class="detail_description">
                 <label class="content_left">详细描述:</label>
-                <textarea v-model="opinion.address" maxlength="300" class="opinion_textarea" />
+                <textarea v-model="opinion.nei_rong" maxlength="300" class="opinion_textarea" />
             </div>
             <div class="detail_description">
                 <label class="content_left">上传附件:</label>
@@ -41,8 +41,8 @@
                 <span>*仅支持jpeg、gif、png、jpg格式文件</span>
             </div>
             <p class="operation">
-                <a class="user_btn save_btn">保存</a>
-                <a class="user_btn cancel_btn">取消</a>
+                <a class="user_btn save_btn" @click="saveOption">保存</a>
+                <a class="user_btn cancel_btn" @click="cancel">取消</a>
             </p>
         </div>
         <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
@@ -51,6 +51,7 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { feedBack } from '@/service/service'
 export default {
   name: 'FeedBack',
   components: {
@@ -61,23 +62,40 @@ export default {
     return {
       title: '系统意见反馈',
       txtVal: 0,
+      checkValue: '',
       opinion: {
-        leixing: 1,
-        sex: 1,
-        phone: '15181001161',
-        loginName: 'ceshi',
-        card: '',
-        number: '',
-        address: '',
-        beizhu: ''
+        title: '',
+        nei_rong: '',
+        type_name: '',
+        files: [
+        ]
       }
     }
   },
   methods: {
+    radioSelect: function (value) {
+      this.checkValue = value
+    },
     // 显示Textarea里面的内容字数
     descInput: function () {
       let user = this.user
       this.txtVal = user.beizhu.length
+    },
+    // 意见提交
+    saveOption: function () {
+      let data = {
+        'title': this.opinion.title,
+        'nei_rong': this.opinion.nei_rong,
+        'type_name': this.checkValue,
+        'files': [
+          '222'
+        ]
+      }
+    //   feedBack(data).then(res => {
+    //   })
+    },
+    cancel: function () {
+      this.$router.push('/userIndex')
     }
   }
 
