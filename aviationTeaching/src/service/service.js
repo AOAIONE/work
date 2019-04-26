@@ -9,12 +9,10 @@ export const selectRole = data => {
     'Content-Type': 'application/x-www-form-urlencoded'
   })
 }
-
 // 获取列表
 export const list = data => {
   return post('/api/course_ware/list', data)
 }
-
 // 获取课件分类列表
 export const courseTypeList = () => {
   return get('/api/course_ware/course_type_list')
@@ -43,9 +41,13 @@ export const delCourseAssign = data => {
 export const getInfo = () => {
   return get('/api/account/get_info')
 }
-// 获取账号信息
+// 更改密码
 export const changePassword = data => {
   return post('/api/account/change_password', data)
+}
+// 意见反馈
+export const feedBack = data => {
+  return post('/api/feedback/add', data)
 }
 // 更改用户信息
 export const changeInfo = data => {
