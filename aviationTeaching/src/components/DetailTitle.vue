@@ -1,5 +1,5 @@
 <template>
-  <div class="container ax_default">
+  <div class="title_container ax_default">
     <p>
       <a class="title_left" @click="back"><i class="iconfont">&#xe616;</i>返回</a>
       <div class="title_center">{{title}}</div>
@@ -20,7 +20,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.container {
+.title_container {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -40,6 +40,7 @@ export default {
   left: 2%;
   white-space: nowrap;
   font-size: 28px;
+  font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
 }
 .title_left i{
   font-size: 30px;

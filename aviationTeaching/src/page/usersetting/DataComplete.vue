@@ -150,11 +150,8 @@ export default {
   margin-top: 110px;
 }
 .user_comment {
-  margin-left: 20px;
-  padding-left: 30px;
+  padding:20px 30px 40px 30px;
   width: 750px;
-  height: 240px;
-  margin-top: 10px;
   text-align: left;
   font-family: "FontAwesome Regular", "FontAwesome";
   font-weight: 410;
@@ -164,14 +161,18 @@ export default {
   background: inherit;
   box-sizing: border-box;
   position: relative;
+  background-color: #fff;
 }
 
 .user_comment textarea {
-  margin-left: -30px;
-  width: 750px;
-  height: 200px;
+  width: 100%;
+  margin-top: 10px;
+  min-height: 200px;
   font-size: 14px;
   outline: none;
+  border: 1px solid rgba(242, 242, 242, 1);
+  padding: 10px;
+  box-sizing: border-box;
 }
 .user_comment span {
   position: absolute;

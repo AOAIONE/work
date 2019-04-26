@@ -1,15 +1,17 @@
 <template>
   <div class=" container">
     <detail-title :title="title"></detail-title>
-    <div class="select_bar ax_default">
-      <span>课件分类:&nbsp;</span>
-      <!-- <div id="trigger" class="select_wrap">
-                <select onmousedown="javascript:return false;" class="select_common">
-                    <option>{{date}}</option>
-                </select>
-            </div> -->
-    </div>
+    <div class="courseList_container">
+      <div class="select_bar ax_default">
+        <span>课件分类:&nbsp;</span>
+        <!-- <div id="trigger" class="select_wrap">
+                  <select onmousedown="javascript:return false;" class="select_common">
+                      <option>{{date}}</option>
+                  </select>
+              </div> -->
+      </div>
     <div class="course_content" id="coursesTable"></div>
+    </div>
     <bottom-tabbar :activeStatus="'table'"></bottom-tabbar>
   </div>
 </template>
