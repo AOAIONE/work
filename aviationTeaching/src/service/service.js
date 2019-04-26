@@ -51,3 +51,15 @@ export const changePassword = data => {
 export const changeInfo = data => {
   return post('/api/account/change_info', data)
 }
+// 课件指派教员
+export const designateTeacher = data => {
+  return get('/api/course_ware/course_designate_teacher', data)
+}
+// 课件指派学员
+export const designateStudent = data => {
+  return get('/api/course_ware/course_designate_student', data)
+}
+// 课件取消指派（教员/教务员通用）
+export const delDesignateTeacher = data => {
+  return get('/api/course_ware/del_course_designate_student', data)
+}

@@ -86,7 +86,7 @@ export default {
 
   },
   methods: {
-    getCourseList: function () {
+    getCourseTypeList: function () {
       let that = this
       courseTypeList().then(res => {
         let data = res.data.data
@@ -95,17 +95,6 @@ export default {
           courseList = {'id': d.id, 'value': d.name}
           that.courseLists.push(courseList)
         })
-      })
-      let data = {
-        'type_id': that.type_id,
-        'privilege': that.privilege,
-        'status': 'all',
-        'keyword': that.keyword,
-        'page_index': that.page_index,
-        'page_count': that.page_count
-      }
-      list(data).then(res => {
-        that.courses = res.data.data
         let mobileSelect1 = new MobileSelect({
           trigger: '#trigger',
           title: '选择课件',
@@ -118,27 +107,42 @@ export default {
           },
           triggerDisplayData: false
         })
-        let mobileSelect2 = new MobileSelect({
-          trigger: '#trigger1',
-          title: '课件权限',
-          wheels: [
-            {data: that.limits}
-          ],
-          callback: function (indexArr, data) {
-            that.permission = data[0].value
-            that.privilege = data[0].value
-          },
-          triggerDisplayData: false
-        })
       })
     },
     toDetail: function (id) {
       this.$router.push({path: '/myCourseDetail', query: {'id': id}})
+    },
+    getCourseList: function () {
+      let that = this
+      let data = {
+        'type_id': that.type_id,
+        'privilege': that.privilege,
+        'status': 'all',
+        'keyword': that.keyword,
+        'page_index': that.page_index,
+        'page_count': that.page_count
+      }
+      list(data).then(res => {
+        that.courses = res.data.data
+      })
     }
-
   },
   mounted () {
-    this.getCourseList()
+    let that = this
+    that.getCourseTypeList()
+    that.getCourseList()
+    let mobileSelect2 = new MobileSelect({
+      trigger: '#trigger1',
+      title: '课件权限',
+      wheels: [
+        {data: that.limits}
+      ],
+      callback: function (indexArr, data) {
+        that.permission = data[0].value
+        that.privilege = data[0].value
+      },
+      triggerDisplayData: false
+    })
   }
 
 }

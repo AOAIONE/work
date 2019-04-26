@@ -6,7 +6,7 @@
                 <label class="content_left">教员ID:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{(detail.designated_user_info).user_id}}
+                        {{designatedUserInfo.user_id}}
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <label class="content_left">身份证号:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.designated_user_info.id_card_no}}
+                        {{designatedUserInfo.id_card_no}}
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <label class="content_left">手机号:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.designated_user_info.phone_no}}
+                        {{designatedUserInfo.phone_no}}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <label class="content_left">课件分配:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="course_tag1" @click="relieve(detail)">解除分配</a>
+                        <a class="course_tag1" @click="courseDelAssign">解除分配</a>
                     </div>
                 </div>
             </div>
@@ -94,22 +94,26 @@ export default {
   data () {
     return {
       title: '赵槐',
-      detail: {}
+      detail: {},
+      designatedUserInfo: {}
     }
   },
   methods: {
     getTeacherDetail: function () {
       let data = {'taskId': this.$route.query.task_id}
       teacherDetail(data).then(res => {
+        this.designatedUserInfo = res.data.data.designated_user_info
         this.detail = res.data.data
       })
     },
     // 解除分配
-    relieve: function (detail) {
+    courseDelAssign: function () {
       let data = {'taskId': this.$route.query.task_id}
       delCourseAssign(data).then(res => {
         if (res.data.is_success) {
-          swal('', '解除分配成功!', 'success')
+          swal('', '解除分配成功!', 'success').then((value) => {
+            this.$router.push({path: '/selectTeacher', query: {'id': this.detail.id}})
+          })
         }
       })
     },

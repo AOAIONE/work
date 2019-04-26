@@ -23,8 +23,8 @@
           {{teacher.id_card_no}}
         </span>
         <span class="flex1 ">
-          <a v-if="teacher.is_designated===0 " class="course_tag1 ">课件分配</a>
-          <a v-else class="course_tag ">解除分配</a>
+          <a v-if="teacher.is_designated===0 " class="course_tag1" @click="courseAssign(teacher.user_id)">课件分配</a>
+          <a v-else class="course_tag" @click="courseDelAssign(teacher.task_id)">解除分配</a>
         </span>
       </div>
     </div>
@@ -34,7 +34,7 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { teacherList } from '@/service/service'
+import { teacherList, designateTeacher, delDesignateTeacher } from '@/service/service'
 
 export default {
   name: 'SelectTeacher',
@@ -69,12 +69,34 @@ export default {
     serach: function () {
       this.getTeacherList()
     },
+    // 跳转到教员详情，已分配的教员才能进入
     toDetail: function (teacher) {
       if (teacher.is_designated === 0) {
         return false
       } else {
         this.$router.push({path: '/teacherDetail', query: {'task_id': teacher.task_id}})
       }
+    },
+    // 课件指派教员
+    courseAssign: function (teacherId) {
+      let data = {
+        'teacherId': teacherId,
+        'courseWareId': this.$route.query.id
+      }
+      designateTeacher(data).then(res => {
+        if (res.data.is_success) {
+          this.getTeacherList()
+        }
+      })
+    },
+    // 取消指派
+    courseDelAssign: function (taskId) {
+      let data = {'taskId': taskId}
+      delDesignateTeacher(data).then(res => {
+        if (res.data.is_success) {
+          this.getTeacherList()
+        }
+      })
     }
   }
 
