@@ -35,6 +35,10 @@ export const teacherDetail = data => {
 }
 // 获取申请课件列表
 export const applyCourseList = data => {
+  return post('/api/course_ware/application_list', data)
+}
+// 获取我申请的课件列表
+export const MyApplyCourseList = data => {
   return post('/api/course_ware/my_application_list', data)
 }
 // 取消课件指派
@@ -68,4 +72,28 @@ export const designateStudent = data => {
 // 课件取消指派（教员/教务员通用）
 export const delDesignateTeacher = data => {
   return get('/api/course_ware/del_course_designate_student', data)
+}
+// 获取申请中课件详情
+export const applicationDetail = data => {
+  return get('/api/course_ware/application_detail', data)
+}
+// 处理课件阅读申请
+export const handleApplication = data => {
+  return post('/api/course_ware/handle_application', data)
+}
+// 取消申请
+export const cancelApplication = data => {
+  return get('/api/course_ware/del_designate', data)
+}
+// 设置任务完成状态
+export const completeTask = data => {
+  return get('/api/course_ware/complete_designate_task', data)
+}
+// 获取指定阅读课件列表
+export const designatedCourseWareList = data => {
+  return post('/api/course_ware/designated_courseWare_list_mine', data)
+}
+// 获取指定阅读课件详情
+export const designatedCourseWareDetail = data => {
+  return get('/api/course_ware/designated_courseWare_detail_mine', data)
 }

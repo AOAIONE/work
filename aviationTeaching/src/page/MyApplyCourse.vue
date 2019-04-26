@@ -18,7 +18,7 @@
                     </select>
                 </div>
                 <div class="search_bar">
-                    <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+                    <input placeholder="请输入关键词,例如: 课件标题" class="search_input" v-model="keyword" />
                     <a class="search_btn" @click="search">搜索</a>
                 </div>
             </div>
@@ -29,12 +29,12 @@
                     <span class="flex1">申请状态</span>
                     <span class="flex1">申请时间</span>
                 </div>
-                <div class="table_content table_common" v-for="course in courses" :key="course.id">
+                <div class="table_content table_common" v-for="course in courses" :key="course.application_id">
                     <span class="flex1">
-                        <a class="linka">{{course.id}}</a>
+                        <a class="linka" @click="toDetail(course.application_status,course.application_id)">{{course.id}}</a>
                     </span>
                     <span class="flex2">
-                        <a class="linka">{{course.name}}</a>
+                        <a class="linka" @click="toDetail(course.application_status,course.application_id)">{{course.name}}</a>
                     </span>
                     <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
                         {{course.application_status|statusConver}}
@@ -58,7 +58,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { courseTypeList, applyCourseList } from '@/service/service'
+import { courseTypeList, MyApplyCourseList } from '@/service/service'
 
 export default {
   name: 'MyApplyCourse',
@@ -145,12 +145,23 @@ export default {
         'keyword': that.keyword,
         'page_index': that.page_index,
         'page_count': that.page_count }
-      applyCourseList(data).then(res => {
+      MyApplyCourseList(data).then(res => {
         that.courses = res.data.data
       })
     },
     search: function () {
       this.getApplyCourseList()
+    },
+    toDetail: function (value, id) {
+      let toPath = ''
+      if (value === 'apply_checking') {
+        toPath = 'MyApplyCourseDetailUnderway'
+      } else if (value === 'apply_refused') {
+        toPath = 'MyApplyCourseDetailNotPass'
+      } else {
+        toPath = 'MyApplyCourseDetailPass'
+      }
+      this.$router.push({path: toPath, query: {'application_id': id}})
     }
   },
   mounted () {

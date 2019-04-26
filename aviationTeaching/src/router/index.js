@@ -196,9 +196,9 @@ export default new Router({
       }
     },
     {
-      path: '/applyDetail',
-      name: 'ApplyDetail',
-      component: () => import('@/page/ApplyDetail'),
+      path: '/courseApprovalDetail',
+      name: 'CourseApprovalDetail',
+      component: () => import('@/page/CourseApprovalDetail'),
       meta: {
         title: '课件申请批复详情页'
       }

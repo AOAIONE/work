@@ -29,12 +29,12 @@
           <span class="flex1">申请状态</span>
           <span class="flex1">申请人</span>
         </div>
-        <div class="table_content table_common" v-for="course in courses" :key="course.id">
+        <div class="table_content table_common" v-for="course in courses" :key="course.application_id">
           <span class="flex1">
-            <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
+            <a class="linka" @click="toDetail(course.application_id)">{{course.id}}</a>
           </span>
           <span class="flex2">
-            <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
+            <a class="linka" @click="toDetail(course.application_id)">{{course.name}}</a>
           </span>
           <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
             {{course.application_status|statusConver}}
@@ -137,7 +137,7 @@ export default {
       })
     },
     toDetail: function (id) {
-      this.$router.push({path: '/courseCenterDetail', query: {'id': id}})
+      this.$router.push({path: '/CourseApprovalDetail', query: {'application_id': id}})
     },
     getCourseList: function () {
       let data = {

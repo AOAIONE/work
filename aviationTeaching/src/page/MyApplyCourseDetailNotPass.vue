@@ -7,7 +7,7 @@
                 <label class="content_left">申请时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        2017-09-07
+                        {{detail.application_time}}
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <label class="content_left">申请状态:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        未通过
+                        {{detail.application_status|statusConver}}
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <label class="content_left">操作:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="course_tag">重新申请</a>
+                        <a class="course_tag" @click="againApply(course.id)">重新申请</a>
                     </div>
                 </div>
             </div>
@@ -35,6 +35,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import courseBaseInfo from '@/components/CourseBaseInfo'
+import { applicationDetail, applyCourse } from '@/service/service'
 
 export default {
   name: 'MyApplyCourseDetailNotPass',
@@ -45,10 +46,63 @@ export default {
   },
   data () {
     return {
-      title: '发动机火警ECAM程序',
-      detail:
-        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas'}
+      title: '',
+      detail: {}
     }
+  },
+  filters: {
+    statusConver: function (value) {
+      if (!value) return ''
+      let newValue
+      switch (value) {
+        case 'apply_checking':
+          newValue = '申请中'
+          break
+        case 'apply_passed':
+          newValue = '已通过'
+          break
+        default:
+          newValue = '未通过'
+      }
+      return newValue
+    }
+  },
+  methods: {
+    getMyCourseDetail: function () {
+      let that = this
+      let data = {'applicationId': this.$route.query.application_id}
+      applicationDetail(data).then(res => {
+        let data1 = res.data.data
+        that.detail = {
+          'id': data1.id,
+          'name': data1.name,
+          'corresponding_course': Array.isArray(data1.corresponding_course) ? data1.corresponding_course.join() : '',
+          'privilege': data1.privilege,
+          'publisher_name': data1.publisher_name,
+          'add_time': data1.add_time,
+          'note': data1.note,
+          'application_time': data1.application_time,
+          'application_status': data1.application_status
+        }
+        that.title = data1.name
+      })
+    },
+    // 重新申请
+    againApply: function (id) {
+      let data = {'id': id}
+      applyCourse(data).then(res => {
+        if (res.data.is_success) {
+          swal('', '课件重新申请成功', 'success').then((value) => {
+            this.$router.push('/myApplyCourse')
+          })
+        } else {
+          swal('', '课件重新申请失败', 'error')
+        }
+      })
+    }
+  },
+  mounted () {
+    this.getMyCourseDetail()
   }
 }
 </script>

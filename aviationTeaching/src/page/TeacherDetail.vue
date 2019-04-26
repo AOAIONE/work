@@ -82,7 +82,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
-import { teacherDetail, delCourseAssign } from '@/service/service'
+import { teacherDetail, delCourseAssign, completeTask } from '@/service/service'
 
 export default {
   name: 'TeacherDetail',
@@ -119,7 +119,12 @@ export default {
     },
     // 更改任务完成状态
     modifiLearningStatus: function () {
-      swal('', '任务状态更改成功!', 'success')
+      let data = {'taskId': this.$route.query.task_id}
+      completeTask(data).then(res => {
+        swal('', '任务状态更改成功!', 'success').then((value) => {
+          this.getTeacherDetail()
+        })
+      })
     }
   },
   mounted () {

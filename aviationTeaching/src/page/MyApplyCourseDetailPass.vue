@@ -1,17 +1,16 @@
 <template>
     <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
-        <div class="item video_wrap">
-            <!-- <img :src="detail.img"> -->
-            <iframe id="iframe" class="ifr" src="http://demo-scal.ccar142.com//upload/data/kejian/jiaowu/6/%E7%89%B9%E6%83%85%E7%A8%8B%E5%BA%8F/index.htm" frameborder="0"></iframe>
+        <div class="video_wrap">
+            <my-player :video="video"></my-player>
         </div>
-        <div class="myitem ax_default">
+        <div class="ax_default">
             <course-base-info :courseBase="detail"></course-base-info>
             <div class="item_content">
                 <label class="content_left">申请时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.time}}
+                        {{detail.application_time}}
                     </div>
                 </div>
             </div>
@@ -19,11 +18,10 @@
                 <label class="content_left">申请状态:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.fabu}}
+                        {{detail.application_status|statusConver}}
                     </div>
                 </div>
             </div>
-
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
@@ -31,20 +29,72 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import detailContent from '@/components/DetailContent'
 import courseBaseInfo from '@/components/CourseBaseInfo'
+import myPlayer from '@/components/MyPlayer'
+
+import { applicationDetail } from '@/service/service'
+
 export default {
   name: 'MyApplyCourseDetailPass',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
-    'course-base-info': courseBaseInfo
+    'detail-content': detailContent,
+    'course-base-info': courseBaseInfo,
+    'my-player': myPlayer
   },
   data () {
     return {
-      title: '发动机火警ECAM程序',
-      detail:
-        {id: 1, title: '发动机火警ECAM程序', kecheng: '型别等级训练', leixing: '测试', fabu: '赵槐', time: '2018-12-09', beizhu: 'ddasdasdasdasdasdas', img: 'http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg'}
+      title: '',
+      detail: {},
+      video: {
+        'videoUrl': 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+        'state': true,
+        'poster': 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg'
+      }
     }
+  },
+  filters: {
+    statusConver: function (value) {
+      if (!value) return ''
+      let newValue
+      switch (value) {
+        case 'apply_checking':
+          newValue = '申请中'
+          break
+        case 'apply_passed':
+          newValue = '已通过'
+          break
+        default:
+          newValue = '未通过'
+      }
+      return newValue
+    }
+  },
+  methods: {
+    getMyCourseDetail: function () {
+      let that = this
+      let data = {'applicationId': this.$route.query.application_id}
+      applicationDetail(data).then(res => {
+        let data1 = res.data.data
+        that.detail = {
+          'id': data1.id,
+          'name': data1.name,
+          'corresponding_course': Array.isArray(data1.corresponding_course) ? data1.corresponding_course.join() : '',
+          'privilege': data1.privilege,
+          'publisher_name': data1.publisher_name,
+          'add_time': data1.add_time,
+          'note': data1.note,
+          'application_time': data1.application_time,
+          'application_status': data1.application_status
+        }
+        that.title = data1.name
+      })
+    }
+  },
+  mounted () {
+    this.getMyCourseDetail()
   }
 }
 </script>
@@ -56,10 +106,28 @@ export default {
   width: 100%;
   height: 100%;
 }
+.btn {
+  display: inline-block;
+  width: 170px;
+  height: 52px;
+  color: #000000;
+  font-family: "微软雅黑";
+  font-weight: 410;
+  font-style: normal;
+  font-size: 24px;
+  text-align: center;
+  line-height: 52px;
+  box-sizing: border-box;
+  background-color: #fecd02;
+  border-radius: 10px;
+}
 .video_wrap {
-  width: 100%;
+  width: 750px;
   height: 408px;
+  margin-top: 100px;
   -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  // position: relative;
+  // overflow-y: scroll;
+  // overflow: hidden;
 }
 </style>
