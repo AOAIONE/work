@@ -83,7 +83,6 @@ export default {
     },
     // 意见提交
     saveOption: function () {
-      debugger
       let data = {
         'title': this.opinion.title,
         'nei_rong': this.opinion.nei_rong,
