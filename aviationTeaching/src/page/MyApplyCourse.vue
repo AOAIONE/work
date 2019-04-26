@@ -1,50 +1,54 @@
 <template>
     <div class="courseList_container container">
         <detail-title :title="title"></detail-title>
-        <div class="select_bar ax_default">
-            <span>课件分类:&nbsp;</span>
-            <div id="trigger" class="select_wrap">
-                <select onmousedown="javascript:return false;" class="select_common">
-                    <option>{{courseList}}</option>
-                </select>
+        <div class="top_container">
+            <div class="select_bar ax_default">
+                <div class="bar_right">
+                    <span>课件分类:&nbsp;</span>
+                    <div id="trigger" class="select_wrap">
+                        <select onmousedown="javascript:return false;" class="select_common">
+                            <option>{{courseList}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="trigger1" class="bar_right">
+                    <span>申请状态:&nbsp;</span>
+                    <select onmousedown="javascript:return false;" class="select_common">
+                        <option>{{permission}}</option>
+                    </select>
+                </div>
+                <div class="search_bar">
+                    <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+                    <a class="search_btn" @click="search">搜索</a>
+                </div>
             </div>
-            <div id="trigger1" class="bar_right">
-                <span>申请状态:&nbsp;</span>
-                <select onmousedown="javascript:return false;" class="select_common">
-                    <option>{{permission}}</option>
-                </select>
-            </div>
-        </div>
-        <div class="search_bar ax_default">
-            <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-            <a class="search_btn" @click="search">搜索</a>
-        </div>
-        <div class="table_wrap ax_default">
-            <div class="table_title table_common">
-                <span class="flex1">课件ID</span>
-                <span class="flex2">课件标题</span>
-                <span class="flex1">申请状态</span>
-                <span class="flex1">申请时间</span>
-            </div>
-            <div class="table_content table_common" v-for="course in courses" :key="course.id">
-                <span class="flex1">
-                    <a class="linka">{{course.id}}</a>
-                </span>
-                <span class="flex2">
-                    <a class="linka">{{course.name}}</a>
-                </span>
-                <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
-                    {{course.application_status|statusConver}}
-                </span>
-                <span class="flex1" v-else-if="course.application_status==='apply_refused'" style="color:#009966;">
-                    {{course.application_status|statusConver}}
-                </span>
-                <span class="flex1" v-else>
-                    {{course.application_status|statusConver}}
-                </span>
-                <span class="flex1">
-                    {{course.application_time}}
-                </span>
+            <div class="table_wrap ax_default">
+                <div class="table_title table_common">
+                    <span class="flex1">课件ID</span>
+                    <span class="flex2">课件标题</span>
+                    <span class="flex1">申请状态</span>
+                    <span class="flex1">申请时间</span>
+                </div>
+                <div class="table_content table_common" v-for="course in courses" :key="course.id">
+                    <span class="flex1">
+                        <a class="linka">{{course.id}}</a>
+                    </span>
+                    <span class="flex2">
+                        <a class="linka">{{course.name}}</a>
+                    </span>
+                    <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
+                        {{course.application_status|statusConver}}
+                    </span>
+                    <span class="flex1" v-else-if="course.application_status==='apply_refused'" style="color:#009966;">
+                        {{course.application_status|statusConver}}
+                    </span>
+                    <span class="flex1" v-else>
+                        {{course.application_status|statusConver}}
+                    </span>
+                    <span class="flex1">
+                        {{course.application_time}}
+                    </span>
+                </div>
             </div>
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -77,7 +81,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 8,
+      page_count: 18,
       keyword: '',
       privilege: '',
       status: 'all'
