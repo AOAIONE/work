@@ -21,6 +21,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
   width: 750px;
   height: 100px;
   font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";

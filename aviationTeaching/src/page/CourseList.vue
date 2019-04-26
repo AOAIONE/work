@@ -1,44 +1,48 @@
 <template>
-  <div class="courseList_container container">
+  <div class="container">
     <detail-title :title="title"></detail-title>
-    <div class="select_bar ax_default">
-      <span>课件分类:&nbsp;</span>
-      <div id="trigger" class="select_wrap">
-        <select onmousedown="javascript:return false;" class="select_common">
-          <option>{{courseList}}</option>
-        </select>
+    <div class="courseList_container">
+      <div class="select_bar ax_default">
+        <div class="bar_right">
+          <span>课件分类:&nbsp;</span>
+          <div id="trigger" class="select_wrap">
+            <select onmousedown="javascript:return false;" class="select_common">
+              <option>{{courseList}}</option>
+            </select>
+          </div>
+        </div>
+        <div id="trigger1" class="bar_right">
+          <span>课件权限:&nbsp;</span>
+          <select onmousedown="javascript:return false;" class="select_common">
+            <option>{{permission}}</option>
+          </select>
+        </div>
+        <div class="search_bar">
+          <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+          <a class="search_btn" @click="getCourseList()">搜索</a>
+        </div>
       </div>
-      <div id="trigger1" class="bar_right">
-        <span>课件权限:&nbsp;</span>
-        <select onmousedown="javascript:return false;" class="select_common">
-          <option>{{permission}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="search_bar ax_default">
-      <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-      <a class="search_btn" @click="getCourseList()">搜索</a>
-    </div>
-    <div class="table_wrap ax_default">
-      <div class="table_title table_common">
-        <span class="flex1">课件ID</span>
-        <span class="flex2">课件标题</span>
-        <span class="flex1">发布者</span>
-        <span class="flex1">添加时间</span>
-      </div>
-      <div class="table_content table_common" v-for="course in courses" :key="course.id">
-        <span class="flex1">
-          <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
-        </span>
-        <span class="flex2">
-          <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
-        </span>
-        <span class="flex1">
-          {{course.publisher_name}}
-        </span>
-        <span class="flex1">
-          {{course.add_time}}
-        </span>
+      <div class="table_wrap ax_default">
+        <div class="table_title table_common">
+          <span class="flex1">课件ID</span>
+          <span class="flex2">课件标题</span>
+          <span class="flex1">发布者</span>
+          <span class="flex1">添加时间</span>
+        </div>
+        <div class="table_content table_common" v-for="course in courses" :key="course.id">
+          <span class="flex1">
+            <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
+          </span>
+          <span class="flex2">
+            <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
+          </span>
+          <span class="flex1">
+            {{course.publisher_name}}
+          </span>
+          <span class="flex1">
+            {{course.add_time}}
+          </span>
+        </div>
       </div>
     </div>
     <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -147,6 +151,6 @@ export default {
 
 }
 </script>
-<style lang="less">
+<style scoped>
 @import "../styles/course-common.less";
 </style>
