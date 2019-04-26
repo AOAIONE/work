@@ -51,10 +51,10 @@ export default {
       let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let drectorys1 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe639;'},
         {text: '课件中心', id: 2, path: '/courseCenter', icon: '&#xe63b;'},
-        {text: '消息通知', id: 3, icon: '&#xe608;'},
+        {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'},
         {text: '模拟机排课表', id: 4, icon: '&#xe625;'}]
       let drectorys2 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe65e;'},
-        {text: '消息通知', id: 3, icon: '&#xe608;'},
+        {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'},
         {text: '模拟机排课表', id: 4, icon: '&#xe625;'}]
       let currentRole = localStorage.getItem('currentRole')
       switch (currentRole) {
