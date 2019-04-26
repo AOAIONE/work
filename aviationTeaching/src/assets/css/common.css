@@ -16,6 +16,9 @@
   overflow-y: auto;
   background-color: rgba(245, 245, 245, 1);
 }
+.def_c{
+  color: #d7000f;
+}
 .pdbottom {
   padding-bottom: 150px;
 }

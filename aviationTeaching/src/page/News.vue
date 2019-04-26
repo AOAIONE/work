@@ -5,7 +5,7 @@
       <a class="converButton" :class="{active:already}" @click="alreadyBtn">已读</a>
     </div>
     <p class="info_content" v-for="info in news" :key="info.id">
-      <span>{{info.title}}</span>
+      <span><i class="def_c">•</i> {{info.title}}</span>
       <span>{{info.time}}</span>
     </p>
     <bottom-tabbar :activeStatus="'news'"></bottom-tabbar>
