@@ -21,6 +21,10 @@ export const courseTypeList = () => {
 export const detail = data => {
   return get('/api/course_ware/detail', data)
 }
+// 申请阅读课件
+export const applyCourse = data => {
+  return get('/api/course_ware/apply', data)
+}
 // 获取指派教员列表
 export const teacherList = data => {
   return post('/api/account/designated_teacher_list', data)

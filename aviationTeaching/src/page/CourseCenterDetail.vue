@@ -7,7 +7,7 @@
         <label class="content_left">阅读权限:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            <a class="btn" v-if="permissions==='allow_apply'">立即申请</a>
+            <a class="btn" v-if="permissions==='allow_apply'" @click="applyCourse">立即申请</a>
             <a class="albtn" v-if="permissions==='apply_passed'">申请通过</a>
             <a class="albtn" v-if="permissions==='designated'">指定阅读</a>
             <a class="albtn" v-if="permissions==='apply_checking'">申请审核中</a>
@@ -24,7 +24,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import courseBaseInfo from '@/components/CourseBaseInfo'
-import { detail } from '@/service/service'
+import { detail, applyCourse } from '@/service/service'
 
 export default {
   name: 'CourseCenterDetail',
@@ -60,6 +60,18 @@ export default {
         }
         that.title = data1.name
         that.permissions = data1.read_permission_status
+      })
+    },
+    applyCourse: function () {
+      let data = {id: this.$route.query.id}
+      applyCourse(data).then(res => {
+        if (res.data.is_success) {
+          swal('', '课件申请成功', 'success').then((value) => {
+            this.getCourseCenterDetail()
+          })
+        } else {
+          swal('', '课件申请失败', 'error')
+        }
       })
     }
   }
