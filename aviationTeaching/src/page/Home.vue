@@ -17,6 +17,8 @@ import title from '@/components/Title'
 import drectory from '@/components/Drectory'
 import videoChunk from '@/components/VideoChunk'
 import bottomTabbar from '@/components/BottomTabbar'
+import { hotList } from '@/service/service'
+
 export default {
   name: 'Home',
   components: {
@@ -30,6 +32,8 @@ export default {
       title1: {text: '热门分录', show: false},
       title2: {text: '热门课件', show: true},
       drectorys: [],
+      page_index: 1,
+      page_count: 8,
       videos: [
         {url: 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg', title: '123', name: '赵槐', date: '2019-02-03'},
         {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
@@ -41,12 +45,14 @@ export default {
       ]
     }
   },
-  created () {
+  mounted () {
     // 首页热门分录装角色切换
     this.drectoryCut()
+    this.getHotList()
   },
   methods: {
     drectoryCut: function () {
+      // 按照权限动态生成tab卡
       let that = this
       let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let drectorys1 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe639;'},
@@ -71,6 +77,17 @@ export default {
           that.drectorys = drectorys1
           break
       }
+    },
+    getHotList: function () {
+      let data = {
+        'page_index': this.page_index,
+        'page_count': this.page_count
+      }
+      hotList(data).then(res => {
+        if (res.data.data.is_success) {
+
+        }
+      })
     }
   }
 

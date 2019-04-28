@@ -53,7 +53,13 @@ export default {
       })
     },
     assignCourse: function (id) {
-      this.$router.push({path: '/selectTeacher', query: {'id': id}})
+      let path = ''
+      if (localStorage.getItem('currentRole') === 'user') {
+        path = 'selectUser'
+      } else {
+        path = 'selectTeacher'
+      }
+      this.$router.push({path: path, query: {'id': id}})
     }
   },
   mounted () {

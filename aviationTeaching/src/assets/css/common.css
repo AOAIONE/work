@@ -16,7 +16,7 @@
   overflow-y: auto;
   background-color: rgba(245, 245, 245, 1);
 }
-.def_c{
+.def_c {
   color: #d7000f;
 }
 .pdbottom {
@@ -98,7 +98,6 @@
   background: inherit;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
-
 }
 .item_content::after {
   clear: both;

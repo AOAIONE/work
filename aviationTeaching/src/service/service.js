@@ -13,6 +13,10 @@ export const selectRole = data => {
 export const list = data => {
   return post('/api/course_ware/list', data)
 }
+// 获取热门列表
+export const hotList = data => {
+  return post('/api/course_ware/hot_list', data)
+}
 // 获取课件分类列表
 export const courseTypeList = () => {
   return get('/api/course_ware/course_type_list')
@@ -26,12 +30,20 @@ export const applyCourse = data => {
   return get('/api/course_ware/apply', data)
 }
 // 获取指派教员列表
+export const studentList = data => {
+  return post('/api/account/designated_student_list', data)
+}
+// 获取指派学员列表
 export const teacherList = data => {
   return post('/api/account/designated_teacher_list', data)
 }
 // 获取指派教员详情
 export const teacherDetail = data => {
   return get('/api/course_ware/designate_teacher_detail', data)
+}
+// 获取指派学员详情
+export const studentDetail = data => {
+  return get('/api/course_ware/designate_student_detail', data)
 }
 // 获取申请课件列表
 export const applyCourseList = data => {
