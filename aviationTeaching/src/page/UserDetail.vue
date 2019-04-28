@@ -3,7 +3,7 @@
         <detail-title :title="title"></detail-title>
         <div class="item ax_default">
             <div class="item_content">
-                <label class="content_left">学员ID:</label>
+                <label class="content_left">教员ID:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
                         {{designatedUserInfo.user_id}}
@@ -82,10 +82,10 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
-import { studentDetail, delCourseAssign, completeTask } from '@/service/service'
+import { teacherDetail, delCourseAssign, completeTask } from '@/service/service'
 
 export default {
-  name: 'TeacherDetail',
+  name: 'UserDetail',
   components: {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
@@ -99,9 +99,9 @@ export default {
     }
   },
   methods: {
-    getStudentDetail: function () {
+    getTeacherDetail: function () {
       let data = {'taskId': this.$route.query.task_id}
-      studentDetail(data).then(res => {
+      teacherDetail(data).then(res => {
         this.designatedUserInfo = res.data.data.designated_user_info
         this.detail = res.data.data
         this.title = res.data.data.designated_user_info.user_name
@@ -123,13 +123,13 @@ export default {
       let data = {'taskId': this.$route.query.task_id}
       completeTask(data).then(res => {
         swal('', '任务状态更改成功!', 'success').then((value) => {
-          this.getStudentDetail()
+          this.getTeacherDetail()
         })
       })
     }
   },
   mounted () {
-    this.getStudentDetail()
+    this.getTeacherDetail()
   }
 }
 </script>

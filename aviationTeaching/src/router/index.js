@@ -126,11 +126,27 @@ export default new Router({
       }
     },
     {
+      path: '/selectUser',
+      name: 'SelectUser',
+      component: () => import('@/page/SelectUser'),
+      meta: {
+        title: '选择教员'
+      }
+    },
+    {
       path: '/selectTeacher',
       name: 'SelectTeacher',
       component: () => import('@/page/SelectTeacher'),
       meta: {
-        title: '选择教员'
+        title: '选择学员'
+      }
+    },
+    {
+      path: '/userDetail',
+      name: 'UserDetail',
+      component: () => import('@/page/UserDetail'),
+      meta: {
+        title: '教员详细信息'
       }
     },
     {
@@ -138,7 +154,7 @@ export default new Router({
       name: 'TeacherDetail',
       component: () => import('@/page/TeacherDetail'),
       meta: {
-        title: '教员详细信息'
+        title: '学员详细信息'
       }
     },
     {

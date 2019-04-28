@@ -50,10 +50,14 @@ service.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           localStorage.removeItem('Authorization')
+          localStorage.removeItem('currentRole')
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('role')
+          localStorage.removeItem('tokenDeadline')
           router.push('/login')
           break
         case 404:
-          //   router.push('/blank.vue')
+          router.push('/404.vue')
           break
       }
       return Promise.reject(error.response)
