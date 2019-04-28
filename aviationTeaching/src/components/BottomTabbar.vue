@@ -33,7 +33,7 @@
                 <span class="iconfont">&#xe611;</span>
                 <span class="item_badge ax_default">
                     <span class="badge_wrap">
-                        <span class="badge">8</span>
+                        <!-- <span class="badge">8</span> -->
                     </span>
                 </span>
             </p>
@@ -147,6 +147,7 @@ export default {
   color: #ffffff;
 }
 .activeMenu {
-  color: #0079fe;
+  //   color: #0079fe;
+  color: #d7000f;
 }
 </style>

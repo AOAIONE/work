@@ -3,7 +3,7 @@
     <div class="title_content">
       <p>
         <span>{{title.text}}</span>
-        <span v-if="title.show" class="title_right_1 iconfont" @cliack="to">更多 &#xe600;</span>
+        <span v-if="title.show" class="title_right_1 iconfont" @click="toRouter">更多 &#xe600;</span>
       </p>
     </div>
   </div>
@@ -18,8 +18,8 @@ export default {
   },
   props: ['title'],
   methods: {
-    to: function () {
-
+    toRouter: function () {
+      this.$router.push('/courseList')
     }
 
   }
@@ -39,7 +39,7 @@ export default {
 }
 .title_content {
   padding-left: 40px;
-  color: #D7000F;
+  color: #d7000f;
   word-wrap: break-word;
 }
 .title_right_1 {

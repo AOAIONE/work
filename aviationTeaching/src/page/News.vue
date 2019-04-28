@@ -5,8 +5,9 @@
       <a class="converButton" :class="{active:already}" @click="alreadyBtn">已读</a>
     </div>
     <p class="info_content" v-for="info in news" :key="info.id">
-      <span><i class="def_c">•</i> {{info.title}}</span>
-      <span>{{info.time}}</span>
+      <span>
+        <i class="def_c">•</i> {{info.title}}</span>
+      <span class="info_content_right">{{info.time}}</span>
     </p>
     <bottom-tabbar :activeStatus="'news'"></bottom-tabbar>
   </div>
@@ -24,8 +25,8 @@ export default {
       already: false,
       news: [
         {id: 1, title: '您的课表有新的变化啦,请及时查看', time: '2019-04-08'},
-        {id: 2, title: '您的课表有新的变化啦,请及时查看', time: '2019-04-08'},
-        {id: 3, title: '您的课表有新的变化啦,请及时查看', time: '2019-04-08'},
+        {id: 2, title: '您的课件有新的变化啦,请及时查看', time: '2019-04-09'},
+        {id: 3, title: '您的课件申请通过啦,请及时查看', time: '2019-04-18'},
         {id: 4, title: '您的课表有新的变化啦,请及时查看', time: '2019-04-08'}
 
       ]
