@@ -2,7 +2,7 @@
     <div class="container">
         <detail-title :title="title"></detail-title>
         <div class="courseList_container">
-          <div class="select_bar ax_default">
+          <div class="select_bar ax_default pdt10">
             <div class="search_bar">
                 <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" v-model="keyword" />
                 <a @click="serach()" class="search_btn ">搜索</a>
