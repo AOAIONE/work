@@ -114,12 +114,13 @@ export default {
     },
     // 通过
     pass: function () {
+      let that = this
       let data = { 'application_id': this.$route.query.application_id,
         'respond_type': 1}
       handleApplication(data).then(res => {
         if (res.data.is_success) {
           swal('', '通过课件申请成功', 'success').then((value) => {
-            this.getCourseCenterDetail()
+            that.getCourseCenterDetail()
           })
         } else {
           swal('', '课件通过失败', 'error')
