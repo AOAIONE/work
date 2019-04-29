@@ -13,7 +13,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background-color: rgba(245, 245, 245, 1);
 }
 .def_c {
