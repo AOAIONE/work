@@ -8,6 +8,7 @@
         <span :class="{lf:tab.isLeft}">{{tab.text}}</span>
       </li>
     </ul>
+    <a href='http://wx3.ccar142.com/api/OAuth2/wx/base?appid=wxa2365c393c3a0dd4&url=http://teachingsystem.ccar142.com/#/home'>1231312313123131313</a>
   </div>
 </template>
 <script>
@@ -82,11 +83,11 @@ export default {
     // 获取微信openid
     getWxOpenid: function () {
       let data = {'appid': 'wxa2365c393c3a0dd4', 'url': 'http://teachingsystem.ccar142.com/#/home'}
-      wxOpenid(data).then(res => {
-        if (res.status === 200) {
-          // window.open(res.data.url)
-        }
-      })
+      // wxOpenid(data).then(res => {
+      // if (res.status === 200) {
+      // window.open(res.data.url)
+      // }
+      // })
     }
   }
 }
