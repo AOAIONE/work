@@ -14,6 +14,8 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { bondWechat } from '@/service/service'
+
 export default {
   name: 'Unbound',
   components: {
@@ -22,12 +24,23 @@ export default {
   },
   data () {
     return {
-      title: '切换身份',
-      role: '教务员'
+      title: '解除微信绑定'
     }
   },
   methods: {
-
+    // 解除微信绑定
+    delBondWechar: function () {
+      bondWechat().then(res => {
+        if (res.data === 'success') {
+          swal('', '解除微信绑定成功', 'success').then((value) => {
+            this.$router.push('/userIndex')
+          })
+        } else {
+          swal('', '解除微信绑定失败', 'success').then((value) => {
+          })
+        }
+      })
+    }
   }
 
 }

@@ -17,7 +17,7 @@ import title from '@/components/Title'
 import drectory from '@/components/Drectory'
 import videoChunk from '@/components/VideoChunk'
 import bottomTabbar from '@/components/BottomTabbar'
-import { hotList } from '@/service/service'
+import { hotList, bondWechat } from '@/service/service'
 
 export default {
   name: 'Home',
@@ -49,7 +49,7 @@ export default {
     // 首页热门分录装角色切换
     this.drectoryCut()
     this.getHotList()
-    alert(window.location.href)
+    this.getOpenId()
   },
   methods: {
     drectoryCut: function () {
@@ -87,6 +87,14 @@ export default {
       hotList(data).then(res => {
         if (res.data.data.is_success) {
 
+        }
+      })
+    },
+    getOpenId: function () {
+      let openId = window.location.href.split('=')[1]
+      bondWechat({'openId': openId}).then(res => {
+        if (res.data === 'success') {
+          localStorage.setItem('openId', openId)
         }
       })
     }

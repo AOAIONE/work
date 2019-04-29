@@ -117,3 +117,11 @@ export const scheduleList = data => {
 export const wxOpenid = data => {
   return get('/api/OAuth2/wx/base', data)
 }
+// 绑定微信
+export const bondWechat = data => {
+  return get('/api/account/bond_wechat', data)
+}
+// 解除绑定微信
+export const delBondWechat = () => {
+  return get('/api/account/del_bond_wechat')
+}
