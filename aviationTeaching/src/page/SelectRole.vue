@@ -46,7 +46,7 @@ export default {
         localStorage.setItem('currentRole', text)
         that.changeLogin({Authorization: that.userToken})
         this.getWxOpenid()
-        that.$router.push('/home')
+        // that.$router.push('/home')
       })
     },
     // 页面初始化之前请求用户角色
@@ -81,9 +81,11 @@ export default {
     },
     // 获取微信openid
     getWxOpenid: function () {
-      let data = {'appid': 'wxa2365c393c3a0dd4'}
+      let data = {'appid': 'wxa2365c393c3a0dd4', 'url': 'http://teachingsystem.ccar142.com/#/home'}
       wxOpenid(data).then(res => {
-        debugger
+        if (res.status === 200) {
+          window.open(res.data.url)
+        }
       })
     }
   }
