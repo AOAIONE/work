@@ -84,7 +84,7 @@ export default {
       let data = {'appid': 'wxa2365c393c3a0dd4', 'url': 'http://teachingsystem.ccar142.com/#/home'}
       wxOpenid(data).then(res => {
         if (res.status === 200) {
-          window.open(res.data.url)
+          // window.open(res.data.url)
         }
       })
     }
