@@ -8,7 +8,7 @@
         <span :class="{lf:tab.isLeft}">{{tab.text}}</span>
       </li>
     </ul>
-    <a href='http://wx3.ccar142.com/api/OAuth2/wx/base?appid=wxa2365c393c3a0dd4&url=http://teachingsystem.ccar142.com'>1231312313123131313</a>
+    <a href='http://wx3.ccar142.com/api/OAuth2/wx/base?appid=wxa2365c393c3a0dd4&url=http://teachingsystem.ccar142.com' id="boundChat" style="display:none;"></a>
   </div>
 </template>
 <script>
@@ -46,6 +46,8 @@ export default {
         localStorage.setItem('tokenDeadline', tokenDeadline)
         localStorage.setItem('currentRole', text)
         that.changeLogin({Authorization: that.userToken})
+        let el = document.getElementById('boundChat')
+        el.click()
         // that.$router.push('/home')
       })
     },

@@ -5,7 +5,7 @@
       <p> 是否确认解除绑定</p>
     </div>
     <p class="operation">
-      <a class="user_btn save_btn" @click="delBondWechar">确定</a>
+      <a class="user_btn save_btn" @click="delBondWechat">确定</a>
       <a class="user_btn cancel_btn" @click="cancel">取消</a>
     </p>
     <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
@@ -14,7 +14,7 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { bondWechat } from '@/service/service'
+import { delBondWechat } from '@/service/service'
 
 export default {
   name: 'Unbound',
@@ -29,9 +29,9 @@ export default {
   },
   methods: {
     // 解除微信绑定
-    delBondWechar: function () {
-      bondWechat().then(res => {
-        if (res.data === 'success') {
+    delBondWechat: function () {
+      delBondWechat().then(res => {
+        if (res.data.is_success === true) {
           swal('', '解除微信绑定成功', 'success').then((value) => {
             this.$router.push('/userIndex')
           })
