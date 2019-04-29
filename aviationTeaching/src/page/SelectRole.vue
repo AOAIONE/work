@@ -46,7 +46,7 @@ export default {
         localStorage.setItem('currentRole', text)
         that.changeLogin({Authorization: that.userToken})
         this.getWxOpenid()
-        // that.$router.push('/home')
+        that.$router.push('/home')
       })
     },
     // 页面初始化之前请求用户角色

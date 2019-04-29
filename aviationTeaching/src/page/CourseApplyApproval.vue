@@ -29,25 +29,29 @@
           <span class="flex1">申请状态</span>
           <span class="flex1">申请人</span>
         </div>
-        <div class="table_content table_common" v-for="course in courses" :key="course.application_id">
-          <span class="flex1">
-            <a class="linka" @click="toDetail(course.application_id)">{{course.id}}</a>
-          </span>
-          <span class="flex2">
-            <a class="linka" @click="toDetail(course.application_id)">{{course.name}}</a>
-          </span>
-          <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
-            {{course.application_status|statusConver}}
-          </span>
-          <span class="flex1" v-else-if="course.application_status==='apply_refused'" style="color:#009966;">
-            {{course.application_status|statusConver}}
-          </span>
-          <span class="flex1" v-else>
-            {{course.application_status|statusConver}}
-          </span>
-          <span class="flex1">
-            {{course.application_user_name}}
-          </span>
+        <div class="scall_wrapper" ref="wrapper">
+          <div class="warpper_content">
+            <div class="table_content table_common" v-for="course in courses" :key="course.application_id">
+              <span class="flex1">
+                <a class="linka" @click="toDetail(course.application_id)">{{course.id}}</a>
+              </span>
+              <span class="flex2">
+                <a class="linka" @click="toDetail(course.application_id)">{{course.name}}</a>
+              </span>
+              <span class="flex1" v-if="course.application_status==='apply_checking'" style="color:#FF9900;">
+                {{course.application_status|statusConver}}
+              </span>
+              <span class="flex1" v-else-if="course.application_status==='apply_refused'" style="color:#009966;">
+                {{course.application_status|statusConver}}
+              </span>
+              <span class="flex1" v-else>
+                {{course.application_status|statusConver}}
+              </span>
+              <span class="flex1">
+                {{course.application_user_name}}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -81,7 +85,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 8,
+      page_count: 15,
       keyword: '',
       status: 'all'
     }
@@ -149,8 +153,34 @@ export default {
         'page_count': this.page_count
       }
       applyCourseList(data).then(res => {
-        this.courses = res.data.data
-      })
+        let arr = res.data.data
+        let arr1 = JSON.parse(JSON.stringify(this.courses))
+        this.courses = [...arr1, ...arr]
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            let that = this
+            this.scroll = new this.$BScroll(this.$refs.wrapper, {
+              pullUpLoad: {
+                threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
+              },
+              click: true
+            })
+            this.scroll.on('pullingUp', (pos) => {
+              // 下拉动作
+              that.page_index++
+              that.getCourseList()
+              // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
+              that.scroll.finishPullUp()
+              // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
+              setTimeout(() => {
+                that.scroll.refresh()
+              }, 300)
+            })
+          } else {
+            this.scroll.refresh()
+          }
+        }) 
+})
     }
 
   },

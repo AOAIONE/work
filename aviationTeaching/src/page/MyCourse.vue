@@ -2,50 +2,54 @@
     <div class="container">
         <detail-title :title="title"></detail-title>
         <div class="courseList_container">
-          <div class="select_bar ax_default">
-            <div class="bar_right">
-                <span>课件分类:&nbsp;</span>
-                <div id="trigger" class="select_wrap">
-                    <select onmousedown="javascript:return false;" class="select_common">
-                        <option>{{courseList}}</option>
-                    </select>
+            <div class="select_bar ax_default">
+                <div class="bar_right">
+                    <span>课件分类:&nbsp;</span>
+                    <div id="trigger" class="select_wrap">
+                        <select onmousedown="javascript:return false;" class="select_common">
+                            <option>{{courseList}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bar_right">
+                    <div id="trigger1">
+                        <span>课件权限:&nbsp;</span>
+                        <select onmousedown="javascript:return false;" class="select_common">
+                            <option>{{permission}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search_bar">
+                    <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+                    <a class="search_btn" @click="getCourseList()">搜索</a>
                 </div>
             </div>
-            <div class="bar_right">
-                <div id="trigger1">
-                    <span>课件权限:&nbsp;</span>
-                    <select onmousedown="javascript:return false;" class="select_common">
-                        <option>{{permission}}</option>
-                    </select>
+            <div class="table_wrap ax_default">
+                <div class="table_title table_common">
+                    <span class="flex1">课件ID</span>
+                    <span class="flex2">课件标题</span>
+                    <span class="flex1">课件类型</span>
+                    <span class="flex1">添加时间</span>
+                </div>
+                <div class="scall_wrapper" ref="wrapper">
+                    <div class="warpper_content">
+                        <div class="table_content table_common" v-for="course in courses" :key="course.id">
+                            <span class="flex1">
+                                <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
+                            </span>
+                            <span class="flex2">
+                                <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
+                            </span>
+                            <span class="flex1">
+                                {{course.privilege}}
+                            </span>
+                            <span class="flex1">
+                                {{course.add_time}}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="search_bar">
-                <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-                <a class="search_btn" @click="getCourseList()">搜索</a>
-            </div>
-          </div>
-          <div class="table_wrap ax_default">
-              <div class="table_title table_common">
-                  <span class="flex1">课件ID</span>
-                  <span class="flex2">课件标题</span>
-                  <span class="flex1">课件类型</span>
-                  <span class="flex1">添加时间</span>
-              </div>
-              <div class="table_content table_common" v-for="course in courses" :key="course.id">
-                  <span class="flex1">
-                      <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
-                  </span>
-                  <span class="flex2">
-                      <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
-                  </span>
-                  <span class="flex1">
-                      {{course.privilege}}
-                  </span>
-                  <span class="flex1">
-                      {{course.add_time}}
-                  </span>
-              </div>
-          </div>
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
@@ -77,7 +81,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 8,
+      page_count: 15,
       keyword: '',
       privilege: 'all'
     }
@@ -129,7 +133,33 @@ export default {
         'page_count': that.page_count
       }
       list(data).then(res => {
-        that.courses = res.data.data
+        let arr = res.data.data
+        let arr1 = JSON.parse(JSON.stringify(this.courses))
+        this.courses = [...arr1, ...arr]
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            let that = this
+            this.scroll = new this.$BScroll(this.$refs.wrapper, {
+              pullUpLoad: {
+                threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
+              },
+              click: true
+            })
+            this.scroll.on('pullingUp', (pos) => {
+              // 下拉动作
+              that.page_index++
+              that.getCourseList()
+              // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
+              that.scroll.finishPullUp()
+              // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
+              setTimeout(() => {
+                that.scroll.refresh()
+              }, 300)
+            })
+          } else {
+            this.scroll.refresh()
+          }
+        })
       })
     }
   },

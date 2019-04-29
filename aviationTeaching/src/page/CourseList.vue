@@ -134,7 +134,6 @@ export default {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.courses))
         this.courses = [...arr1, ...arr]
-        console.log(this.list)
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
@@ -161,9 +160,6 @@ export default {
         })
       })
     }
-  },
-  updated () {
-    // this.scroll.refresh()
   },
   mounted () {
     this.getCourseTypeList()
