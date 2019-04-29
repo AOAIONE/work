@@ -295,6 +295,7 @@ export default new Router({
     },
     {
       path: '*',
+      name: 'notFound',
       component: () => import('@/page/404'),
       meta: {
         title: '页面未找到'

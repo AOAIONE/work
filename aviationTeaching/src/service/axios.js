@@ -23,6 +23,8 @@ service.interceptors.request.use(
       // 更改服务器地址
       // config.baseURL = 'http://192.168.0.138:5000'
       config.baseURL = 'http://demo-user.ccar142.com/'
+    } else if (config.url === '/api/OAuth2/wx/base') {
+      config.baseURL = 'http://wx3.ccar142.com'
     } else {
       if (localStorage.getItem('Authorization')) {
         config.headers.Authorization = localStorage.getItem('Authorization')

@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { selectRole } from '@/service/service'
+import { selectRole, wxOpenid } from '@/service/service'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -45,6 +45,7 @@ export default {
         localStorage.setItem('tokenDeadline', tokenDeadline)
         localStorage.setItem('currentRole', text)
         that.changeLogin({Authorization: that.userToken})
+        this.getWxOpenid()
         that.$router.push('/home')
       })
     },
@@ -76,6 +77,13 @@ export default {
             console.log('角色请求出错')
             break
         }
+      })
+    },
+    // 获取微信openid
+    getWxOpenid: function () {
+      let data = {'appid': 'wxa2365c393c3a0dd4'}
+      wxOpenid(data).then(res => {
+        debugger
       })
     }
   }

@@ -109,7 +109,11 @@ export const designatedCourseWareList = data => {
 export const designatedCourseWareDetail = data => {
   return get('/api/course_ware/designated_courseWare_detail_mine', data)
 }
-// 获取指定阅读课件列表
-export const designatedCourseWareList1 = data => {
+// 获取模拟机排课表
+export const scheduleList = data => {
   return post('/api/course_schedule/simulator_course_schedule_list', data)
+}
+// 获取openid
+export const wxOpenid = data => {
+  return get('/api/OAuth2/wx/base', data)
 }
