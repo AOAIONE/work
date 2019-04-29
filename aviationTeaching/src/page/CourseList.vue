@@ -30,19 +30,21 @@
           <span class="flex1">添加时间</span>
         </div>
         <div class="scall_wrapper" ref="wrapper">
-          <div class="table_content table_common" v-for="course in courses" :key="course.id">
-            <span class="flex1">
-              <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
-            </span>
-            <span class="flex2">
-              <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
-            </span>
-            <span class="flex1">
-              {{course.publisher_name}}
-            </span>
-            <span class="flex1">
-              {{course.add_time}}
-            </span>
+          <div class="warpper_content">
+            <div class="table_content table_common" v-for="course in courses" :key="course.id">
+              <span class="flex1">
+                <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
+              </span>
+              <span class="flex2">
+                <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
+              </span>
+              <span class="flex1">
+                {{course.publisher_name}}
+              </span>
+              <span class="flex1">
+                {{course.add_time}}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -78,7 +80,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 13,
+      page_count: 15,
       keyword: '',
       privilege: 'all'
     }
@@ -129,27 +131,28 @@ export default {
         'page_count': this.page_count
       }
       list(data).then(res => {
-        this.courses = res.data.data
+        let arr = res.data.data
+        let arr1 = JSON.parse(JSON.stringify(this.courses))
+        this.courses = [...arr1, ...arr]
+        console.log(this.list)
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
             this.scroll = new this.$BScroll(this.$refs.wrapper, {
               pullUpLoad: {
-                threshold: -70// 在上拉到超过底部 20px 时，触发 pullingUp 事件
+                threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
               },
               click: true
-              // scrollY: true
             })
             this.scroll.on('pullingUp', (pos) => {
-              debugger
               // 下拉动作
-              this.page_index++
-              this.getCourseList()
+              that.page_index++
+              that.getCourseList()
               // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
-              this.scroll.finishPullUp()
+              that.scroll.finishPullUp()
               // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
               setTimeout(() => {
-                this.scroll.refresh()
+                that.scroll.refresh()
               }, 300)
             })
           } else {
