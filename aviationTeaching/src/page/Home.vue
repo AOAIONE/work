@@ -49,6 +49,7 @@ export default {
     // 首页热门分录装角色切换
     this.drectoryCut()
     this.getHotList()
+    alert(window.location.href)
   },
   methods: {
     drectoryCut: function () {
