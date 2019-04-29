@@ -2,16 +2,29 @@
   <div class=" container">
     <detail-title :title="title"></detail-title>
     <div class="courseList_container">
-      <div class="select_bar ax_default">
-        <span>课件分类:&nbsp;</span>
-        <!-- <div id="trigger" class="select_wrap">
-                  <select onmousedown="javascript:return false;" class="select_common">
-                      <option>{{date}}</option>
-                  </select>
-              </div> -->
+      <div class="my-tabs">
+        <div class="tabs-bar">
+          <div class="tabs-bar-nav">
+            <div class="tabs-tab" v-for="tab in tabList" :class="[tabIndex == tab.index ? 'tabs-active' : '']" @click="changeTab(tab)">
+              {{tab.name}}
+            </div>
+          </div>
+        </div>
+        <div class="tabs-content">
+          <div class="select_bar ax_default pd20">
+            <span>选择月份:&nbsp;</span>
+            <!-- <div id="trigger" class="select_wrap">
+                      <select onmousedown="javascript:return false;" class="select_common">
+                          <option>{{date}}</option>
+                      </select>
+                  </div> -->
+                  <vue-datepicker-local v-model="time" format="YYYY-MM" />
+          </div>
+          <div class="course_content" id="coursesTable"></div>
+          </div>
+        </div>
       </div>
-    <div class="course_content" id="coursesTable"></div>
-    </div>
+      
     <bottom-tabbar :activeStatus="'table'"></bottom-tabbar>
   </div>
 </template>
@@ -19,6 +32,7 @@
 // import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import VueDatepickerLocal from 'vue-datepicker-local'
 // import { list, courseTypeList } from '@/service/service'
 import Timetables from '../../static/Timetables.min.js'
 
@@ -26,13 +40,29 @@ export default {
   name: 'ClassSchedule',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    VueDatepickerLocal
   },
   data () {
     return {
       title: '课表',
       data: '全部',
       date: '',
+      time: new Date(),
+      tabIndex: 0,
+      currentContent: 'one',
+      tabList: [
+        {
+          index: 0,
+          name: '选项一',
+          component: 'one'
+        },
+        {
+          index: 1,
+          name: '选项二',
+          component: 'two'
+        }
+      ],
       week: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
       day: [10,11,12,13,14,15,16],
       courseList: [['大学英语(Ⅳ)@10203大学1111fsdfs', '大学英语(Ⅳ)@10203大学1111fsdfs', '', '', '', '', '毛概@14208', '毛概@14208', '', '', '', '选修']],
@@ -53,7 +83,10 @@ export default {
     }
   },
   methods: {
-
+    changeTab: function (tab) {
+      this.tabIndex = tab.index
+      this.currentContent = tab.component
+    }
   },
   mounted () {
     let that = this
@@ -85,3 +118,4 @@ export default {
 <style lang="less">
 @import "../styles/course-common.less";
 </style>
+

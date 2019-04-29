@@ -18,6 +18,7 @@
   font-style: normal;
   font-size: 28px;
   color: #333333;
+  box-sizing: border-box;
 }
 .select_wrap {
   display: inline-block;
@@ -75,6 +76,9 @@
 }
 .pdt10 {
   padding-top: 10px;
+}
+.pd20{
+  padding: 10px 20px;
 }
 .search_bar {
   display: flex;
@@ -185,3 +189,42 @@
 .mobileSelect .content .panel .shadowMask {
   height: 400px;
 }
+
+// tab
+.my-tabs {
+  font-size: 14px;
+  color: #444;
+}
+ .tabs-bar {
+   height: 60px;
+   background-color: #fff;
+   border-bottom: 1px solid #eee;
+   position: relative;
+   padding: 5px 0;
+ }
+ .tabs-bar-nav {
+   display: table;
+   position: absolute;
+   bottom: 0;
+ }
+ .tabs-tab {
+   min-width: 110px;
+   padding: 10px 0;
+   position: relative;
+   margin-left: -1px;
+   display: inline-block;
+   text-align: center;
+   cursor: pointer;
+   border-right: 1px solid #f5f5f5;
+   border-top: 1px solid #f5f5f5;
+ }
+ .tabs-active {
+   color: #fff;
+   background-color:#d7000f; 
+ }
+ .tabs-content {
+  //  padding-left: 20px;
+  //  padding-right: 20px;
+  padding-top: 10px;
+   padding-bottom: 30px;
+ }
