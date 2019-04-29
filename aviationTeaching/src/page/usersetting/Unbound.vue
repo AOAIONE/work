@@ -5,8 +5,8 @@
       <p> 是否确认解除绑定</p>
     </div>
     <p class="operation">
-      <a class="user_btn save_btn">确定</a>
-      <a class="user_btn cancel_btn">取消</a>
+      <a class="user_btn save_btn" @click="delBondWechar">确定</a>
+      <a class="user_btn cancel_btn" @click="cancel">取消</a>
     </p>
     <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
   </div>
@@ -40,6 +40,9 @@ export default {
           })
         }
       })
+    },
+    cancel: function () {
+      this.$router.push('/userIndex')
     }
   }
 
