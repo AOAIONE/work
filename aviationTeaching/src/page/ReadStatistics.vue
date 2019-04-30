@@ -56,7 +56,7 @@ export default {
   },
   data () {
     return {
-      title: '课件目录测试消息哦你信不信我能跨行',
+      title: '测试消息',
       courseList: '全部',
       permission: '全部',
       courseLists: [

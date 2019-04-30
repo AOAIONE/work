@@ -10,7 +10,7 @@
         <label class="content_left">阅读统计:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            <a class="btn">查看阅读统计</a>
+            <a class="btn" @click="toRoute(detail.id)">查看阅读统计</a>
           </div>
         </div>
       </div>
@@ -65,6 +65,9 @@ export default {
         that.title = data1.name
         that.permissions = data1.read_permission_status
       })
+    },
+    toRoute: function (id) {
+      this.$router.push({path: '/ReadStatistics', query: {'id': id}})
     }
   },
   mounted () {
