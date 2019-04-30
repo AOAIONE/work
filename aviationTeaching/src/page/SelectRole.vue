@@ -47,11 +47,7 @@ export default {
         localStorage.setItem('currentRole', text)
         that.changeLogin({Authorization: that.userToken})
         let el = document.getElementById('boundChat')
-<<<<<<< HEAD
         // el.click()
-=======
-        //el.click()
->>>>>>> beb35baf562159bf2ae924541224be4e91be7484
         that.$router.push('/home')
       })
     },

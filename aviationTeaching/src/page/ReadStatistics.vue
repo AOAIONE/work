@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="select_bar ax_default">
+        <div class="select_bar item ax_default">
             <span>结业状态:&nbsp;</span>
             <div id="trigger" class="select_wrap">
                 <select onmousedown="javascript:return false;" class="select_common">
@@ -9,7 +9,7 @@
                 </select>
             </div>
             <div class="bar_right">
-                <input placeholder="请输入课程代码、课程课号" class="search_input" />
+                <input placeholder="请输入课程代码、课程课号" v-model="keyword" class="search_input" />
                 <a class="search_btn">搜索</a>
             </div>
         </div>
@@ -47,6 +47,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { readStaticList } from '@/service/service'
 
 export default {
   name: 'ReadStatistics',
@@ -58,21 +59,17 @@ export default {
     return {
       title: '测试消息',
       courseList: '全部',
-      permission: '全部',
       courseLists: [
-        {id: '1', value: '周一'},
-        {id: '2', value: '周二'},
-        {id: '3', value: '周三'}
-      ],
-      limits: [
-        {id: '1', value: '教员'},
-        {id: '2', value: '学员'}
+        {id: '1', value: '已结业'},
+        {id: '2', value: '未结业'}
       ],
       courses: [
-        {kid: '101', name: '赵槐', leixing: '测试', way: '指定阅读', time: '2018-12-22'},
-        {kid: '102', name: '偏偏', leixing: '飞机', way: '申请阅读', time: '2018-12-23'}
 
-      ]
+      ],
+      page_index: 1,
+      page_count: 15,
+      keyword: '',
+      study_status: 2
     }
   },
   mounted () {
@@ -84,10 +81,24 @@ export default {
         {data: that.courseLists}
       ],
       callback: function (indexArr, data) {
-        console.log(data)
+        that.study_status = data.id
       },
       triggerDisplayData: false
     })
+    this.getReadStaticList()
+  },
+  methods: {
+    getReadStaticList: function () {
+      let data = {
+        'study_status': 0,
+        'course_ware_id': 0,
+        'user_role': 'string',
+        'user_id': 0,
+        'keyword': '',
+        'page_index': 0,
+        'page_count': 0
+      }
+    }
   }
 
 }

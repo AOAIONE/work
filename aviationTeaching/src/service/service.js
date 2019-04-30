@@ -129,3 +129,11 @@ export const delBondWechat = () => {
 export const getSimulator = () => {
   return get('/api/course_schedule/simulator_list')
 }
+// 获取课件阅读记录列表
+export const readStaticList = data => {
+  return post('/api/course_ware/read_static', data)
+}
+// 获取课件阅读记录详情
+export const readStaticDetail = data => {
+  return post('/api/course_ware/read_static_detail', data)
+}

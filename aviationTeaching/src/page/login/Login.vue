@@ -13,9 +13,9 @@
           <div class="img_wrap ax_default">
             <div class="login_img img_p"></div>
           </div>
-          <input type="text" class="login_inp" v-model="password" placeholder='登录密码' />
+          <input type="password" class="login_inp" v-model="password" placeholder='登录密码' />
         </div>
-        <div class="forget_password">忘记密码</div>
+        <!-- <div class="forget_password">忘记密码</div> -->
       </div>
       <a href="javascript:;" class="weui-btn weui-btn_plain-primary btn" @click="login">登录</a>
 
