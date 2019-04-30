@@ -125,3 +125,7 @@ export const bondWechat = data => {
 export const delBondWechat = () => {
   return get('/api/account/del_bond_wechat')
 }
+// 获取模拟机数据
+export const getSimulator = () => {
+  return get('/api/course_schedule/simulator_list')
+}
