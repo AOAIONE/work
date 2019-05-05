@@ -5,7 +5,7 @@
       <div class="my-tabs">
         <div class="tabs-bar">
           <div class="tabs-bar-nav">
-            <div class="tabs-tab" v-for="tab in tabList" :class="[tabIndex == tab.index ? 'tabs-active' : '']" @click="changeTab(tab)">
+            <div class="tabs-tab" v-for="tab in tabList" :class="[tabIndex == tab.index ? 'tabs-active' : '']" @click="changeTab(tab)" :key="tab.index">
               {{tab.name}}
             </div>
           </div>
@@ -18,9 +18,16 @@
                           <option>{{date}}</option>
                       </select>
                   </div> -->
-                  <vue-datepicker-local v-model="time" format="YYYY-MM" />
+            <vue-datepicker-local v-model="time" @confirm="confirm" format="YYYY-MM" />
+            <div id="trigger" class="select_wrap">
+              <select onmousedown="javascript:return false;" class="select_common">
+                <option>{{weekname}}</option>
+              </select>
+            </div>
           </div>
-          <div class="course_content" id="coursesTable"></div>
+          <div class="course_content">
+            <div id="coursesTable"></div>
+          </div>
           </div>
         </div>
       </div>
@@ -29,12 +36,13 @@
   </div>
 </template>
 <script>
-// import MobileSelect from 'mobile-select'
+import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import VueDatepickerLocal from 'vue-datepicker-local'
 import { getSimulator,scheduleList } from '@/service/service'
 import Timetables from '../../static/Timetables.min.js'
+import { setTimeout } from 'timers';
 
 export default {
   name: 'ClassSchedule',
@@ -46,13 +54,20 @@ export default {
   data () {
     return {
       title: '课表',
-      data: '全部',
-      date: '',
+      limits: [
+        {id: '0', value: '第1周'},
+        {id: '1', value: '第2周'},
+        {id: '2', value: '第3周'},
+        {id: '3', value: '第4周'}
+      ],
+      weekname: '第1周',
+      weekOrder: 0,
       time: new Date(),
       tabIndex: 0,
+      tabName: '',
       tabList: [],
       week: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      day: [10,11,12,13,14,15,16],
+      //day: [10,11,12,13,14,15,16],
       courseList: [[],[],[],[],[],[],[]],
       timetableType: [
         [{name: '6:00'}, 1],
@@ -83,7 +98,17 @@ export default {
   methods: {
     changeTab (tab) {
       this.tabIndex = tab.index
-      this.currentContent = tab.component
+      this.tabName = tab.name
+      
+      let changeParam = {
+        week_order: 0,
+        date: document.querySelector('.datepicker input').value,
+        simulator_name: tab.name,
+        keyword: "",
+        page_index: 1,
+        page_count: 10
+      }
+      this.getSchedule(changeParam)
     },
     getSimuData () {
       getSimulator().then(res => {
@@ -94,61 +119,77 @@ export default {
           this.tabList.push(tabObj)
           tabObj = null
         });
+        this.tabName = data[0]
+        this.getSchedule({
+          week_order: 0,
+            date: document.querySelector('.datepicker input').value,
+            simulator_name: this.tabName,
+            keyword: "",
+            page_index: 1,
+            page_count: 10
+        })  
       })
     },
-    getSchedule () {
-      let param = {
-        week_order: 0,
-        date: '2019-04',
-        simulator_name: 'FFS#4',
-        keyword: "",
-        page_index: 1,
-        page_count: 10
-      }
+    getSchedule (param) {
       scheduleList(param).then(res => {
         let list = res.data.data;
         if(!res.data && list.length == 0) return;
-        //list.forEach((el,index) => {
+        list.forEach((el,index) => {
          // console.log(el)
-        let data = []
+          let data = [],
+              startObj = [],
+              endObj = [],
+              nameAry = [],
+              totalObj = [],
+              schedule = el.week_day_schedule
 
-          for(var item of list[0].week_day_schedule){
-            let start = Math.ceil(item.start_time.substring(0,item.start_time.lastIndexOf(':'))), 
-                end = Math.ceil(item.end_time.substring(0,item.end_time.lastIndexOf(':'))),
-                startObj = [],
-                endObj = [],
-                nameAry = [],
-                totalObj = []
+          for(var key in schedule){
+            let start = Math.ceil(schedule[key].start_time.substring(0,schedule[key].start_time.lastIndexOf(':'))), 
+                end = Math.ceil(schedule[key].end_time.substring(0,schedule[key].end_time.lastIndexOf(':')))
+                
 
             switch(end){
               case 0: end = 24;break
               case 1: end = 25;break
               case 2: end = 26;break
             }
-
+            // if(key > 0){
+            //   if(schedule[key-1].end_time < schedule[key].start_time){
+            //       var len = parseInt(schedule[key].start_time - schedule[key-1].end_time);
+            //       for(var i=0; i<len; i++){
+            //         nameAry.push('');
+            //       }
+            //   }
+            //   else if(schedule[key-1].start_time >= schedule[key].start_time){
+            //     startObj = [];
+            //     for(var i=0,len1 = start-6; i<len1; i++){
+            //       startObj.push('');
+            //     }
+            //   }
+            //   for(var k=0,len2= end-start; k<len2; k++){
+            //    nameAry.push(schedule[key].course_no + schedule[key].teacher_name + schedule[key].training_time)
+            //   }
+            //   return;
+            // }
+            
             if(start - 6 > 0) {
-              for(var i=0,len=start - 6; i<len; i++){
+              for(var i=0,len1 = start-6; i<len1; i++){
                 startObj.push('');
               }
             }
-            // if(26 - end > 0){
-            //   for(var j=0,len=26 - end; j<len; j++){
-            //     endObj.push('');
-            //   }
-            // }
-            if(start > 6 && end < 26){
-              for(var k=0,len=end - start; k<len; k++){
-               nameAry.push(item.course_no + item.teacher_name + item.training_time)
+           
+            if(start >= 6 && end <= 26){
+              for(var k=0,len2= end-start; k<len2; k++){
+               nameAry.push(schedule[key].course_no + schedule[key].teacher_name + schedule[key].training_time)
               }
             }
-            
 
-          totalObj = startObj.concat(nameAry)
+            totalObj = startObj.concat(nameAry)
+          }
 
            data = totalObj
            totalObj = [];
-          }
-          switch(list[0].week_day){
+          switch(el.week_day){
             case '一': this.courseList[0] = data;break;
             case '二': this.courseList[1] = data;break;
             case '三': this.courseList[2] = data;break;
@@ -156,20 +197,20 @@ export default {
             case '五': this.courseList[4] = data;break;
             case '六': this.courseList[5] = data;break;
             case '日': this.courseList[6] = data;break;
-            default: this.courseList.push({});break
+            default: this.courseList.push('');break
           }
           data = [];
-          this.init()
         })
-      //})
+        console.log(this.courseList)
+        this.init()
+      })
     },
     init () {
-      console.log(this.courseList)
         var highlightWeek = new Date().getDay()
         var styles = {
           Gheight: 50,
           leftHandWidth: 50,
-          palette: ['#ffd061', '#d7000f']
+          palette: ['#ffd061']
         }
           // 实例化(初始化课表)
         var Timetable = new Timetables({
@@ -185,17 +226,42 @@ export default {
           },
           styles: styles
         })
+    },
+    confirm: function (time) {
+      alert(time)
     }
   },
   mounted () {
     let that = this
     this.getSimuData()
-    this.getSchedule()  
+    
+    let mobileSelect1 = new MobileSelect({
+      trigger: '#trigger',
+      title: '',
+      wheels: [
+        {data: this.limits}
+      ],
+      callback: function (indexArr, data) {
+        that.weeklist = data[0].id
+        that.weekname = data[0].value
+
+        let changeParam = {
+          week_order: this.weekOrder,
+          date: document.querySelector('.datepicker input').value,
+          simulator_name: this.tabName,
+          keyword: "",
+          page_index: 1,
+          page_count: 10
+        }
+        that.getSchedule(changeParam)
+      },
+      triggerDisplayData: false
+    })
   }
 
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "../styles/course-common.less";
 </style>
 

@@ -48,8 +48,8 @@ export default {
         localStorage.setItem('currentRoleId', userId)
         that.changeLogin({Authorization: that.userToken})
         let el = document.getElementById('boundChat')
-        el.click()
-        // that.$router.push('/home')
+        //el.click()
+        that.$router.push('/home')
       })
     },
     // 页面初始化之前请求用户角色
