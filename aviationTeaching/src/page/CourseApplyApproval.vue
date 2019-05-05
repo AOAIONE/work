@@ -19,7 +19,7 @@
         </div>
         <div class="search_bar">
           <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-          <a class="search_btn" @click="getCourseList()">搜索</a>
+          <a class="search_btn" @click="getCourseList(true)">搜索</a>
         </div>
       </div>
       <div class="table_wrap ax_default">
@@ -87,7 +87,8 @@ export default {
       page_index: 1,
       page_count: 15,
       keyword: '',
-      status: 'all'
+      status: 'all',
+      disRepet: false
     }
   },
   filters: {
@@ -109,10 +110,10 @@ export default {
   },
   watch: {
     'type_id': function () {
-      this.getCourseList()
+      this.getCourseList(true)
     },
     'privilege': function () {
-      this.getCourseList()
+      this.getCourseList(true)
     }
 
   },
@@ -143,7 +144,7 @@ export default {
     toDetail: function (id) {
       this.$router.push({path: '/CourseApprovalDetail', query: {'application_id': id}})
     },
-    getCourseList: function () {
+    getCourseList: function (disRepet) {
       let data = {
         'type_id': this.type_id,
         'privilege': this.privilege,
@@ -152,9 +153,13 @@ export default {
         'page_index': this.page_index,
         'page_count': this.page_count
       }
+      this.disRepet = disRepet
       applyCourseList(data).then(res => {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.courses))
+        if (this.disRepet) {
+          arr1 = []
+        }
         this.courses = [...arr1, ...arr]
         this.$nextTick(() => {
           if (!this.scroll) {
@@ -179,8 +184,8 @@ export default {
           } else {
             this.scroll.refresh()
           }
-        }) 
-})
+        })
+      })
     }
 
   },

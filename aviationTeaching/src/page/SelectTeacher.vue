@@ -56,23 +56,29 @@ export default {
       students: [],
       keyword: '',
       page_index: 1,
-      page_count: 15
+      page_count: 15,
+      disRepet: false
+
     }
   },
   mounted () {
     this.getStudentList()
   },
   methods: {
-    getStudentList: function () {
+    getStudentList: function (disRepet) {
       let data = {
         'course_ware_id': this.$route.query.id,
         'keyword': this.keyword,
         'page_index': this.page_index,
         'page_count': this.page_count
       }
+      this.disRepet = disRepet
       studentList(data).then(res => {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.students))
+        if (this.disRepet) {
+          arr1 = []
+        }
         this.students = [...arr1, ...arr]
         this.$nextTick(() => {
           if (!this.scroll) {
@@ -101,7 +107,7 @@ export default {
       })
     },
     serach: function () {
-      this.getStudentList()
+      this.getStudentList(true)
     },
     // 跳转到学员详情，已分配的学员才能进入
     toDetail: function (student) {
