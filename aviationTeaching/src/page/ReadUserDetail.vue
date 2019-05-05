@@ -66,6 +66,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
+import { readStaticDetail } from '@/service/service'
 
 export default {
   name: 'ReadUserDetail',
@@ -80,6 +81,25 @@ export default {
       detail:
         {id: 1, name: '赵槐', kecheng: '型别等级训练', leixing: '测试', kehao: '赵槐', way: '指定阅读', time: '2018-12-09', ladeTime: '2018-09-08'}
     }
+  },
+  methods: {
+    getReadStaticDetail: function () {
+      let data = {
+        'study_status': '',
+        'course_ware_id': this.$route.query.id,
+        'user_role': localStorage.getItem(),
+        'user_id': localStorage.getItem(),
+        'keyword': '',
+        'page_index': 0,
+        'page_count': 0
+      }
+      readStaticDetail(data).then(res => {
+
+      })
+    }
+  },
+  mounted () {
+    this.getReadStaticDetail()
   }
 }
 </script>

@@ -10,7 +10,7 @@
             </div>
             <div class="bar_right">
                 <input placeholder="请输入课程代码、课程课号" v-model="keyword" class="search_input" />
-                <a class="search_btn" @click="getReadStaticList()">搜索</a>
+                <a class="search_btn" @click="getReadStaticList(true)">搜索</a>
             </div>
         </div>
         <div class="table_wrap ax_default">
@@ -25,10 +25,10 @@
                 <div class="warpper_content">
                     <div class="table_content table_common" v-for="user in users" :key="user.kid">
                         <span class="flex1">
-                            <a class="linka">{{user.kid}}</a>
+                            <a class="linka" @click="toRoute">{{user.kid}}</a>
                         </span>
                         <span class="flex1">
-                            <a class="linka">{{user.name}}</a>
+                            <a class="linka" @click="toRoute">{{user.name}}</a>
                         </span>
                         <span class="flex1">
                             {{user.leixing}}
@@ -72,7 +72,9 @@ export default {
       page_index: 1,
       page_count: 15,
       keyword: '',
-      study_status: 2
+      study_status: 2,
+      disRepet: false
+
     }
   },
   mounted () {
@@ -92,20 +94,24 @@ export default {
     this.getReadStaticList()
   },
   methods: {
-    getReadStaticList: function () {
+    getReadStaticList: function (disRepet) {
       let data = {
         'study_status': this.study_status,
         'course_ware_id': this.$route.query.id,
-        'user_role': localStorage.getItem('currentRole'),
-        'user_id': localStorage.getItem('currentRoleId'),
+        'user_role': '',
+        'user_id': 0,
         'keyword': this.keyword,
         'page_index': this.page_index,
         'page_count': this.page_count
       }
+      this.disRepet = disRepet
       readStaticList(data).then(res => {
         if (res.is_success) {
           let arr = res.data.data
           let arr1 = JSON.parse(JSON.stringify(this.users))
+          if (this.disRepet) {
+            arr1 = []
+          }
           this.users = [...arr1, ...arr]
           this.$nextTick(() => {
             if (!this.scroll) {
@@ -133,6 +139,9 @@ export default {
           })
         }
       })
+    },
+    toRoute: function () {
+      this.$router.push({path: '/readUserDetail', query: {'id': this.$route.query.id}})
     }
   }
 
