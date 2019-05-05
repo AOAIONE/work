@@ -286,6 +286,14 @@ export default new Router({
       }
     },
     {
+      path: '/analogClassSchedule',
+      name: 'AnalogClassSchedule',
+      component: () => import('@/page/AnalogClassSchedule'),
+      meta: {
+        title: '模拟机课表'
+      }
+    },
+    {
       path: '/news',
       name: 'News',
       component: () => import('@/page/News'),
