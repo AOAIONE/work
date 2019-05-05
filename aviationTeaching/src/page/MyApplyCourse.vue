@@ -88,15 +88,17 @@ export default {
       page_count: 15,
       keyword: '',
       privilege: '',
-      status: 'all'
+      status: 'all',
+      disRepet: false
+
     }
   },
   watch: {
     'type_id': function () {
-      this.getApplyCourseList()
+      this.getApplyCourseList(true)
     },
     'privilege': function () {
-      this.getApplyCourseList()
+      this.getApplyCourseList(true)
     }
   },
   filters: {
@@ -140,7 +142,7 @@ export default {
         })
       })
     },
-    getApplyCourseList: function () {
+    getApplyCourseList: function (disRepet) {
       let that = this
       let data = {
         'type_id': that.type_id,
@@ -148,10 +150,15 @@ export default {
         'status': that.status,
         'keyword': that.keyword,
         'page_index': that.page_index,
-        'page_count': that.page_count }
+        'page_count': that.page_count
+      }
+      that.disRepet = disRepet
       MyApplyCourseList(data).then(res => {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.courses))
+        if (that.disRepet) {
+          arr1 = []
+        }
         this.courses = [...arr1, ...arr]
         this.$nextTick(() => {
           if (!this.scroll) {
@@ -180,7 +187,7 @@ export default {
       })
     },
     search: function () {
-      this.getApplyCourseList()
+      this.getApplyCourseList(true)
     },
     toDetail: function (value, id) {
       let toPath = ''

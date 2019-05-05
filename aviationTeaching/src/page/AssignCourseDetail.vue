@@ -30,7 +30,7 @@ export default {
   },
   data () {
     return {
-      title: '发动机火警ECAM程序',
+      title: '',
       detail: {}
     }
   },

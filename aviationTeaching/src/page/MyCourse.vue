@@ -21,7 +21,7 @@
                 </div>
                 <div class="search_bar">
                     <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-                    <a class="search_btn" @click="getCourseList()">搜索</a>
+                    <a class="search_btn" @click="getCourseList(true)">搜索</a>
                 </div>
             </div>
             <div class="table_wrap ax_default">
@@ -73,9 +73,9 @@ export default {
       permission: '全部',
       courseLists: [],
       limits: [
-        {id: '1', value: '共有'},
-        {id: '2', value: '私有'},
-        {id: '3', value: '所有'}
+        {id: 'public', value: '共有'},
+        {id: 'private', value: '私有'},
+        {id: 'all', value: '所有'}
 
       ],
       courses: [],
@@ -83,15 +83,16 @@ export default {
       page_index: 1,
       page_count: 15,
       keyword: '',
-      privilege: 'all'
+      privilege: 'all',
+      disRepet: false
     }
   },
   watch: {
     'type_id': function () {
-      this.getCourseList()
+      this.getCourseList(true)
     },
     'privilege': function () {
-      this.getCourseList()
+      this.getCourseList(true)
     }
 
   },
@@ -122,7 +123,7 @@ export default {
     toDetail: function (id) {
       this.$router.push({path: '/myCourseDetail', query: {'id': id}})
     },
-    getCourseList: function () {
+    getCourseList: function (disRepet) {
       let that = this
       let data = {
         'type_id': that.type_id,
@@ -132,9 +133,13 @@ export default {
         'page_index': that.page_index,
         'page_count': that.page_count
       }
+      this.disRepet = disRepet
       list(data).then(res => {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.courses))
+        if (this.disRepet) {
+          arr1 = []
+        }
         this.courses = [...arr1, ...arr]
         this.$nextTick(() => {
           if (!this.scroll) {
@@ -175,7 +180,7 @@ export default {
       ],
       callback: function (indexArr, data) {
         that.permission = data[0].value
-        that.privilege = data[0].value
+        that.privilege = data[0].id
       },
       triggerDisplayData: false
     })

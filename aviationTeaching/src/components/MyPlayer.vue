@@ -57,10 +57,10 @@ export default {
   methods: {
     // 视频播放的按钮点击
     onPlayerPlay (player) {
-      alert('开始播放' + new Date())
+      // alert('开始播放' + new Date())
     },
     onPlayerPause (player) {
-      alert('暂停播放' + new Date())
+      // alert('暂停播放' + new Date())
     },
     playerStateChanged (player) {
     }
