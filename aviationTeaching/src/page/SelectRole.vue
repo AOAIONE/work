@@ -1,7 +1,7 @@
 <template>
   <div class="select-container">
     <ul>
-      <li class="cell" v-for="tab in tabs" :key="tab.id" @click="toRoute(tab.role)">
+      <li class="cell" v-for="tab in tabs" :key="tab.id" @click="toRoute(tab.role,tab.userId)">
         <div class="img_background">
           <div class="img" :class="{mx:tab.isMx}" :style="{'background-image':'url('+tab.img+')','background-repate':'no-repeat','background-size':'cover'}"></div>
         </div>
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     ...mapMutations(['changeLogin']),
-    toRoute: function (text) {
+    toRoute: function (text, userId) {
       let that = this
       let role = JSON.parse(that.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法加密
       let data = {
@@ -45,10 +45,11 @@ export default {
         let tokenDeadline = that.$myUtil.formatTimeStamp(new Date()) + res.data.expires_in * 1000
         localStorage.setItem('tokenDeadline', tokenDeadline)
         localStorage.setItem('currentRole', text)
+        localStorage.setItem('currentRoleId', userId)
         that.changeLogin({Authorization: that.userToken})
         let el = document.getElementById('boundChat')
-        // el.click()
-        that.$router.push('/home')
+        el.click()
+        // that.$router.push('/home')
       })
     },
     // 页面初始化之前请求用户角色
