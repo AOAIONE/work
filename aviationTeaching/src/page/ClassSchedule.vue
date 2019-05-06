@@ -34,7 +34,7 @@
               <!-- <div class="Courses-head" style="overflow: hidden;"></div>
               <div class="Courses-content">
                 <ul class="stage_none"></ul>
-              </div> -->
+              </div>-->
             </div>
           </div>
         </div>
@@ -89,11 +89,11 @@ export default {
           item.day
         }</p><p>${item.week}</p></div>`;
       });
-      //document.querySelector(".Courses-head").innerHTML = str;
+
       if (old.length > 0) {
         let changeParam = {
           week_order: this.weekOrder,
-          date: this.$myUtil.dateFormat(this.time),
+          date: this.$myUtil.dateFormat(this.time,'yyyy-MM'),
           simulator_name: this.tabName,
           keyword: "",
           page_index: this.page,
@@ -104,10 +104,11 @@ export default {
       }
     },
     time(c, o) {
+      
       if (o) {
         let changeParam = {
-          week_order: 0,
-          date: this.$myUtil.dateFormat(c),
+          week_order: this.weekOrder,
+          date: this.$myUtil.dateFormat(c,'yyyy-MM'),
           simulator_name: this.tabName,
           keyword: "",
           page_index: this.page,
@@ -125,7 +126,7 @@ export default {
 
       let changeParam = {
         week_order: 0,
-        date: this.$myUtil.dateFormat(this.time),
+        date: this.$myUtil.dateFormat(this.time,'yyyy-MM'),
         simulator_name: tab.name,
         keyword: "",
         page_index: this.page,
@@ -145,7 +146,7 @@ export default {
         this.tabName = data[0];
         this.getSchedule({
           week_order: 0,
-          date: this.$myUtil.dateFormat(this.time),
+          date: this.$myUtil.dateFormat(this.time,'yyyy-MM'),
           simulator_name: this.tabName,
           keyword: "",
           page_index: this.page,
@@ -160,7 +161,7 @@ export default {
         //清空
         //document.querySelector(".stage_none").innerHTML = '';
         this.classList = list;
-        this.init()
+        this.init();
       });
     },
     setDate(date) {
@@ -170,7 +171,6 @@ export default {
       this.weekDate = [];
 
       for (var i = 0; i < 7; i++) {
-        // cells[i].innerHTML = formatDate(i==0 ? date : addDate(date,1));    星期一开始
         //cells[i].innerHTML = formatDate(i==0 ? addDate(date,-1) : addDate(date,1));//星期日开始
         this.weekDate.push(
           this.formatDate(i == 0 ? date : this.addDate(date, 1))
@@ -189,25 +189,47 @@ export default {
 
       return { day: day, week: week };
     },
+    getMonthWeek(a, b, c) {
+        /**
+        * a = d = 当前日期
+        * b = 6 - w = 当前周的还有几天过完(不算今天)
+        * a + b 的和在除以7 就是当天是当前月份的第几周
+        */
+        var date = new Date(a, parseInt(b) - 1, c),
+            w = date.getDay(),
+            d = date.getDate();
+        if(w==0){
+            w=7;
+        }
+        var config={
+            getMonth:date.getMonth()+1,
+            getYear:date.getFullYear(),
+            getWeek:Math.ceil((d + 6 - w) / 7),
+        }
+        return config;
+    },
     init() {
       var Timetable = new Timetables({
-          el: '#coursesTable',
-          timetables: this.classList,
-          weekDate: this.weekDate,
-          gridOnClick: function (e) {
-            alert(e.name + '  ' + e.week +', 第' + e.index + '节课, 课长' + e.length +'节')
-            console.log(e)
-          },
-          styles: {
-             Gheight: 110
-          }
+        el: "#coursesTable",
+        timetables: this.classList,
+        weekDate: this.weekDate,
+        gridOnClick: function(e) {
+          alert(e.id);
+        },
+        styles: {
+          Gheight: 115
+        }
       });
     }
   },
   mounted() {
-    let that = this;
+    let that = this,
+        date = new Date(),
+        curweek = this.getMonthWeek(date.getFullYear(),date.getMonth()+1,date.getDate()).getWeek;
     this.getSimuData();
-    this.setDate(new Date());
+    this.setDate(date);
+    this.weekOrder =  curweek - 1
+    this.weekname = `第${curweek}周`
 
     let mobileSelect1 = new MobileSelect({
       trigger: "#trigger",

@@ -52,7 +52,7 @@ const util = {
    * 日期转换
    * @param {*} time
    */
-  dateFormat (time) {
+  dateFormat (time, format) {
     var date = new Date(time)
     var year = date.getFullYear()
     /* 在日期格式中，月份是从0开始的，因此要加0
@@ -69,7 +69,21 @@ const util = {
     // var seconds =
     //   date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
     // 拼接
-    return year + '-' + month
+    if(format == 'YYYY'){
+        return year
+    }
+    else if(format == 'MM'){
+      return month
+    }
+    else if(format == 'dd'){
+      return day
+    }
+    else if(format == 'yyyy-MM'){
+      return year + '-' + month
+    }
+    else if(format == 'yyyy-MM-dd'){
+      return year + '-' + month + '-' + day
+    }
   }
 }
 

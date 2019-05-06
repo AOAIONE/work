@@ -1,13 +1,9 @@
 ; (function (global) {
     var Timetables = function (option) {
-        console.log(option)
         this.el = document.querySelector(option.el)
         this.Timetables = option.timetables || []
         this.weekDate = option.weekDate || []
-        //   this.merge = typeof option.merge === 'boolean' ? option.merge : true
-        //   this.TimetableType = option.timetableType || []
-        //   this.leftHandText = []
-        //   this.highlightWeek = option.highlightWeek || ''
+
         this.gridOnClick =
             typeof option.gridOnClick === 'function' ? option.gridOnClick : undefined
         var styles = option.styles || {}
@@ -16,8 +12,6 @@
             '#f05261',
             '#48a8e4',
             '#ffd061',
-            '#52db9a',
-            '#70d3e6',
             '#52db9a',
             '#3f51b5',
             '#f3d147',
@@ -63,7 +57,6 @@
             courseListContent.className = 'Courses-content'
             var courseItems = document.createElement('ul')
             courseItems.style.position = 'relative'
-            var paletteIndex = 0
 
             var head = document.createElement('div')
             head.style.overflow = 'hidden'
@@ -132,14 +125,12 @@
                     courseItem.style.boxSizing = "border-box";
                     courseItem.style.borderRadius = "3px";
                     courseItem.style.padding = "3px";
+                    courseItem.style.borderBottom = '1px solid #fff'
+                    courseItem.style.fontSize = '12px'
                     courseItem.setAttribute("id", schedule[key].id);
                     if (palette) {
-                        courseItem.style.backgroundColor = palette[paletteIndex]
+                        courseItem.style.backgroundColor = palette[i]
                         courseItem.style.color = '#fff'
-                        paletteIndex++
-                        if (paletteIndex > palette.length -1) {
-                            paletteIndex = 0
-                        }
                     }
 
                     var courseType = document.createElement("p");
