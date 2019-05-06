@@ -49,9 +49,12 @@ export default {
       title: '',
       detail: {},
       video: {
-        'videoUrl': 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
-        'state': true,
-        'poster': 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg'
+        videoUrl: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+        state: true,
+        poster: 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg',
+        course_id: '',
+        task_id: ''
+
       }
     }
   },
@@ -89,7 +92,9 @@ export default {
           'application_time': data1.application_time,
           'application_status': data1.application_status
         }
+        that.task_id = data1.id
         that.title = data1.name
+        this.video.course_id = data1.id
       })
     }
   },
