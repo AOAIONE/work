@@ -11,6 +11,7 @@
 import { videoPlayer } from 'vue-video-player'
 import '../../node_modules/video.js/dist/video-js.css'
 import '../../node_modules/vue-video-player/src/custom-theme.css'
+import { playListening } from '@/service/service'
 
 export default {
   name: 'MyPlayer',
@@ -32,8 +33,11 @@ export default {
         }],
         poster: 'https://surmon-china.github.io/vue-quill-editor/static/images/surmon-3.jpg', // 你的封面地址
         width: document.documentElement.clientWidth,
-        notSupportedMessage: '此视频暂无法播放，请稍后再试'// 允许覆盖Video.js无法播放媒体源时显示的默认信息。
-      }
+        notSupportedMessage: '此视频暂无法播放，请稍后再试' // 允许覆盖Video.js无法播放媒体源时显示的默认信息。,
+      },
+      parse: false,
+      play_key: '',
+      stable: 3
     }
   },
   watch: {
@@ -46,6 +50,7 @@ export default {
     // 弹出框关闭后暂停 否则一直在播放 state从弹出框组件传值
 
     state: function (val) {
+      alert('123131'.window.myPlay)
       if (val) {
         this.$refs.videoPlayer.player.pause()
       }
@@ -57,13 +62,34 @@ export default {
   methods: {
     // 视频播放的按钮点击
     onPlayerPlay (player) {
-      // alert('开始播放' + new Date())
+      window.myPlay = setInterval(this.myPlayListening, 4000)
     },
     onPlayerPause (player) {
-      // alert('暂停播放' + new Date())
+      // this.stable = 1
+      this.parse = true
+      clearInterval(window.myPlay)
+      window.myPlay = null
     },
     playerStateChanged (player) {
+    },
+    // 课件监听播放
+    myPlayListening () {
+      if (this.play_key) {
+        this.stable = 3
+      } else {
+        this.stable = 0
+      }
+      let data = {
+        'course_id': this.video.course_id,
+        'play_key': this.play_key,
+        'stable': this.stable,
+        'task_id': ''
+      }
+      playListening(data).then(res => {
+        this.play_key = res.data
+      })
     }
+
   },
   computed: {
     player () {

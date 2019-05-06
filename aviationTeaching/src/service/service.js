@@ -137,3 +137,7 @@ export const readStaticList = data => {
 export const readStaticDetail = data => {
   return post('/api/course_ware/read_static_detail', data)
 }
+// 获取课件监听
+export const playListening = data => {
+  return post('/api/play/play_listening', data)
+}
