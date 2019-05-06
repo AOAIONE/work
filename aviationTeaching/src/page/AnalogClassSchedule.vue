@@ -86,7 +86,7 @@ export default {
     getScheduleList: function () {
       let data = {
         'week_order': this.week_order,
-        'date': '',
+        'date': this.$myUtil.dateFormat(this.time),
         'simulator_name': '',
         'is_need_cross': this.is_need_cross,
         'keyword': '',
