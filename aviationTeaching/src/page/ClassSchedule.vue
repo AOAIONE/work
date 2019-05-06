@@ -22,7 +22,7 @@
                           <option>{{date}}</option>
                       </select>
             </div>-->
-            <vue-datepicker-local v-model="time" @confirm="confirm" format="YYYY-MM"/>
+            <vue-datepicker-local v-model="time" format="YYYY-MM"/>
             <div id="trigger" class="select_wrap">
               <select onmousedown="javascript:return false;" class="select_common">
                 <option>{{weekname}}</option>
@@ -63,7 +63,7 @@
               </div>
               <div class="Courses-content">
                 <ul class="stage_none">
-                  <li>19ACPC0003黄志忠12:00——16:00</li>
+                  
                 </ul>
               </div>
             </div>
@@ -108,33 +108,13 @@ export default {
       tabList: [],
       week: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
       //day: [10,11,12,13,14,15,16],
-      courseList: [[], [], [], [], [], [], []],
-      timetableType: [
-        // [{name: '6:00'}, 1],
-        // [{name: '7:00'}, 1],
-        // [{name: '8:00'}, 1],
-        // [{name: '9:00'}, 1],
-        // [{name: '10:00'}, 1],
-        // [{name: '11:00'}, 1],
-        // [{name: '12:00'}, 1],
-        // [{name: '13:00'}, 1],
-        // [{name: '14:00'}, 1],
-        // [{name: '15:00'}, 1],
-        // [{name: '16:00'}, 1],
-        // [{name: '17:00'}, 1],
-        // [{name: '18:00'}, 1],
-        // [{name: '19:00'}, 1],
-        // [{name: '20:00'}, 1],
-        // [{name: '21:00'}, 1],
-        // [{name: '22:00'}, 1],
-        // [{name: '23:00'}, 1],
-        // [{name: '00:00'}, 1],
-        // [{name: '01:00'}, 1],
-        // [{name: '02:00'}, 1]
-      ]
+      page: 1,
+      count: 10
     };
   },
-  computed: {},
+  watch: {
+
+  },
   methods: {
     changeTab(tab) {
       this.tabIndex = tab.index;
@@ -142,11 +122,11 @@ export default {
 
       let changeParam = {
         week_order: 0,
-        date: document.querySelector(".datepicker input").value,
+        date: this.$myUtil.dateFormat(this.time),
         simulator_name: tab.name,
         keyword: "",
-        page_index: 1,
-        page_count: 10
+        page_index: this.page,
+        page_count: this.count
       };
       this.getSchedule(changeParam);
     },
@@ -174,6 +154,7 @@ export default {
       scheduleList(param).then(res => {
         let list = res.data.data;
         if (!res.data && list.length == 0) return;
+        
         list.forEach((el, index) => {
           // console.log(el)
           let data = [],
@@ -181,138 +162,70 @@ export default {
             endObj = [],
             nameAry = [],
             totalObj = [],
-            schedule = el.week_day_schedule;
+            schedule = el.week_day_schedule,
+            frag = document.createDocumentFragment(),
+            Lileft = 0,
+            width = 100/7,
+            week = 1;
 
-          for (var key in schedule) {
-            let start = Math.ceil(
-                schedule[key].start_time.substring(
-                  0,
-                  schedule[key].start_time.lastIndexOf(":")
-                )
-              ),
-              end = Math.ceil(
-                schedule[key].end_time.substring(
-                  0,
-                  schedule[key].end_time.lastIndexOf(":")
-                )
-              );
-
-            switch (end) {
-              case 0:
-                end = 24;
+            switch (el.week_day) {
+              case "一":
+                week = 0;
                 break;
-              case 1:
-                end = 25;
+              case "二":
+                week = 1;
                 break;
-              case 2:
-                end = 26;
+              case "三":
+                 week = 2;
+                break;
+              case "四":
+                 week = 3;
+                break;
+              case "五":
+                 week = 4;
+                break;
+              case "六":
+                 week = 5;
+                break;
+              case "日":
+                 week = 6;
+                break;
+              default:
+                 week = null;
                 break;
             }
-            // if(key > 0){
-            //   if(schedule[key-1].end_time < schedule[key].start_time){
-            //       var len = parseInt(schedule[key].start_time - schedule[key-1].end_time);
-            //       for(var i=0; i<len; i++){
-            //         nameAry.push('');
-            //       }
-            //   }
-            //   else if(schedule[key-1].start_time >= schedule[key].start_time){
-            //     startObj = [];
-            //     for(var i=0,len1 = start-6; i<len1; i++){
-            //       startObj.push('');
-            //     }
-            //   }
-            //   for(var k=0,len2= end-start; k<len2; k++){
-            //    nameAry.push(schedule[key].course_no + schedule[key].teacher_name + schedule[key].training_time)
-            //   }
-            //   return;
-            // }
+          for(var key in schedule) {
+            var courseItem = document.createElement('li')
+            courseItem.style.position = 'absolute'
+            courseItem.style.left = width * week + '%';
+            console.log(frag.childElementCount)
+            courseItem.style.top = frag.childElementCount * 110 + 'px';
+            courseItem.style.width = 100 / 7 + '%'
+            courseItem.style.height ='110px'
+            courseItem.style.boxSizing = 'border-box'
+            courseItem.style.backgroundColor = '#f05261'
+            courseItem.style.color = '#fff'
+            courseItem.style.border = '1px solid #ffa3ab'
+            courseItem.style.borderRadius = '3px'
+            courseItem.setAttribute("id", schedule[key].id)
 
-            // if(start - 6 > 0) {
-            //   for(var i=0,len1 = start-6; i<len1; i++){
-            //     startObj.push('');
-            //   }
-            // }
+            var courseType = document.createElement('p')
+            courseType.innerText = schedule[key].course_no
+            courseType.style.wordWrap = 'break-word'
 
-            // if(start >= 6 && end <= 26){
-            //for(var k=0,len2= end-start; k<len2; k++){
-            nameAry.push(
-              schedule[key].course_no +
-                schedule[key].teacher_name +
-                schedule[key].training_time
-            );
-            //}
-            //}
+            var courseInfo = document.createElement('p')
+            courseInfo.innerText = schedule[key].teacher_name + schedule[key].training_time
 
-            totalObj = startObj.concat(nameAry);
+            courseItem.appendChild(courseType)
+            courseItem.appendChild(courseInfo)
+            frag.appendChild(courseItem)
           }
-
-          data = totalObj;
-          totalObj = [];
-          switch (el.week_day) {
-            case "一":
-              this.courseList[0] = data;
-              break;
-            case "二":
-              this.courseList[1] = data;
-              break;
-            case "三":
-              this.courseList[2] = data;
-              break;
-            case "四":
-              this.courseList[3] = data;
-              break;
-            case "五":
-              this.courseList[4] = data;
-              break;
-            case "六":
-              this.courseList[5] = data;
-              break;
-            case "日":
-              this.courseList[6] = data;
-              break;
-            default:
-              this.courseList.push("");
-              break;
-          }
-          data = [];
+          console.log(frag)
+          document.querySelector('.stage_none').appendChild(frag)
         });
         console.log(this.courseList);
         //this.init();
       });
-    },
-    init() {
-      var highlightWeek = new Date().getDay();
-      var styles = {
-        Gheight: 50,
-        leftHandWidth: 50,
-        palette: ["#ffd061"]
-      };
-      // 实例化(初始化课表)
-      var Timetable = new Timetables({
-        el: "#coursesTable",
-        timetables: this.courseList,
-        week: this.week,
-        day: this.day,
-        timetableType: this.timetableType,
-        highlightWeek: highlightWeek,
-        gridOnClick: function(e) {
-          alert(
-            e.name +
-              "  " +
-              e.week +
-              ", 第" +
-              e.index +
-              "节课, 课长" +
-              e.length +
-              "节"
-          );
-          console.log(e);
-        },
-        styles: styles
-      });
-    },
-    confirm: function(time) {
-      alert(time);
     }
   },
   mounted() {
@@ -328,12 +241,12 @@ export default {
         that.weekname = data[0].value;
 
         let changeParam = {
-          week_order: this.weekOrder,
-          date: document.querySelector(".datepicker input").value,
-          simulator_name: this.tabName,
+          week_order: that.weekOrder,
+          date: that.$myUtil.dateFormat(that.time),
+          simulator_name: that.tabName,
           keyword: "",
-          page_index: 1,
-          page_count: 10
+          page_index: this.page,
+          page_count: this.count
         };
         that.getSchedule(changeParam);
       },
@@ -355,6 +268,7 @@ export default {
   font-size: 24px;
 }
 .Courses-content ul {
+  position: relative;
   padding: 0;
   border-top: 1px dashed rgb(247, 247, 247);
 }
