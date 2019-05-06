@@ -286,6 +286,14 @@ export default new Router({
       }
     },
     {
+      path: '/scheduleDetail',
+      name: 'ScheduleDetail',
+      component: () => import('@/page/ScheduleDetail'),
+      meta: {
+        title: '课表详情'
+      }
+    },
+    {
       path: '/analogClassSchedule',
       name: 'AnalogClassSchedule',
       component: () => import('@/page/AnalogClassSchedule'),
@@ -298,7 +306,7 @@ export default new Router({
       name: 'News',
       component: () => import('@/page/News'),
       meta: {
-        title: '课表'
+        title: '消息'
       }
     },
     {

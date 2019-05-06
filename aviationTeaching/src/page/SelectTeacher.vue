@@ -15,7 +15,7 @@
                     <span class="flex2 ">身份证</span>
                     <span class="flex1 ">课件分配</span>
                 </div>
-                <div class="scall_wrapper" ref="wrapper">
+                <div class="scall_wrapper1" ref="wrapper">
                     <div class="warpper_content">
                         <div class="table_content table_common " v-for="student in students " :key="student.user_id ">
                             <span class="flex1 ">
