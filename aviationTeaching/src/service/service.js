@@ -113,6 +113,14 @@ export const designatedCourseWareDetail = data => {
 export const scheduleList = data => {
   return post('/api/course_schedule/simulator_course_schedule_list', data)
 }
+// 获取课表
+export const courseScheduleList = data => {
+  return post('/api/course_schedule/list', data)
+}
+// 获取课表详情
+export const scheduleDetail = data => {
+  return get('/api/course_schedule/detail', data)
+}
 // 获取openid
 export const wxOpenid = data => {
   return get('/api/OAuth2/wx/base', data)
