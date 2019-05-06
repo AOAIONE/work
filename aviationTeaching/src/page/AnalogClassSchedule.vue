@@ -85,7 +85,7 @@ export default {
   methods: {
     getScheduleList: function () {
       let data = {
-        'week_order': 0,
+        'week_order': this.week_order,
         'date': '',
         'simulator_name': '',
         'is_need_cross': this.is_need_cross,
@@ -97,6 +97,9 @@ export default {
         debugger
       })
     }
+  },
+  watch: {
+
   }
 }
 </script>
