@@ -7,7 +7,7 @@
           <div class="img_wrap ax_default">
             <div class="login_img img_u"></div>
           </div>
-          <input type="text" class="login_inp" v-model="number" placeholder='手机号码' />
+          <input type="text" class="login_inp" v-model="number" placeholder='登录名' />
         </div>
         <div class="imput_wrap border1px">
           <div class="img_wrap ax_default">
@@ -41,6 +41,14 @@ export default {
         password: this.password
 
       }
+      if (!this.number) {
+        swal('', '请输入登录名', 'warning')
+        return
+      }
+      if (!this.password) {
+        swal('', '请输入密码', 'warning')
+        return
+      }
       login(data).then(res => {
         let that = this
         let data = res.data.data
@@ -49,7 +57,8 @@ export default {
           localStorage.setItem('role', role)
           this.$router.push({name: 'SelectRole'})
         } else {
-          console.log(res)
+          swal('', res.data.message, 'error')
+          this.password = ''
         }
       })
     }

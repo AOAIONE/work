@@ -63,7 +63,6 @@ export default {
         'password': this.password
       }
       changePassword(data).then(res => {
-        debugger
         if (res.data.is_success === true) {
           swal('', '密码修改成功！', 'success').then((value) => {
             this.$router.push('/userIndex')

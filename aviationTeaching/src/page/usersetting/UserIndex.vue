@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="mgtop"></div>
-    <div class="user_name">张凡</div>
+    <div class="user_name">{{title}}</div>
     <p v-for="tag in tags" :key="tag.id" class="user_content ax_default" @click="toRoute(tag.path)">
       <span class="iconfont user_icon" v-html="tag.icon"></span>{{tag.title}}
     </p>
@@ -18,7 +18,7 @@ export default {
   },
   data () {
     return {
-      title: '张凡',
+      title: '',
       tags: [
         {title: '资料完善', id: 1, path: '/dataComplete', icon: '&#xe79c;'},
         {title: '密码修改', id: 2, path: '/passwordModifi', icon: '&#xe62d;'},
@@ -32,6 +32,10 @@ export default {
     toRoute: function (path) {
       this.$router.push(path)
     }
+  },
+  mounted () {
+    let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法解密
+    this.title = role.userName
   }
 }
 </script>

@@ -10,7 +10,7 @@
                 </span>
             </p>
         </a>
-        <a href="javascript:;" :class="{activeMenu:activeStatus==='table'}" @click="toRoute('/classSchedule')" class="tabbar__item">
+        <a href="javascript:;" :class="{activeMenu:activeStatus==='table'}" @click="toRoute('/classSchedule',1)" class="tabbar__item">
             <p class="item_top">
                 <span class="iconfont">&#xe65e;</span>
             </p>
@@ -62,8 +62,12 @@ export default {
     }
   },
   methods: {
-    toRoute: function (path) {
-      this.$router.push(path)
+    toRoute: function (path, id) {
+      if (!id) {
+        this.$router.push(path)
+      } else {
+        this.$router.push({path: path, query: {id: Number(id)}})
+      }
     },
     showMenu: function () {
       if (localStorage.getItem('currentRole') === 'schemer') {

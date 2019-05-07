@@ -149,3 +149,11 @@ export const readStaticDetail = data => {
 export const playListening = data => {
   return post('/api/play/play_listening', data)
 }
+// 获取消息
+export const messageList = data => {
+  return post('/api/messages/list', data)
+}
+// 阅读消息
+export const messageRead = data => {
+  return get('/api/messages/read', data)
+}

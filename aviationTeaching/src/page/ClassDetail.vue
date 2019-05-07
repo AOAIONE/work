@@ -6,7 +6,7 @@
         <label class="content_left">课件类容:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.content}}
+            {{detail.course_task_name}}
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
         <label class="content_left">日期:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.time}}
+            {{detail.training_date}}
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <label class="content_left">上课时间:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.uptime}}
+            {{detail.training_time}}
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <label class="content_left">课时:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.date}}
+            {{detail.course_hours}}
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
         <label class="content_left">训练设施:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.time}}
+            {{detail.place_name}}
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <label class="content_left">教员:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.jiaoyuan}}
+            {{detail.teacher_name}}
           </div>
         </div>
       </div>
@@ -54,17 +54,18 @@
         <label class="content_left">学员:</label>
         <div class="content_right">
           <div class="content_right_wrap">
-            {{detail.xueyuan}}
+            {{detail.student_names|arr}}
           </div>
         </div>
       </div>
     </div>
-    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
+    <bottom-tabbar :activeStatus="'table'"></bottom-tabbar>
   </div>
 </template>
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import { scheduleDetail } from '@/service/service'
 
 export default {
   name: 'ClassDetail',
@@ -74,9 +75,29 @@ export default {
   },
   data () {
     return {
-      title: '19EFE0005',
-      detail: {id: '1', content: 'FFS 7[B]', time: '2019-04-01', uptime: '06:00——12:00', date: '6', jiaoyuan: '徐聪明', xueyuan: '张三 李四 王五'}
-
+      title: '',
+      detail: {}
+    }
+  },
+  methods: {
+    getScheduleDetail: function () {
+      let data = {id: this.$route.query.id}
+      scheduleDetail(data).then(res => {
+        if (res.data.is_success) {
+          this.detail = res.data.data
+          this.title = res.data.data.course_no
+        }
+      })
+    }
+  },
+  mounted () {
+    this.getScheduleDetail()
+  },
+  filters: {
+    arr (value) {
+      if (value) {
+        return value.join(' ')
+      }
     }
   }
 }
