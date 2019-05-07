@@ -64,7 +64,8 @@ export default {
         { id: '0', value: '第1周' },
         { id: '1', value: '第2周' },
         { id: '2', value: '第3周' },
-        { id: '3', value: '第4周' }
+        { id: '3', value: '第4周' },
+        { id: '4', value: '第5周' }
       ],
       weekname: '第1周',
       weekOrder: 0,
@@ -81,6 +82,7 @@ export default {
   },
   watch: {
     weekDate (curVal, old) {
+
       let str = ''
       curVal.forEach((item, i) => {
         str += `<div class="Courses-head-${i}" style="flex:1"><p>${
@@ -106,19 +108,12 @@ export default {
     },
     time (c, o) {
       if (o) {
-        let changeParam = {
-          week_order: this.weekOrder,
-          date: this.$myUtil.dateFormat(c, 'yyyy-MM'),
-          simulator_name: this.tabName,
-          keyword: '',
-          page_index: this.page,
-          page_count: this.count
-        }
-        if (this.isClass) {
-          this.getCourse(changeParam)
-        } else {
-          this.getSchedule(changeParam)
-        }
+        //切换月份更新日期
+        this.setDate(c)
+
+        this.time = c
+        this.weekOrder = 0
+        this.weekname = '第1周'
       }
     }
   },
@@ -127,7 +122,7 @@ export default {
       this.tabIndex = tab.index
       this.tabName = tab.name
       let changeParam = {
-        week_order: 0,
+        week_order: this.weekOrder,
         date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
         simulator_name: tab.name,
         keyword: '',
@@ -147,7 +142,7 @@ export default {
         })
         this.tabName = data[0]
         this.getSchedule({
-          week_order: 0,
+          week_order: this.weekOrder,
           date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
           simulator_name: this.tabName,
           keyword: '',
@@ -217,7 +212,6 @@ export default {
     setDate (date) {
       let week = date.getDay() - 1
       date = this.addDate(date, week * -1)
-      let currentFirstDate = new Date(date)
       this.weekDate = []
       for (var i = 0; i < 7; i++) {
         // cells[i].innerHTML = formatDate(i==0 ? addDate(date,-1) : addDate(date,1));//星期日开始
@@ -288,9 +282,9 @@ export default {
       this.title = '模拟机排课表'
       this.getSimuData()
     }
-    let date = new Date()
-    let curweek = this.getMonthWeek(date.getFullYear(), date.getMonth() + 1, date.getDate()).getWeek
-    this.setDate(date)
+
+    let curweek = this.getMonthWeek(this.time.getFullYear(), this.time.getMonth() + 1, this.time.getDate()).getWeek
+    this.setDate(this.time)
     this.weekOrder = curweek - 1
     this.weekname = `第${curweek}周`
     let mobileSelect1 = new MobileSelect({
@@ -300,7 +294,8 @@ export default {
       callback: function (indexArr, data) {
         that.weekOrder = data[0].id
         that.weekname = data[0].value
-        that.setDate(that.addDate(new Date(), that.weekOrder * 7))
+        //curweek = that.getMonthWeek(that.time.getFullYear(), that.time.getMonth() + 1, that.time.getDate()).getWeek
+        that.setDate(that.addDate(that.time, (Number(data[0].id) + 1 - curweek) * 7))
       },
       triggerDisplayData: false
     })
