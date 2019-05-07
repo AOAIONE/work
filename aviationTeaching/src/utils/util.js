@@ -69,19 +69,15 @@ const util = {
     // var seconds =
     //   date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
     // 拼接
-    if(format == 'YYYY'){
-        return year
-    }
-    else if(format == 'MM'){
+    if (format == 'YYYY') {
+      return year
+    } else if (format == 'MM') {
       return month
-    }
-    else if(format == 'dd'){
+    } else if (format == 'dd') {
       return day
-    }
-    else if(format == 'yyyy-MM'){
+    } else if (format == 'yyyy-MM') {
       return year + '-' + month
-    }
-    else if(format == 'yyyy-MM-dd'){
+    } else if (format == 'yyyy-MM-dd') {
       return year + '-' + month + '-' + day
     }
   }

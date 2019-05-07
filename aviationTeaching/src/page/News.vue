@@ -8,7 +8,7 @@
       <div class="warpper_content">
         <p class="info_content" v-for="info in news" :key="info.message_id" @click="setMessageRead(info.user_message_id)">
           <span>
-            <i class="def_c">•</i> {{info.message_content}}</span>
+            <i class="def_c" v-if="unread">•</i> {{info.message_content}}</span>
           <span class="info_content_right">{{info.add_time}}</span>
         </p>
       </div>
