@@ -13,6 +13,10 @@ export const selectRole = data => {
 export const list = data => {
   return post('/api/course_ware/list', data)
 }
+// 获取我的课件列表
+export const myCourseList = data => {
+  return post('/api/course_ware/list_mine', data)
+}
 // 获取热门列表
 export const hotList = data => {
   return post('/api/course_ware/hot_list', data)
