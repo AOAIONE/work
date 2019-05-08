@@ -120,7 +120,7 @@ export default {
       handleApplication(data).then(res => {
         if (res.data.is_success) {
           swal('', '通过课件申请成功', 'success').then((value) => {
-            that.getCourseCenterDetail()
+            that.getMyCourseDetail()
           })
         } else {
           swal('', '课件通过失败', 'error')

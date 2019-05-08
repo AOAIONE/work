@@ -6,7 +6,7 @@
                 <label class="content_left">用户ID:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.id}}
+                        {{detail.designated_user_info | getId}}
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <label class="content_left">姓名:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.name}}
+                        {{detail.designated_user_info | getName}}
                     </div>
                 </div>
             </div>
@@ -77,9 +77,8 @@ export default {
   },
   data () {
     return {
-      title: '赵槐',
-      detail:
-        {id: 1, name: '赵槐', kecheng: '型别等级训练', leixing: '测试', kehao: '赵槐', way: '指定阅读', time: '2018-12-09', ladeTime: '2018-09-08'}
+      title: '',
+      detail: {}
     }
   },
   methods: {
@@ -87,15 +86,26 @@ export default {
       let data = {
         'study_status': '',
         'course_ware_id': this.$route.query.id,
-        'user_role': localStorage.getItem(),
-        'user_id': localStorage.getItem(),
+        'user_role': this.$route.query.user_role,
+        'user_id': this.$route.query.user_id,
         'keyword': '',
         'page_index': 0,
         'page_count': 0
       }
       readStaticDetail(data).then(res => {
-
+        if (res.data.is_success) {
+          this.detail = res.data.data
+          this.title = res.data.data.designated_user_info.user_name
+        }
       })
+    }
+  },
+  filters: {
+    getName: function (value) {
+      return value ? value.user_name : ''
+    },
+    getId: function (value) {
+      return value ? value.user_id : ''
     }
   },
   mounted () {

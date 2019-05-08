@@ -142,7 +142,7 @@ export default {
       })
     },
     toDetail: function (id) {
-      this.$router.push({path: '/CourseApprovalDetail', query: {'application_id': id}})
+      this.$router.push({path: '/courseApprovalDetail', query: {'application_id': id}})
     },
     getCourseList: function (disRepet) {
       let data = {

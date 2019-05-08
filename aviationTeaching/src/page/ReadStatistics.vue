@@ -19,25 +19,25 @@
                 <span class="flex1">姓名</span>
                 <span class="flex1">身份类型</span>
                 <span class="flex1">阅读方式</span>
-                <span class="flex1">查阅总时长</span>
+                <span class="flex2">查阅总时长</span>
             </div>
             <div class="scall_wrapper" ref="wrapper">
                 <div class="warpper_content">
-                    <div class="table_content table_common" v-for="user in users" :key="user.kid">
+                    <div class="table_content table_common" v-for="user in users" :key="user.designated_user_info|getUserId">
                         <span class="flex1">
-                            <a class="linka" @click="toRoute">{{user.kid}}</a>
+                            <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getUserId}}</a>
                         </span>
                         <span class="flex1">
-                            <a class="linka" @click="toRoute">{{user.name}}</a>
+                            <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getName}}</a>
                         </span>
                         <span class="flex1">
-                            {{user.leixing}}
+                            {{user.designated_user_info | getRole}}
                         </span>
                         <span class="flex1">
-                            {{user.way}}
+                            {{user.read_type}}
                         </span>
-                        <span class="flex1">
-                            {{user.time}}
+                        <span class="flex2">
+                            {{user.total_learning_time}}
                         </span>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ export default {
       }
       this.disRepet = disRepet
       readStaticList(data).then(res => {
-        if (res.is_success) {
+        if (res.data.is_success) {
           let arr = res.data.data
           let arr1 = JSON.parse(JSON.stringify(this.users))
           if (this.disRepet) {
@@ -140,8 +140,37 @@ export default {
         }
       })
     },
-    toRoute: function () {
-      this.$router.push({path: '/readUserDetail', query: {'id': this.$route.query.id}})
+    toRoute: function (user) {
+      let userId = user.designated_user_info.user_id
+      let userRole = user.designated_user_info.role
+      this.$router.push({path: '/readUserDetail', query: {'id': this.$route.query.id, 'user_id': userId, 'user_role': userRole}})
+    }
+  },
+  filters: {
+    getName: function (value) {
+      return value.user_name
+    },
+    getRole: function (value) {
+      let role = value.role
+      let roleName = ''
+      switch (role) {
+        case 'user':
+          roleName = '教务员'
+          break
+        case 'schemer':
+          roleName = '计划员'
+          break
+        case 'teacher':
+          roleName = '教员'
+          break
+        case 'student':
+          roleName = '学员'
+          break
+      }
+      return roleName
+    },
+    getUserId: function (value) {
+      return value.user_id
     }
   }
 
