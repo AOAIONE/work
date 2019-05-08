@@ -128,6 +128,7 @@
                     courseItem.style.borderBottom = '1px solid #fff'
                     courseItem.style.fontSize = '12px'
                     courseItem.setAttribute("id", schedule[key].id);
+                    courseItem.key = key; //添加一个名为key的属性，值为循环体key变量的值
                     if (palette) {
                         courseItem.style.backgroundColor = palette[i]
                         courseItem.style.color = '#fff'
@@ -148,7 +149,7 @@
                                 v.classList.remove('grid-active')
                             })
                         this.className = 'grid-active'
-                        var info = schedule[key]
+                        var info = schedule[this.key]
                         gridOnClick && gridOnClick(info)
                     }
 

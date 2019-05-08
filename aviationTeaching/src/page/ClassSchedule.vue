@@ -172,7 +172,7 @@ export default {
         //   arr1 = []
         // }
         this.classList = [...classList1, ...list]
-        // this.classList = list
+        //this.classList = list
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
@@ -265,9 +265,15 @@ export default {
     let that = this
     //使用月份（随周变化）固定值作为参数
     this.month =  document.querySelector('.month input').value
+        //初始化当前第几周渲染日期数据
+    let curweek = this.getMonthWeek(this.time.getFullYear(), this.time.getMonth() + 1, this.time.getDate()).getWeek
+    this.setDate(this.time)
+    this.weekOrder = curweek
+    this.weekname = `第${curweek}周`
+
     if (Number(this.$route.query.id) === 1) {
       let data = {
-        week_order: 0,
+        week_order: this.weekOrder,
         date: this.month,
         simulator_name: '',
         keyword: '',
@@ -282,11 +288,6 @@ export default {
       this.title = '模拟机排课表'
       this.getSimuData()
     }
-    //初始化当前第几周渲染日期数据
-    let curweek = this.getMonthWeek(this.time.getFullYear(), this.time.getMonth() + 1, this.time.getDate()).getWeek
-    this.setDate(this.time)
-    this.weekOrder = curweek
-    this.weekname = `第${curweek}周`
 
     let mobileSelect1 = new MobileSelect({
       trigger: '#trigger',
