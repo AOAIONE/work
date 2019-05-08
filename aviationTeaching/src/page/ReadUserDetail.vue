@@ -30,7 +30,7 @@
                 <label class="content_left">课程课号:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.kehao}}
+                        {{detail.course_nos| getClassNo}}
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <label class="content_left">阅读方式:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.way}}
+                        {{detail.read_type}}
                     </div>
                 </div>
             </div>
@@ -108,6 +108,9 @@ export default {
       return value ? value.user_id : ''
     },
     getRole: function (value) {
+      if (!value) {
+        return ''
+      }
       let role = value.role
       let roleName = ''
       switch (role) {
@@ -125,6 +128,9 @@ export default {
           break
       }
       return roleName
+    },
+    getClassNo: function (value) {
+      return value ? value.join('、') : ''
     }
   },
   mounted () {
