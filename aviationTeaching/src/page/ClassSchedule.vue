@@ -16,7 +16,7 @@
                           <option>{{date}}</option>
                       </select>
             </div>-->
-            <vue-datepicker-local v-model="time" format="YYYY-MM" />
+            <vue-datepicker-local v-model="time" format="YYYY-MM" class="month"/>
             <div id="trigger" class="select_wrap">
               <select onmousedown="javascript:return false;" class="select_common">
                 <option>{{weekname}}</option>
@@ -61,19 +61,20 @@ export default {
     return {
       title: '',
       limits: [
-        { id: '0', value: '第1周' },
-        { id: '1', value: '第2周' },
-        { id: '2', value: '第3周' },
-        { id: '3', value: '第4周' },
-        { id: '4', value: '第5周' }
+        { id: '1', value: '第1周' },
+        { id: '2', value: '第2周' },
+        { id: '3', value: '第3周' },
+        { id: '4', value: '第4周' },
+        { id: '5', value: '第5周' }
       ],
       weekname: '第1周',
-      weekOrder: 0,
-      time: new Date(),
+      weekOrder: 1,
+      time: new Date(), //初始日期
+      month: '',        //初始或切换后请求的参数date值
       tabIndex: 0,
       tabName: '',
       tabList: [],
-      weekDate: [],
+      weekDate: [],     //初始化查询周日期、星期
       classList: [],
       page: 1,
       count: 5,
@@ -82,7 +83,6 @@ export default {
   },
   watch: {
     weekDate (curVal, old) {
-
       let str = ''
       curVal.forEach((item, i) => {
         str += `<div class="Courses-head-${i}" style="flex:1"><p>${
@@ -93,7 +93,7 @@ export default {
       if (old.length > 0) {
         let changeParam = {
           week_order: this.weekOrder,
-          date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
+          date: this.month,
           simulator_name: this.tabName,
           keyword: '',
           page_index: this.page,
@@ -110,10 +110,10 @@ export default {
       if (o) {
         //切换月份更新日期
         this.setDate(c)
-
-        this.time = c
-        this.weekOrder = 0
-        this.weekname = '第1周'
+        //处理最新月份日期格式
+        this.month = this.$myUtil.dateFormat(c, 'yyyy-MM')
+        this.weekOrder = 1
+        this.weekname = this.limits[0].value
       }
     }
   },
@@ -123,7 +123,7 @@ export default {
       this.tabName = tab.name
       let changeParam = {
         week_order: this.weekOrder,
-        date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
+        date: this.month,
         simulator_name: tab.name,
         keyword: '',
         page_index: this.page,
@@ -143,7 +143,7 @@ export default {
         this.tabName = data[0]
         this.getSchedule({
           week_order: this.weekOrder,
-          date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
+          date: this.month,
           simulator_name: this.tabName,
           keyword: '',
           page_index: this.page,
@@ -156,8 +156,7 @@ export default {
       scheduleList(param).then(res => {
         let list = res.data.data
         if (!res.data && list.length === 0) return
-        // 清空
-        // document.querySelector(".stage_none").innerHTML = '';
+
         this.classList = list
         this.init()
       })
@@ -167,9 +166,8 @@ export default {
       courseScheduleList(data).then(res => {
         let list = res.data.data
         if (!res.data && list.length === 0) return
-        // 清空
-        // document.querySelector(".stage_none").innerHTML = '';
         let classList1 = JSON.parse(JSON.stringify(this.classList))
+
         // if (this.disRepet) {
         //   arr1 = []
         // }
@@ -188,8 +186,8 @@ export default {
               // 下拉动作
               that.page++
               that.getCourse({
-                week_order: 0,
-                date: that.$myUtil.dateFormat(that.time, 'yyyy-MM'),
+                week_order: that.weekOrder,
+                date: that.month,
                 simulator_name: '',
                 keyword: '',
                 page_index: that.page,
@@ -265,10 +263,12 @@ export default {
   },
   mounted () {
     let that = this
+    //使用月份（随周变化）固定值作为参数
+    this.month =  document.querySelector('.month input').value
     if (Number(this.$route.query.id) === 1) {
       let data = {
         week_order: 0,
-        date: this.$myUtil.dateFormat(this.time, 'yyyy-MM'),
+        date: this.month,
         simulator_name: '',
         keyword: '',
         page_index: this.page,
@@ -282,11 +282,12 @@ export default {
       this.title = '模拟机排课表'
       this.getSimuData()
     }
-
+    //初始化当前第几周渲染日期数据
     let curweek = this.getMonthWeek(this.time.getFullYear(), this.time.getMonth() + 1, this.time.getDate()).getWeek
     this.setDate(this.time)
-    this.weekOrder = curweek - 1
+    this.weekOrder = curweek
     this.weekname = `第${curweek}周`
+
     let mobileSelect1 = new MobileSelect({
       trigger: '#trigger',
       title: '',
@@ -294,8 +295,9 @@ export default {
       callback: function (indexArr, data) {
         that.weekOrder = data[0].id
         that.weekname = data[0].value
-        //curweek = that.getMonthWeek(that.time.getFullYear(), that.time.getMonth() + 1, that.time.getDate()).getWeek
-        that.setDate(that.addDate(that.time, (Number(data[0].id) + 1 - curweek) * 7))
+        //重置月份格式为本月第一天 -> 设置默认周为第一周（切换月份）计算2,3,4
+        let curMonth = new Date(`${that.month}-01`)
+        that.setDate(that.addDate(curMonth, (Number(data[0].id) - 1) * 7))
       },
       triggerDisplayData: false
     })
