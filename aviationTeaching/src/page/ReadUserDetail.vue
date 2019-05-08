@@ -22,7 +22,7 @@
                 <label class="content_left">身份类型:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.leixing}}
+                        {{detail.designated_user_info | getRole}}
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <label class="content_left">查阅总时长:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.time}}
+                        {{detail.total_learning_time}}
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <label class="content_left">最近查阅时间:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        {{detail.ladeTime}}
+                        {{detail.last_learning_time}}
                     </div>
                 </div>
             </div>
@@ -106,6 +106,25 @@ export default {
     },
     getId: function (value) {
       return value ? value.user_id : ''
+    },
+    getRole: function (value) {
+      let role = value.role
+      let roleName = ''
+      switch (role) {
+        case 'user':
+          roleName = '教务员'
+          break
+        case 'schemer':
+          roleName = '计划员'
+          break
+        case 'teacher':
+          roleName = '教员'
+          break
+        case 'student':
+          roleName = '学员'
+          break
+      }
+      return roleName
     }
   },
   mounted () {
