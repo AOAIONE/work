@@ -25,6 +25,9 @@ service.interceptors.request.use(
       config.baseURL = 'http://demo-user.ccar142.com/'
     } else if (config.url === '/api/OAuth2/wx/base') {
       config.baseURL = 'http://wx3.ccar142.com'
+    } else if (config.url === '/api/uploadFile') {
+      config.baseURL = 'http://demo-scal.ccar142.com/upload/uploadify.ashx'
+      config.url = ''
     } else {
       if (localStorage.getItem('Authorization')) {
         config.headers.Authorization = localStorage.getItem('Authorization')
@@ -110,5 +113,17 @@ export function deletes (url) {
     headers: {}
   })
 }
-
+// 封装文件post请求
+export function file (url, data = {}, headers = {}) {
+  // 默认配置
+  let sendObject = {
+    url: url,
+    method: 'post',
+    data: data
+  }
+  sendObject.headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+  return service(sendObject)
+}
 export { service }

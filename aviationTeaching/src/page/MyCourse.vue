@@ -58,7 +58,7 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { list, courseTypeList } from '@/service/service'
+import { myCourseList, courseTypeList } from '@/service/service'
 
 export default {
   name: 'MyCourse',
@@ -134,7 +134,7 @@ export default {
         'page_count': that.page_count
       }
       this.disRepet = disRepet
-      list(data).then(res => {
+      myCourseList(data).then(res => {
         let arr = res.data.data
         let arr1 = JSON.parse(JSON.stringify(this.courses))
         if (this.disRepet) {

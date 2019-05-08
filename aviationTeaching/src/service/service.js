@@ -1,4 +1,4 @@
-import { get, post } from './axios.js' // 导入axios实例文件中方法
+import { get, post, file } from './axios.js' // 导入axios实例文件中方法
 // login登录
 export const login = data => {
   return post('/api/account_info/get_roles', data)
@@ -12,6 +12,10 @@ export const selectRole = data => {
 // 获取列表
 export const list = data => {
   return post('/api/course_ware/list', data)
+}
+// 获取我的课件列表
+export const myCourseList = data => {
+  return post('/api/course_ware/list_mine', data)
 }
 // 获取热门列表
 export const hotList = data => {
@@ -156,4 +160,8 @@ export const messageList = data => {
 // 阅读消息
 export const messageRead = data => {
   return get('/api/messages/read', data)
+}
+// 文件上传
+export const upLoadFile = data => {
+  return file('/api/uploadFile', data)
 }
