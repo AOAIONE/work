@@ -36,8 +36,9 @@
             <div class="detail_description">
                 <label class="content_left">上传附件:</label>
                 <div class="uploader_box">
-                    <input class="uploader_input" type="file" accept="image/*" multiple="">
+                    <input class="uploader_input" id="upFile" type="file" :accept="accept" multiple="" @change="showPic">
                 </div>
+                <img v-if="videopic" :src="videopic" class="uploader_box">
                 <span>*仅支持jpeg、gif、png、jpg格式文件</span>
             </div>
             <p class="operation">
@@ -51,7 +52,7 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
-import { feedBack } from '@/service/service'
+import { upLoadFile, feedBack } from '@/service/service'
 export default {
   name: 'FeedBack',
   components: {
@@ -63,13 +64,16 @@ export default {
       title: '系统意见反馈',
       txtVal: 0,
       checkValue: '',
+      videopic: '',
       opinion: {
         title: '',
         nei_rong: '',
         type_name: '',
         files: [
         ]
-      }
+      },
+      accept: 'image/gif, image/jpeg, image/png, image/jpg'
+
     }
   },
   methods: {
@@ -87,15 +91,50 @@ export default {
         'title': this.opinion.title,
         'nei_rong': this.opinion.nei_rong,
         'type_name': this.checkValue,
-        'files': [
-          '222'
-        ]
+        'files': this.files
       }
-    //   feedBack(data).then(res => {
-    //   })
+      feedBack(data).then(res => {
+        if (res.data.is_success) {
+          swal('', res.data.data, 'success').then((value) => {
+            this.$router.push('/userIndex')
+          })
+        } else {
+          swal('', '意见提交失败', 'error')
+        }
+      })
     },
     cancel: function () {
       this.$router.push('/userIndex')
+    },
+    showPic: function () {
+      let files = document.getElementById('upFile').files
+      let file = files.length > 0 ? files[0] : ''
+      if (!file) {
+        return
+      }
+      let time = this.$myUtil.dateFormat(new Date(), 'yyyy-MM-dd')
+      let userId = localStorage.getItem('currentRoleId')
+      if (this.accept.indexOf(file.type) === -1) {
+        swal('', '请选择我们支持的图片格式！', 'warning')
+        return
+      }
+      if (file.size > 3145728) {
+        swal('', '请选择3M以内的图片！', 'warning')
+        return
+      }
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
+      let data = new FormData()
+      data.append('file1', file)
+      data.append('dirpath', 'feedback/' + userId + '/' + time)
+      upLoadFile(data).then(res => {
+        if (res.status === 200) {
+          this.videopic = reader.result
+          this.opinion.files.push(res.data)
+        } else {
+          swal('', '图片上传失败', 'error')
+        }
+      })
     }
   }
 
