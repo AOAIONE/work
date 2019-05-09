@@ -1,6 +1,6 @@
 <template>
   <div class="video_container">
-    <div class="video_content ax_default">
+    <div class="video_content ax_default" @click="toRouter(video.id)">
       <div class="video_img_lf">
         <img class="video_img" :src="video.url">
         <a class="playbtn">
@@ -9,11 +9,11 @@
       </div>
       <div class="video_info">
         <p class="video_name">
-          <span>{{video.title}}</span>
+          <span>{{video.name}}</span>
         </p>
         <p class="video_user">
-          <span>{{video.name}}</span>
-          <span class="video_date">{{video.date}}</span>
+          <span>{{video.publisher_name}}</span>
+          <span class="video_date">{{video.add_time}}</span>
         </p>
       </div>
     </div>
@@ -27,7 +27,12 @@ export default {
 
     }
   },
-  props: ['video']
+  props: ['video'],
+  methods: {
+    toRouter: function (id) {
+      this.$router.push({path: '/courseCenterDetail', query: {'id': id}})
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -42,7 +47,7 @@ export default {
   margin-left: 3%;
   margin-top: 3%;
 }
-.video_container:last-of-type .video_content{
+.video_container:last-of-type .video_content {
   margin-bottom: 3%;
 }
 .video_img {
@@ -57,13 +62,16 @@ export default {
 }
 .video_info {
   position: relative;
-  padding:16px;
+  padding: 16px;
   word-wrap: break-word;
 }
 .video_name {
   line-height: 40px;
   text-align: left;
   font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .video_user {
   text-align: left;

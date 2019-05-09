@@ -33,15 +33,15 @@ export default {
       title2: {text: '热门课件', show: true},
       drectorys: [],
       page_index: 1,
-      page_count: 8,
+      page_count: 10,
       videos: [
-        {url: 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
-        {url: '', title: '123', name: '赵槐', date: '2019-02-03'}
+        // {url: 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'},
+        // {url: '', title: '123', name: '赵槐', date: '2019-02-03'}
       ]
     }
   },
@@ -85,8 +85,8 @@ export default {
         'page_count': this.page_count
       }
       hotList(data).then(res => {
-        if (res.data.data.is_success) {
-
+        if (res.data.is_success) {
+          this.videos = res.data.data
         }
       })
     },
