@@ -74,6 +74,9 @@ export default {
     },
     // 课件监听播放
     myPlayListening () {
+      if (this.video.isCount) {
+        return
+      }
       if (this.play_key) {
         this.stable = 3
       } else {

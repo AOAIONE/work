@@ -63,6 +63,7 @@ export default {
           'note': data1.note
         }
         that.title = data1.name
+        that.video.isCount = true
         that.permissions = data1.read_permission_status
       })
     },
