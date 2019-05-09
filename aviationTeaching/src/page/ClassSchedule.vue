@@ -16,7 +16,7 @@
                           <option>{{date}}</option>
                       </select>
             </div>-->
-            <vue-datepicker-local v-model="time" format="YYYY-MM" class="month"/>
+            <vue-datepicker-local v-model="time" format="YYYY-MM" class="month" />
             <div id="trigger" class="select_wrap">
               <select onmousedown="javascript:return false;" class="select_common">
                 <option>{{weekname}}</option>
@@ -69,15 +69,15 @@ export default {
       ],
       weekname: '第1周',
       weekOrder: 1,
-      time: new Date(), //初始日期
-      month: '',        //初始或切换后请求的参数date值
+      time: new Date(), // 初始日期
+      month: '', // 初始或切换后请求的参数date值
       tabIndex: 0,
       tabName: '',
       tabList: [],
-      weekDate: [],     //初始化查询周日期、星期
+      weekDate: [], // 初始化查询周日期、星期
       classList: [],
       page: 1,
-      count: 5,
+      count: 7,
       isClass: true
     }
   },
@@ -108,9 +108,9 @@ export default {
     },
     time (c, o) {
       if (o) {
-        //切换月份更新日期
+        // 切换月份更新日期
         this.setDate(c)
-        //处理最新月份日期格式
+        // 处理最新月份日期格式
         this.month = this.$myUtil.dateFormat(c, 'yyyy-MM')
         this.weekOrder = 1
         this.weekname = this.limits[0].value
@@ -156,7 +156,6 @@ export default {
       scheduleList(param).then(res => {
         let list = res.data.data
         if (!res.data && list.length === 0) return
-
         this.classList = list
         this.init()
       })
@@ -172,7 +171,7 @@ export default {
         //   arr1 = []
         // }
         this.classList = [...classList1, ...list]
-        //this.classList = list
+        // this.classList = list
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
@@ -263,9 +262,9 @@ export default {
   },
   mounted () {
     let that = this
-    //使用月份（随周变化）固定值作为参数
-    this.month =  document.querySelector('.month input').value
-        //初始化当前第几周渲染日期数据
+    // 使用月份（随周变化）固定值作为参数
+    this.month = document.querySelector('.month input').value
+    // 初始化当前第几周渲染日期数据
     let curweek = this.getMonthWeek(this.time.getFullYear(), this.time.getMonth() + 1, this.time.getDate()).getWeek
     this.setDate(this.time)
     this.weekOrder = curweek
@@ -296,7 +295,7 @@ export default {
       callback: function (indexArr, data) {
         that.weekOrder = data[0].id
         that.weekname = data[0].value
-        //重置月份格式为本月第一天 -> 设置默认周为第一周（切换月份）计算2,3,4
+        // 重置月份格式为本月第一天 -> 设置默认周为第一周（切换月份）计算2,3,4
         let curMonth = new Date(`${that.month}-01`)
         that.setDate(that.addDate(curMonth, (Number(data[0].id) - 1) * 7))
       },
@@ -305,7 +304,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style type='less'>
 @import "../styles/course-common.less";
 .Courses-head,
 .Courses-content ul {
@@ -328,9 +327,9 @@ export default {
   background-color: rgb(255, 208, 97);
   color: rgb(255, 255, 255);
 }
-/* .scall_wrapper {
+.scall_wrapper {
   height: 1100px;
   overflow: hidden;
-  position: relative;
-} */
+  /* position: relative; */
+}
 </style>

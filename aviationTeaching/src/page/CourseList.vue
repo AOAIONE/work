@@ -69,18 +69,19 @@ export default {
       title: '课件目录',
       courseList: '全部',
       permission: '全部',
-      courseLists: [],
-      // data: [],
+      courseLists: [
+        {id: 'all', value: '全部'}
+      ],
       limits: [
         {id: 'public', value: '共有'},
         {id: 'private', value: '私有'},
-        {id: 'all', value: '所有'}
-
+        {id: 'all', value: '所有'},
+        {id: 'tag', value: '全部'}
       ],
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 15,
+      page_count: 13,
       keyword: '',
       privilege: 'all',
       disRepet: false
@@ -112,8 +113,13 @@ export default {
             {data: that.courseLists}
           ],
           callback: function (indexArr, data) {
-            that.courseList = data[0].value
-            that.type_id = data[0].id
+            if (data[0].id === 'all') {
+              that.courseList = '全部'
+              that.type_id = 0
+            } else {
+              that.courseList = data[0].value
+              that.type_id = data[0].id
+            }
           },
           triggerDisplayData: false
         })
@@ -177,8 +183,13 @@ export default {
         {data: that.limits}
       ],
       callback: function (indexArr, data) {
-        that.permission = data[0].value
-        that.privilege = data[0].id
+        if (data[0].id === 'tag') {
+          that.permission = '全部'
+          that.privilege = 'all'
+        } else {
+          that.permission = data[0].value
+          that.privilege = data[0].id
+        }
       },
       triggerDisplayData: false
     })
@@ -186,6 +197,6 @@ export default {
 
 }
 </script>
-<style scoped>
+<style type='less'>
 @import "../styles/course-common.less";
 </style>

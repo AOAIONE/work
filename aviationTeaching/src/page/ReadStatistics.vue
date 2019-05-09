@@ -60,11 +60,12 @@ export default {
   },
   data () {
     return {
-      title: '测试消息',
+      title: '阅读统计',
       courseList: '全部',
       courseLists: [
+        {id: '2', value: '全部'},
         {id: '1', value: '已结业'},
-        {id: '2', value: '未结业'}
+        {id: '0', value: '未结业'}
       ],
       users: [
 
@@ -81,13 +82,13 @@ export default {
     let that = this
     let mobileSelect1 = new MobileSelect({
       trigger: '#trigger',
-      title: '选择课件',
+      title: '结业状态',
       wheels: [
         {data: that.courseLists}
       ],
       callback: function (indexArr, data) {
-        that.study_status = data.id
-        that.courseList = data.value
+        that.study_status = data[0].id
+        that.courseList = data[0].value
       },
       triggerDisplayData: false
     })
@@ -144,6 +145,11 @@ export default {
       let userId = user.designated_user_info.user_id
       let userRole = user.designated_user_info.role
       this.$router.push({path: '/readUserDetail', query: {'id': this.$route.query.id, 'user_id': userId, 'user_role': userRole}})
+    }
+  },
+  watch: {
+    'study_status': function () {
+      this.getReadStaticList(true)
     }
   },
   filters: {

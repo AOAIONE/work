@@ -1,56 +1,56 @@
 <template>
-    <div class="container">
-        <detail-title :title="title"></detail-title>
-        <div class="courseList_container">
-            <div class="select_bar ax_default">
-                <div class="bar_right">
-                    <span>课件分类:&nbsp;</span>
-                    <div id="trigger" class="select_wrap">
-                        <select onmousedown="javascript:return false;" class="select_common">
-                            <option>{{courseList}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="trigger1" class="bar_right">
-                    <span>课件权限:&nbsp;</span>
-                    <select onmousedown="javascript:return false;" class="select_common">
-                        <option>{{permission}}</option>
-                    </select>
-                </div>
-                <div class="search_bar">
-                    <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
-                    <a class="search_btn" @click="getCourseList(true)">搜索</a>
-                </div>
-            </div>
-            <div class="table_wrap ax_default">
-                <div class="table_title table_common">
-                    <span class="flex1">课件ID</span>
-                    <span class="flex2">课件标题</span>
-                    <span class="flex1">添加时间</span>
-                    <span class="flex1">操作</span>
-                </div>
-                <div class="scall_wrapper" ref="wrapper">
-                    <div class="warpper_content">
-                        <div class="table_content table_common" v-for="course in courses" :key="course.id">
-                            <span class="flex1">
-                                <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
-                            </span>
-                            <span class="flex2">
-                                <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
-                            </span>
-                            <span class="flex1">
-                                {{course.add_time}}
-                            </span>
-                            <span class="flex1">
-                                <a class="course_tag" @click="assignCourse(course.id)"> 指派课件</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <detail-title :title="title"></detail-title>
+    <div class="courseList_container">
+      <div class="select_bar ax_default">
+        <div class="bar_right">
+          <span>课件分类:&nbsp;</span>
+          <div id="trigger" class="select_wrap">
+            <select onmousedown="javascript:return false;" class="select_common">
+              <option>{{courseList}}</option>
+            </select>
+          </div>
         </div>
-        <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
+        <div id="trigger1" class="bar_right">
+          <span>课件权限:&nbsp;</span>
+          <select onmousedown="javascript:return false;" class="select_common">
+            <option>{{permission}}</option>
+          </select>
+        </div>
+        <div class="search_bar">
+          <input placeholder="请输入关键词,例如: 发布者、课件标题" class="search_input" v-model="keyword" />
+          <a class="search_btn" @click="getCourseList(true)">搜索</a>
+        </div>
+      </div>
+      <div class="table_wrap ax_default">
+        <div class="table_title table_common">
+          <span class="flex1">课件ID</span>
+          <span class="flex2">课件标题</span>
+          <span class="flex1">添加时间</span>
+          <span class="flex1">操作</span>
+        </div>
+        <div class="scall_wrapper" ref="wrapper">
+          <div class="warpper_content">
+            <div class="table_content table_common" v-for="course in courses" :key="course.id">
+              <span class="flex1">
+                <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
+              </span>
+              <span class="flex2">
+                <a class="linka" @click="toDetail(course.id)">{{course.name}}</a>
+              </span>
+              <span class="flex1">
+                {{course.add_time}}
+              </span>
+              <span class="flex1">
+                <a class="course_tag" @click="assignCourse(course.id)"> 指派课件</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
+  </div>
 </template>
 <script>
 import MobileSelect from 'mobile-select'
@@ -69,17 +69,20 @@ export default {
       title: '指派课件',
       courseList: '全部',
       permission: '全部',
-      courseLists: [],
+      courseLists: [
+        {id: 'all', value: '全部'}
+      ],
       limits: [
         {id: 'public', value: '共有'},
         {id: 'private', value: '私有'},
-        {id: 'all', value: '所有'}
+        {id: 'all', value: '所有'},
+        {id: 'tag', value: '全部'}
 
       ],
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 15,
+      page_count: 13,
       keyword: '',
       privilege: 'all',
       disRepet: false
@@ -111,8 +114,13 @@ export default {
             {data: that.courseLists}
           ],
           callback: function (indexArr, data) {
-            that.courseList = data[0].value
-            that.type_id = data[0].id
+            if (data[0].id === 'all') {
+              that.courseList = '全部'
+              that.type_id = 0
+            } else {
+              that.courseList = data[0].value
+              that.type_id = data[0].id
+            }
           },
           triggerDisplayData: false
         })
@@ -186,8 +194,13 @@ export default {
         {data: that.limits}
       ],
       callback: function (indexArr, data) {
-        this.permission = data[0].value
-        this.privilege = data[0].id
+        if (data[0].id === 'tag') {
+          that.permission = '全部'
+          that.privilege = 'all'
+        } else {
+          this.permission = data[0].value
+          this.privilege = data[0].id
+        }
       },
       triggerDisplayData: false
     })

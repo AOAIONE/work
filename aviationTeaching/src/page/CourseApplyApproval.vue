@@ -75,17 +75,20 @@ export default {
       title: '课件申请批复',
       courseList: '全部',
       privilege: '全部',
-      courseLists: [],
+      courseLists: [
+        {id: 'all', value: '全部'}
+      ],
       limits: [
         {id: '1', value: '申请中'},
         {id: '2', value: '已通过'},
-        {id: '3', value: '未通过'}
+        {id: '3', value: '未通过'},
+        {id: '4', value: '全部'}
 
       ],
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 15,
+      page_count: 13,
       keyword: '',
       status: 'all',
       disRepet: false
@@ -112,7 +115,7 @@ export default {
     'type_id': function () {
       this.getCourseList(true)
     },
-    'privilege': function () {
+    'status': function () {
       this.getCourseList(true)
     }
 
@@ -134,8 +137,13 @@ export default {
             {data: that.courseLists}
           ],
           callback: function (indexArr, data) {
-            that.courseList = data[0].value
-            that.type_id = data[0].id
+            if (data[0].id === 'all') {
+              that.courseList = '全部'
+              that.type_id = 0
+            } else {
+              that.courseList = data[0].value
+              that.type_id = data[0].id
+            }
           },
           triggerDisplayData: false
         })
@@ -207,8 +215,11 @@ export default {
           case '2':
             that.status = 'passed'
             break
-          default:
+          case '3':
             that.status = 'refused'
+            break
+          default:
+            that.status = 'all'
             break
         }
         that.privilege = data[0].value
