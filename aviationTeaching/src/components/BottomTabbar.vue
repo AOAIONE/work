@@ -90,7 +90,7 @@ export default {
 <style lang="less" scoped>
 .tabbar_container {
   box-shadow: 0px 0 14px 0 #e2e2e2;
-  position: absolute;
+  position: fixed;
   display: flex;
   z-index: 4;
   bottom: 0;

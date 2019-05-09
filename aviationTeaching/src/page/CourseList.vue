@@ -81,7 +81,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 15,
+      page_count: 13,
       keyword: '',
       privilege: 'all',
       disRepet: false
