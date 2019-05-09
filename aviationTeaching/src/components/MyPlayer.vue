@@ -79,11 +79,12 @@ export default {
       } else {
         this.stable = 0
       }
+      let taskId = this.video.taskId ? this.video.taskId : ''
       let data = {
         'course_id': this.video.course_id,
         'play_key': this.play_key,
         'stable': this.stable,
-        'task_id': ''
+        'task_id': taskId
       }
       playListening(data).then(res => {
         this.play_key = res.data

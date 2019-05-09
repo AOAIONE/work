@@ -75,7 +75,8 @@ export default {
       video: {
         'videoUrl': 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
         'state': true,
-        'poster': 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg'
+        'poster': 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg',
+        'taskId': ''
       }
     }
   },
@@ -100,6 +101,7 @@ export default {
           'last_learning_time': data1.last_learning_time
         }
         that.title = data1.name
+        that.video.taskId = this.$route.query.designated_id
       })
     }
   },

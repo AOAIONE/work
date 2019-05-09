@@ -52,9 +52,7 @@ export default {
         videoUrl: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
         state: true,
         poster: 'http://pic3.nipic.com/20090527/1242397_102231006_2.jpg',
-        course_id: '',
-        task_id: ''
-
+        course_id: ''
       }
     }
   },
