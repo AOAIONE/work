@@ -91,7 +91,7 @@ export default {
         'title': this.opinion.title,
         'nei_rong': this.opinion.nei_rong,
         'type_name': this.checkValue,
-        'files': this.files
+        'files': this.opinion.files
       }
       feedBack(data).then(res => {
         if (res.data.is_success) {
