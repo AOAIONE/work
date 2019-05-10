@@ -57,16 +57,18 @@
       var courseListContent = document.createElement('div')
       
       courseListContent.className = 'Courses-content'
-
-      courseListContent.style.height += Gheight * Timetables[0].week_day_schedule.length + 'px'
-      var docuFrag = document.createDocumentFragment()
+      courseListContent.style.paddingTop = '36px'
+      courseListContent.style.overflow = 'hidden'
+      courseListContent.style.height = this.el.offsetHeight - 36 + 'px'
+      //courseListContent.style.height += Gheight * Timetables[0].week_day_schedule.length + 'px'
 
       var courseItems = document.createElement('ul')
       courseItems.style.position = 'relative'
+      courseItems.style.overflowY = 'auto'
+      courseItems.style.height = '100%'
 
       var head = document.createElement('div')
-      head.style.overflow = 'hidden'
-      head.style.display = 'flex'
+      head.style= 'position:absolute;z-index:1;display:flex;width:100%;background-color:#fff'
       head.className = 'Courses-head'
       weekDate.forEach(function (item, index) {
         var weekItem = document.createElement('div')
@@ -123,9 +125,9 @@
         for (var key in schedule) {
           var courseItem = document.createElement('li')
           courseItem.style.position = 'absolute'
-          courseItem.style.marginLeft = width * week + '%'
+          courseItem.style.left = width * week + '%'
 
-          courseItem.style.marginTop = frag.childElementCount * Gheight + 'px'
+          courseItem.style.top = frag.childElementCount * Gheight + 'px'
           courseItem.style.width = 100 / 7 + '%'
           courseItem.style.height = Gheight + 'px'
           courseItem.style.boxSizing = 'border-box'
