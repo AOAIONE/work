@@ -38,7 +38,7 @@
                 <div class="uploader_box">
                     <input class="uploader_input" id="upFile" type="file" :accept="accept" multiple="" @change="showPic">
                 </div>
-                <img v-if="videopic" :src="videopic" class="uploader_box">
+                <img v-if="videopic" :src="videopic" class="uploader_box1">
                 <span>*仅支持jpeg、gif、png、jpg格式文件</span>
             </div>
             <p class="operation">
