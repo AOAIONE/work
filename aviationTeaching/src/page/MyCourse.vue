@@ -32,7 +32,7 @@
                     <span class="flex1">添加时间</span>
                 </div>
                 <div class="scall_wrapper" ref="wrapper">
-                    <div class="warpper_content">
+                    <div v-if="courses.length!==0" class="warpper_content">
                         <div class="table_content table_common" v-for="course in courses" :key="course.id">
                             <span class="flex1">
                                 <a class="linka" @click="toDetail(course.id)">{{course.id}}</a>
@@ -48,6 +48,7 @@
                             </span>
                         </div>
                     </div>
+                    <data-loading v-else></data-loading>
                 </div>
             </div>
         </div>
@@ -58,13 +59,17 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { myCourseList, courseTypeList } from '@/service/service'
 
 export default {
   name: 'MyCourse',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {

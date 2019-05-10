@@ -5,24 +5,29 @@
       <a class="converButton" :class="{active:already}" @click="alreadyBtn">已读</a>
     </div>
     <div class="scall_wrapper" ref="wrapper">
-      <div class="warpper_content">
+      <div class="warpper_content" v-if="news.length!==0">
         <p class="info_content" v-for="info in news" :key="info.message_id" @click="setMessageRead(info.user_message_id)">
           <span>
             <i class="def_c" v-if="unread">•</i> {{info.message_content}}</span>
           <span class="info_content_right">{{info.add_time}}</span>
         </p>
       </div>
+      <data-loading v-else></data-loading>
     </div>
     <bottom-tabbar :activeStatus="'news'"></bottom-tabbar>
   </div>
 </template>
 <script>
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import {messageList, messageRead} from '@/service/service'
 export default {
   name: 'News',
   components: {
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {
@@ -101,7 +106,7 @@ export default {
       messageRead(data).then(res => {
         if (!res.data.is_success) {
           swal('', '操作失败', 'error')
-        }else {
+        } else {
           this.getMessageList()
         }
       })

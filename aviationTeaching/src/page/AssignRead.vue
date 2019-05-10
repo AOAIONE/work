@@ -12,19 +12,24 @@
         <span class="flex1 ">发布者</span>
         <span class="flex1 ">指派时间</span>
       </div>
-      <div class="table_content table_common " v-for="course in courses " :key="course.user_id ">
-        <span class="flex1 ">
-          <a class="linka " @click="toDetail(course.designated_id)">{{course.id}}</a>
-        </span>
-        <span class="flex2 ">
-          <a class="linka " @click="toDetail(course.designated_id)">{{course.name}}</a>
-        </span>
-        <span class="flex1 ">
-          {{course.publisher_name}}
-        </span>
-        <span class="flex1 ">
-          {{course.designated_time}}
-        </span>
+      <div class="scall_wrapper1" ref="wrapper">
+        <div v-if="courses.length!==0" class="warpper_content">
+          <div class="table_content table_common " v-for="course in courses " :key="course.user_id ">
+            <span class="flex1 ">
+              <a class="linka " @click="toDetail(course.designated_id)">{{course.id}}</a>
+            </span>
+            <span class="flex2 ">
+              <a class="linka " @click="toDetail(course.designated_id)">{{course.name}}</a>
+            </span>
+            <span class="flex1 ">
+              {{course.publisher_name}}
+            </span>
+            <span class="flex1 ">
+              {{course.designated_time}}
+            </span>
+          </div>
+        </div>
+        <data-loading v-else></data-loading>
       </div>
     </div>
     <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -33,13 +38,17 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { designatedCourseWareList } from '@/service/service'
 
 export default {
   name: 'AssignRead',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {
@@ -47,25 +56,57 @@ export default {
       courses: [],
       keyword: '',
       page_index: 1,
-      page_count: 8
+      page_count: 8,
+      disRepet: false
+
     }
   },
   mounted () {
     this.getCourseList()
   },
   methods: {
-    getCourseList: function () {
+    getCourseList: function (disRepet) {
       let data = {
         'keyword': this.keyword,
         'page_index': this.page_index,
         'page_count': this.page_count
       }
+      this.disRepet = disRepet
       designatedCourseWareList(data).then(res => {
-        this.courses = res.data.data
+        let arr = res.data.data
+        let arr1 = JSON.parse(JSON.stringify(this.courses))
+        if (this.disRepet) {
+          arr1 = []
+        }
+        this.courses = [...arr1, ...arr]
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            let that = this
+            this.scroll = new this.$BScroll(this.$refs.wrapper, {
+              pullUpLoad: {
+                threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
+              },
+              click: true
+            })
+            this.scroll.on('pullingUp', (pos) => {
+              // 下拉动作
+              that.page_index++
+              that.getCourseList()
+              // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
+              that.scroll.finishPullUp()
+              // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
+              setTimeout(() => {
+                that.scroll.refresh()
+              }, 300)
+            })
+          } else {
+            this.scroll.refresh()
+          }
+        })
       })
     },
     serach: function () {
-      this.getCourseList()
+      this.getCourseList(true)
     },
     // 跳转到教员详情，已分配的教员才能进入
     toDetail: function (id) {

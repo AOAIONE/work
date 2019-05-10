@@ -22,7 +22,7 @@
                 <span class="flex2">查阅总时长</span>
             </div>
             <div class="scall_wrapper" ref="wrapper">
-                <div class="warpper_content">
+                <div v-if="users.length!==0" class="warpper_content">
                     <div class="table_content table_common" v-for="user in users" :key="user.designated_user_info|getUserId">
                         <span class="flex1">
                             <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getUserId}}</a>
@@ -41,6 +41,7 @@
                         </span>
                     </div>
                 </div>
+                <data-loading v-else></data-loading>
             </div>
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -50,13 +51,17 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { readStaticList } from '@/service/service'
 
 export default {
   name: 'ReadStatistics',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {

@@ -16,7 +16,7 @@
           <span class="flex1 ">课件分配</span>
         </div>
         <div class="scall_wrapper1" ref="wrapper">
-          <div class="warpper_content">
+          <div v-if="teachers.length!==0" class="warpper_content">
             <div class="table_content table_common " v-for="teacher in teachers " :key="teacher.user_id ">
               <span class="flex1 ">
                 <a class="linka " @click="toDetail(teacher)">{{teacher.user_id}}</a>
@@ -33,6 +33,7 @@
               </span>
             </div>
           </div>
+          <data-loading v-else></data-loading>
         </div>
       </div>
     </div>
@@ -42,13 +43,17 @@
 <script>
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { teacherList, designateTeacher, delDesignateTeacher } from '@/service/service'
 
 export default {
   name: 'SelectUser',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {

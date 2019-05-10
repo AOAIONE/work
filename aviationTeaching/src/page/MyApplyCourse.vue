@@ -30,7 +30,7 @@
           <span class="flex1">申请时间</span>
         </div>
         <div class="scall_wrapper" ref="wrapper">
-          <div class="warpper_content">
+          <div v-if="courses.length!==0" class="warpper_content">
             <div class="table_content table_common" v-for="course in courses" :key="course.application_id">
               <span class="flex1">
                 <a class="linka" @click="toDetail(course.application_status,course.application_id)">{{course.id}}</a>
@@ -52,6 +52,7 @@
               </span>
             </div>
           </div>
+          <data-loading v-else></data-loading>
         </div>
       </div>
     </div>
@@ -62,13 +63,17 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { courseTypeList, MyApplyCourseList } from '@/service/service'
 
 export default {
   name: 'MyApplyCourse',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
+
   },
   data () {
     return {
