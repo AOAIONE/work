@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
         <div class="courseList_container">
             <div class="select_bar ax_default">

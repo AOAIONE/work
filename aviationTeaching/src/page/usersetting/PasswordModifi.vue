@@ -65,7 +65,7 @@ export default {
       changePassword(data).then(res => {
         if (res.data.is_success === true) {
           swal('', '密码修改成功！', 'success').then((value) => {
-            this.$router.push('/userIndex')
+            this.$router.push('/login')
           })
         } else {
           swal('', '操作失败！', 'error')

@@ -150,7 +150,7 @@ export default {
   margin-top: 110px;
 }
 .user_comment {
-  padding:20px 30px 40px 30px;
+  padding: 20px 30px 40px 30px;
   width: 750px;
   text-align: left;
   font-family: "FontAwesome Regular", "FontAwesome";
@@ -168,7 +168,7 @@ export default {
   width: 100%;
   margin-top: 10px;
   min-height: 200px;
-  font-size: 14px;
+  font-size: 28px;
   outline: none;
   border: 1px solid rgba(242, 242, 242, 1);
   padding: 10px;
