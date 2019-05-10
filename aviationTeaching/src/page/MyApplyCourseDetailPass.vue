@@ -98,6 +98,13 @@ export default {
   },
   mounted () {
     this.getMyCourseDetail()
+  },
+  beforeRouteLeave (to, from, next) {
+    if (window.myPlay) {
+      clearInterval(window.myPlay)
+      window.myPlay = null
+    }
+    next()
   }
 }
 </script>
