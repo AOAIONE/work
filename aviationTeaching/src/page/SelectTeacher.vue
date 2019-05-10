@@ -28,8 +28,8 @@
                                 {{student.id_card_no}}
                             </span>
                             <span class="flex1 ">
-                                <a v-if="student.is_designated===0 " class="course_tag1" @click="courseAssign(student.user_id)">课件分配</a>
-                                <a v-else class="course_tag" @click="courseDelAssign(student.task_id)">解除分配</a>
+                                <a v-if="student.is_designated===0 " class="course_tag1" @click="courseAssign(student)">课件分配</a>
+                                <a v-else class="course_tag" @click="courseDelAssign(student)">解除分配</a>
                             </span>
                         </div>
                     </div>
@@ -124,23 +124,23 @@ export default {
       }
     },
     // 课件指派学员
-    courseAssign: function (studentId) {
+    courseAssign: function (student) {
       let data = {
-        'studentId': studentId,
+        'studentId': student.user_id,
         'courseWareId': this.$route.query.id
       }
       designateStudent(data).then(res => {
         if (res.data.is_success) {
-          this.getStudentList()
+          student.is_designated = 1
         }
       })
     },
     // 取消指派
-    courseDelAssign: function (taskId) {
-      let data = {'taskId': taskId}
+    courseDelAssign: function (student) {
+      let data = {'taskId': student.task_id}
       delDesignateTeacher(data).then(res => {
         if (res.data.is_success) {
-          this.getStudentList()
+          student.is_designated = 0
         }
       })
     }
