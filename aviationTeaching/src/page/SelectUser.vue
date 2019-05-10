@@ -129,7 +129,7 @@ export default {
       }
       designateTeacher(data).then(res => {
         if (res.data.is_success) {
-          this.getTeacherList()
+          this.getTeacherList(true)
         }
       })
     },
@@ -138,7 +138,7 @@ export default {
       let data = {'taskId': taskId}
       delDesignateTeacher(data).then(res => {
         if (res.data.is_success) {
-          this.getTeacherList()
+          this.getTeacherList(true)
         }
       })
     }
