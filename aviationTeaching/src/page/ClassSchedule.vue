@@ -31,9 +31,9 @@
               <div class="Courses-content">
                 <ul class="stage_none"></ul>
               </div>-->
-            </div>
             <!-- </div>
             </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
       weekDate: [], // 初始化查询周日期、星期
       classList: [],
       page: 1,
-      count: 7,
+      count: 100,
       isClass: true
     }
   },
@@ -165,44 +165,44 @@ export default {
       courseScheduleList(data).then(res => {
         let list = res.data.data
         if (!res.data && list.length === 0) return
-        let classList1 = JSON.parse(JSON.stringify(this.classList))
+        //let classList1 = JSON.parse(JSON.stringify(this.classList))
 
         // if (this.disRepet) {
         //   arr1 = []
         // }
-        this.classList = [...classList1, ...list]
-        // this.classList = list
-        this.$nextTick(() => {
-          if (!this.scroll) {
-            let that = this
-            this.scroll = new this.$BScroll(this.$refs.wrapper, {
-              pullUpLoad: {
-                threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
-              },
-              click: true
-            })
-            this.scroll.on('pullingUp', (pos) => {
-              // 下拉动作
-              that.page++
-              that.getCourse({
-                week_order: that.weekOrder,
-                date: that.month,
-                simulator_name: '',
-                keyword: '',
-                page_index: that.page,
-                page_count: that.count
-              })
-              // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
-              that.scroll.finishPullUp()
-              // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
-              setTimeout(() => {
-                that.scroll.refresh()
-              }, 300)
-            })
-          } else {
-            this.scroll.refresh()
-          }
-        })
+        //this.classList = [...classList1, ...list]
+         this.classList = list
+        // this.$nextTick(() => {
+        //   if (!this.scroll) {
+        //     let that = this
+        //     this.scroll = new this.$BScroll(this.$refs.wrapper, {
+        //       pullUpLoad: {
+        //         threshold: -70// 在上拉到超过底部 35px 时，触发 pullingUp 事件
+        //       },
+        //       click: true
+        //     })
+        //     this.scroll.on('pullingUp', (pos) => {
+        //       // 下拉动作
+        //       that.page++
+        //       that.getCourse({
+        //         week_order: that.weekOrder,
+        //         date: that.month,
+        //         simulator_name: '',
+        //         keyword: '',
+        //         page_index: that.page,
+        //         page_count: that.count
+        //       })
+        //       // 调取上拉完成函数，这样才能多次上拉加载更多，切记不能在这里直接调用刷新滚动高度
+        //       that.scroll.finishPullUp()
+        //       // 写个异步刷新，这样可以解决浏览器上拉卡顿问题
+        //       setTimeout(() => {
+        //         that.scroll.refresh()
+        //       }, 300)
+        //     })
+        //   } else {
+        //     this.scroll.refresh()
+        //   }
+        // })
         this.init()
       })
     },
@@ -256,7 +256,8 @@ export default {
         },
         styles: {
           Gheight: 115
-        }
+        },
+        isScroll: true
       })
     }
   },

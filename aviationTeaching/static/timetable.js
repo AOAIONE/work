@@ -35,6 +35,7 @@
       var style = option.styles || {}
       var gridOnClick = option.gridOnClick || this.gridOnClick
       var Gheight = style.Gheight || this.style.Gheight
+      var isScroll = option.isScroll || this.isScroll
       var dpr = window.devicePixelRatio
       var palette
       if (typeof style.palette === 'boolean' && !style.palette) {
@@ -54,12 +55,12 @@
       courseWrapper.id = 'courseWrapper'
       courseWrapper.style.position = 'relative'
       var courseListContent = document.createElement('div')
-      var scallWrapper = document.createElement('div')
-      scallWrapper.className = 'scall_wrapper'
-      scallWrapper.ref = 'wrapper'
-      scallWrapper.style.height = '500px'
-      scallWrapper.style.overflow = 'hidden'
+      
       courseListContent.className = 'Courses-content'
+
+      courseListContent.style.height += Gheight * Timetables[0].week_day_schedule.length + 'px'
+      var docuFrag = document.createDocumentFragment()
+
       var courseItems = document.createElement('ul')
       courseItems.style.position = 'relative'
 
@@ -122,9 +123,9 @@
         for (var key in schedule) {
           var courseItem = document.createElement('li')
           courseItem.style.position = 'absolute'
-          courseItem.style.left = width * week + '%'
+          courseItem.style.marginLeft = width * week + '%'
 
-          courseItem.style.top = frag.childElementCount * Gheight + 'px'
+          courseItem.style.marginTop = frag.childElementCount * Gheight + 'px'
           courseItem.style.width = 100 / 7 + '%'
           courseItem.style.height = Gheight + 'px'
           courseItem.style.boxSizing = 'border-box'
@@ -164,9 +165,9 @@
         }
         courseItems.appendChild(frag)
       })
+
       courseListContent.appendChild(courseItems)
-      scallWrapper.appendChild(courseListContent)
-      courseWrapper.appendChild(scallWrapper)
+      courseWrapper.appendChild(courseListContent)
       this.el.appendChild(courseWrapper)
     },
     setOption: function (option) {
