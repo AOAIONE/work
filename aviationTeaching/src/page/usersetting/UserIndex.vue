@@ -34,8 +34,15 @@ export default {
     }
   },
   mounted () {
-    let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法解密
-    this.title = role.userName
+    let that = this
+    let currentRole = localStorage.getItem('currentRole')
+    let roles = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))).roleMapperNames // 使用CryptoJS方法解密
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i].roleName === currentRole) {
+        that.title = roles[i].userName
+        break
+      }
+    }
   }
 }
 </script>
