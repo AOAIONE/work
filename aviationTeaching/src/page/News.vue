@@ -36,7 +36,9 @@ export default {
       isRead: '',
       news: [],
       page_index: 1,
-      page_count: 15
+      page_count: 15,
+      disRepet: false
+
     }
   },
   methods: {
@@ -47,7 +49,7 @@ export default {
         this.unread = true
         this.already = false
       }
-      this.getMessageList()
+      this.getMessageList(true)
     },
     alreadyBtn: function () {
       this.news = []
@@ -56,19 +58,23 @@ export default {
         this.already = true
         this.unread = false
       }
-      this.getMessageList()
+      this.getMessageList(true)
     },
-    getMessageList: function () {
+    getMessageList: function (disRepet) {
       let data = {
         'is_read': this.isRead,
         'keyword': '',
         'page_index': this.page_index,
         'page_count': this.page_count
       }
+      this.disRepet = disRepet
       messageList(data).then(res => {
         if (res.status === 200) {
           let news = res.data.data
           let arr1 = JSON.parse(JSON.stringify(this.news))
+          if (this.disRepet) {
+            arr1 = []
+          }
           this.news = [...arr1, ...news]
           this.$nextTick(() => {
             if (!this.scroll) {
@@ -100,6 +106,9 @@ export default {
       })
     },
     setMessageRead: function (id) {
+      if (this.already) {
+        return
+      }
       let data = {
         'userMessageId': id
       }
@@ -107,7 +116,7 @@ export default {
         if (!res.data.is_success) {
           swal('', '操作失败', 'error')
         } else {
-          this.getMessageList()
+          this.getMessageList(true)
         }
       })
     }
