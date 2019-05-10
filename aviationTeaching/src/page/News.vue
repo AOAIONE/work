@@ -101,6 +101,8 @@ export default {
       messageRead(data).then(res => {
         if (!res.data.is_success) {
           swal('', '操作失败', 'error')
+        }else {
+          this.getMessageList()
         }
       })
     }
