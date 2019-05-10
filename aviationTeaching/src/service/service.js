@@ -99,7 +99,7 @@ export const handleApplication = data => {
 }
 // 取消申请
 export const cancelApplication = data => {
-  return get('/api/course_ware/del_designate', data)
+  return get('api/course_ware/del_application', data)
 }
 // 设置任务完成状态
 export const completeTask = data => {
