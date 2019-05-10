@@ -80,11 +80,9 @@ export default {
         {id: 'all', value: '全部'}
       ],
       limits: [
-        {id: 'public', value: '共有'},
+        {id: 'public', value: '公有'},
         {id: 'private', value: '私有'},
-        {id: 'all', value: '所有'},
-        {id: 'tag', value: '全部'}
-
+        {id: 'all', value: '所有'}
       ],
       courses: [],
       type_id: 0,
@@ -192,13 +190,8 @@ export default {
         {data: that.limits}
       ],
       callback: function (indexArr, data) {
-        if (data[0].id === 'tag') {
-          that.permission = '全部'
-          that.privilege = 'all'
-        } else {
-          that.permission = data[0].value
-          that.privilege = data[0].id
-        }
+        that.permission = data[0].value
+        that.privilege = data[0].id
       },
       triggerDisplayData: false
     })

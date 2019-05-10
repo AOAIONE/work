@@ -78,11 +78,9 @@ export default {
         {id: 'all', value: '全部'}
       ],
       limits: [
-        {id: 'public', value: '共有'},
+        {id: 'public', value: '公有'},
         {id: 'private', value: '私有'},
-        {id: 'all', value: '所有'},
-        {id: 'tag', value: '全部'}
-
+        {id: 'all', value: '所有'}
       ],
       courses: [],
       type_id: 0,
@@ -119,13 +117,8 @@ export default {
             {data: that.courseLists}
           ],
           callback: function (indexArr, data) {
-            if (data[0].id === 'all') {
-              that.courseList = '全部'
-              that.type_id = 0
-            } else {
-              that.courseList = data[0].value
-              that.type_id = data[0].id
-            }
+            that.courseList = data[0].value
+            that.type_id = data[0].id
           },
           triggerDisplayData: false
         })
