@@ -93,7 +93,7 @@ export default {
       courses: [],
       type_id: 0,
       page_index: 1,
-      page_count: 13,
+      page_count: 15,
       keyword: '',
       privilege: '',
       status: 'all',

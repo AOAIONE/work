@@ -56,7 +56,7 @@ export default {
       courses: [],
       keyword: '',
       page_index: 1,
-      page_count: 8,
+      page_count: 15,
       disRepet: false
 
     }
