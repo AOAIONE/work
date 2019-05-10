@@ -291,7 +291,7 @@ export default {
 
     let mobileSelect1 = new MobileSelect({
       trigger: '#trigger',
-      title: '',
+      title: '课表',
       wheels: [{ data: this.limits }],
       callback: function (indexArr, data) {
         that.weekOrder = data[0].id
@@ -305,7 +305,7 @@ export default {
   }
 }
 </script>
-<style type='less'>
+<style type='less' scoped>
 @import "../styles/course-common.less";
 .Courses-head,
 .Courses-content ul {
