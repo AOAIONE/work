@@ -23,7 +23,7 @@
                 <label class="content_left">操作:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="course_tag" @click="againApply(course.id)">重新申请</a>
+                        <a class="course_tag" @click="againApply(detail.id)">重新申请</a>
                     </div>
                 </div>
             </div>

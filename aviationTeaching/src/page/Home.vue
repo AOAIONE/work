@@ -63,6 +63,9 @@ export default {
       let drectorys2 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe65e;'},
         {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'},
         {text: '模拟机排课表', id: 4, path: '/ClassSchedule', icon: '&#xe625;'}]
+      let drectorys3 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe639;'},
+        {text: '课件中心', id: 2, path: '/courseCenter', icon: '&#xe63b;'},
+        {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'}]
       let currentRole = localStorage.getItem('currentRole')
       switch (currentRole) {
         case 'user':
@@ -72,10 +75,10 @@ export default {
           that.drectorys = drectorys2
           break
         case 'teacher':
-          that.drectorys = drectorys1
+          that.drectorys = drectorys3
           break
         case 'student':
-          that.drectorys = drectorys1
+          that.drectorys = drectorys3
           break
       }
     },
