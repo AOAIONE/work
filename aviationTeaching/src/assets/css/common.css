@@ -98,7 +98,11 @@
   font-style: normal;
   font-size: 28px;
   color: #000000;
-  line-height: 86px;
+  word-wrap: break-word;
+  overflow: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* line-height: 86px; */
   border-bottom: 1px solid rgba(242, 242, 242, 1);
   background: inherit;
   background-color: rgba(255, 255, 255, 1);
