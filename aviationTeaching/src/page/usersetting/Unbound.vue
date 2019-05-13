@@ -49,6 +49,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.item {
+  margin-top: 110px;
+}
 .unbound_content {
   width: 740px;
   height: 118px;
@@ -65,6 +68,7 @@ export default {
   margin-left: 10px;
 }
 .unbound_content p {
+  display: inline-block;
   margin-left: 10px;
   margin-top: 10px;
 }

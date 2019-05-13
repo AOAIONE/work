@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pdbottom">
     <detail-title :title="title"></detail-title>
     <div class="video_wrap">
       <my-player :video="video"></my-player>

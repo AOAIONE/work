@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
         <div class="useritem ax_default">
             <div class="item_content">

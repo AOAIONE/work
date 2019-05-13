@@ -15,7 +15,7 @@
           <span class="flex2 ">身份证</span>
           <span class="flex1 ">课件分配</span>
         </div>
-        <div class="scall_wrapper1" ref="wrapper">
+        <div class="scall_wrapper" ref="wrapper">
           <div v-if="teachers.length!==0" class="warpper_content">
             <div class="table_content table_common " v-for="teacher in teachers " :key="teacher.user_id ">
               <span class="flex1 ">
@@ -130,7 +130,7 @@ export default {
       }
       designateTeacher(data).then(res => {
         if (res.data.is_success) {
-          teacher.is_designated = 1
+          window.location.reload()
         }
       })
     },
@@ -139,7 +139,7 @@ export default {
       let data = {'taskId': teacher.task_id}
       delDesignateTeacher(data).then(res => {
         if (res.data.is_success) {
-          teacher.is_designated = 0
+          window.location.reload()
         }
       })
     }
