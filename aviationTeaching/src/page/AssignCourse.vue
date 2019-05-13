@@ -78,9 +78,9 @@ export default {
         {id: 'all', value: '全部'}
       ],
       limits: [
+        {id: 'all', value: '全部'},
         {id: 'public', value: '公有'},
-        {id: 'private', value: '私有'},
-        {id: 'all', value: '所有'}
+        {id: 'private', value: '私有'}
       ],
       courses: [],
       type_id: 0,
@@ -112,13 +112,18 @@ export default {
         })
         let mobileSelect1 = new MobileSelect({
           trigger: '#trigger',
-          title: '选择课件',
+          title: '课件分类',
           wheels: [
             {data: that.courseLists}
           ],
           callback: function (indexArr, data) {
-            that.courseList = data[0].value
-            that.type_id = data[0].id
+            if (data[0].id === 'all') {
+              that.type_id = 0
+              that.courseList = '全部'
+            } else {
+              that.courseList = data[0].value
+              that.type_id = data[0].id
+            }
           },
           triggerDisplayData: false
         })
@@ -192,13 +197,8 @@ export default {
         {data: that.limits}
       ],
       callback: function (indexArr, data) {
-        if (data[0].id === 'tag') {
-          that.permission = '全部'
-          that.privilege = 'all'
-        } else {
-          this.permission = data[0].value
-          this.privilege = data[0].id
-        }
+        this.permission = data[0].value
+        this.privilege = data[0].id
       },
       triggerDisplayData: false
     })
