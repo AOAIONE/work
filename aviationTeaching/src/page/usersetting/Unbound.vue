@@ -2,7 +2,7 @@
   <div class="container">
     <detail-title :title="title"></detail-title>
     <div class="item unbound_content ax_default ">
-      <p> 是否确认解除绑定</p>
+      <span> 是否确认解除绑定</span>
     </div>
     <p class="operation">
       <a class="user_btn save_btn" @click="delBondWechat">确定</a>
@@ -66,10 +66,11 @@ export default {
   font-size: 28px;
   text-align: left;
   margin-left: 10px;
+  position: relative;
 }
-.unbound_content p {
-  display: inline-block;
-  margin-left: 10px;
-  margin-top: 10px;
+.unbound_content span {
+  position: absolute;
+  bottom: 70px;
+  left: 10px;
 }
 </style>

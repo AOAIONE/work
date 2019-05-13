@@ -1,7 +1,7 @@
 <template>
     <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
-        <div class="useritem ax_default">
+        <div class="ax_default">
             <div class="item_content">
                 <label class="content_left">姓名:</label>
                 <div class="content_right">
@@ -71,10 +71,10 @@
                 <textarea placeholder="请输入 " maxlength="300 " @input="descInput " v-model="user.note " />
                 <span>{{txtVal}}/300</span>
             </div>
-            <p class="operation ">
+            <div class="operation ">
                 <a @click="changeUser " class="user_btn save_btn ">保存</a>
                 <a @click="cancel" class="user_btn cancel_btn ">取消</a>
-            </p>
+            </div>
         </div>
         <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
     </div>

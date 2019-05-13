@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <detail-title :title="title"></detail-title>
-    <div class="item role_content ax_default ">您当前的身份是“{{role}}”</div>
+    <div class="conitem role_content ax_default ">您当前的身份是“{{role}}”</div>
     <a v-if="role!==tab.text" class="conver_btn" v-for="tab in tabs" :key="tab.id" @click="coverRole(tab.role)">切换为“{{tab.text}}”</a>
     <bottom-tabbar :activeStatus="'user'"></bottom-tabbar>
   </div>
@@ -57,8 +57,8 @@ export default {
     // 页面初始化之前请求用户角色
     getRole: function () {
       let that = this
-      let role = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法解密
-      let roleMapperNames = role.roleMapperNames
+      let allRole = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))) // 使用CryptoJS方法解密
+      let roleMapperNames = allRole.roleMapperNames
       roleMapperNames.forEach(e => {
         let tab = {}
         switch (e.roleName) {
@@ -107,7 +107,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.item {
+.conitem {
   margin-top: 110px;
 }
 .role_content {
