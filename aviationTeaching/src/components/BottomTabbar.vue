@@ -38,7 +38,7 @@
                 </span>
             </p>
             <p>
-                <span class="item_bottom">信息</span>
+                <span class="item_bottom">消息</span>
             </p>
         </a>
         <a href="javascript:;" :class="{activeMenu:activeStatus==='user'}" @click="toRoute('/userIndex')" class="tabbar__item">

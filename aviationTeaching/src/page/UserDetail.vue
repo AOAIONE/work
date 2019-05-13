@@ -113,7 +113,7 @@ export default {
       delCourseAssign(data).then(res => {
         if (res.data.is_success) {
           swal('', '解除分配成功!', 'success').then((value) => {
-            this.$router.push({path: '/selectTeacher', query: {'id': this.detail.id}})
+            this.$router.push({path: '/selectUser', query: {'id':  this.detail.id}})
           })
         }
       })

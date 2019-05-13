@@ -1,7 +1,7 @@
 <template>
-  <div class="courseList_container container">
+  <div class="container">
     <detail-title :title="title"></detail-title>
-    <div class="top_container">
+    <div class="courseList_container">
       <div class="select_bar ax_default">
         <div class="bar_right">
           <span>课件分类:&nbsp;</span>

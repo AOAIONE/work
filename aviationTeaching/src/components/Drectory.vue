@@ -36,10 +36,10 @@ export default {
   font-weight: 410;
   font-style: normal;
 }
-.drectory_container:nth-child(3n) {
+.drectory_container:nth-of-type(3n) {
   border-right: 0;
 }
-.drectory_container:nth-child(3) ~ .drectory_container {
+.drectory_container:nth-of-type(3) ~ .drectory_container {
   border-bottom: 0;
 }
 .content {
