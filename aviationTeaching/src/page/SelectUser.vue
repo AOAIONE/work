@@ -8,7 +8,7 @@
           <a @click="serach()" class="search_btn ">搜索</a>
         </div>
       </div>
-      <div class="table_wrap ax_default ">
+      <div class="table_wrap1 ax_default ">
         <div class="table_title table_common ">
           <span class="flex1 ">教员ID</span>
           <span class="flex1 ">姓名</span>
