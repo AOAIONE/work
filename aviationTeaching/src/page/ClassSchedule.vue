@@ -323,8 +323,9 @@ export default {
   }
 }
 </script>
-<style type='less' scoped>
+<style lang='less' scoped>
 @import "../styles/course-common.less";
+@deep: ~'>>>';
 .Courses-head,
 .Courses-content ul {
   display: flex;
@@ -358,23 +359,25 @@ export default {
   right: 4px;
   background-size: 90%;
 }
-.datepicker >>> input{
-  width: 200px;
-  font-size: 24px;
-  border-color:#999;
-  height: auto;
-  padding: 5px;
-}
-.datepicker >>> .datepicker-popup,.datepicker >>> .calendar-head a{
-  font-size: 24px;
-}
-.datepicker >>> .calendar-head {
-  padding: 10px 0;
-}
-.datepicker >>> .calendar-head a{
-  font-size: 30px;
-}
-.datepicker >>> .calendar-body{
-  width: 300px;
+.datepicker {
+   @{deep} input{
+    width: 200px;
+    font-size: 24px;
+    border-color:#999;
+    height: auto;
+    padding: 5px;
+  }
+  @{deep} .datepicker-popup,@{deep} .calendar-head a{
+    font-size: 24px;
+  }
+  @{deep} .calendar-head {
+    padding: 10px 0;
+  }
+  @{deep} .calendar-head a{
+    font-size: 30px;
+  }
+  @{deep} .calendar-body{
+    width: 300px;
+  }
 }
 </style>
