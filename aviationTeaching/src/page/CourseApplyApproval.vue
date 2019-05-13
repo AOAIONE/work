@@ -80,11 +80,10 @@ export default {
         {id: 'all', value: '全部'}
       ],
       limits: [
+        {id: '4', value: '全部'},
         {id: '1', value: '申请中'},
         {id: '2', value: '已通过'},
-        {id: '3', value: '未通过'},
-        {id: '4', value: '全部'}
-
+        {id: '3', value: '未通过'}
       ],
       courses: [],
       type_id: 0,
@@ -133,7 +132,7 @@ export default {
         })
         let mobileSelect1 = new MobileSelect({
           trigger: '#trigger',
-          title: '选择课件',
+          title: '课件分类',
           wheels: [
             {data: that.courseLists}
           ],

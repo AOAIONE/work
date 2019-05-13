@@ -117,11 +117,11 @@ export default {
     },
     // 跳转到学员详情，已分配的学员才能进入
     toDetail: function (student) {
-      if (student.is_designated === 0) {
-        return false
-      } else {
-        this.$router.push({path: '/teacherDetail', query: {'task_id': student.task_id}})
-      }
+    //   if (student.is_designated === 0) {
+    //     return false
+    //   } else {
+      this.$router.push({path: '/teacherDetail', query: {'task_id': student.task_id}})
+    //   }
     },
     // 课件指派学员
     courseAssign: function (student) {

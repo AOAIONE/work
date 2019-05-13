@@ -84,11 +84,10 @@ export default {
         {id: 'all', value: '全部'}
       ],
       limits: [
+        {id: '4', value: '全部'},
         {id: '1', value: '申请中'},
         {id: '2', value: '已通过'},
-        {id: '3', value: '未通过'},
-        {id: '4', value: '全部'}
-
+        {id: '3', value: '未通过'}
       ],
       courses: [],
       type_id: 0,
@@ -144,8 +143,8 @@ export default {
           ],
           callback: function (indexArr, data) {
             if (data[0].id === 'all') {
-              that.courseList = '全部'
               that.type_id = 0
+              that.courseList = '全部'
             } else {
               that.courseList = data[0].value
               that.type_id = data[0].id
