@@ -53,7 +53,6 @@ export default {
   margin-top: 110px;
 }
 .unbound_content {
-  width: 740px;
   height: 118px;
   background: inherit;
   background-color: rgba(255, 255, 255, 1);
@@ -66,6 +65,7 @@ export default {
   font-size: 28px;
   text-align: left;
   margin-left: 10px;
+  margin-right: 10px;
   position: relative;
 }
 .unbound_content span {
