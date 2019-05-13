@@ -24,14 +24,14 @@ export default {
 <style lang="less" scoped>
 .drectory_container {
   float: left;
-  width: 250px;
+  width: calc(100% / 3);
   height: 230px;
   background: inherit;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
-  border: 1px solid rgba(242, 242, 242, 1);
-  // border-top: 0;
-  // border-left: 0;
+  border: 1px solid #f2f2f2;
+  border-left: 0;
+  margin-top: -1px;
   font-family: "FontAwesome Regular", "FontAwesome";
   font-weight: 410;
   font-style: normal;
@@ -39,9 +39,9 @@ export default {
 .drectory_container:nth-of-type(3n) {
   border-right: 0;
 }
-.drectory_container:nth-of-type(3) ~ .drectory_container {
-  border-bottom: 0;
-}
+// .drectory_container:nth-of-type(3) ~ .drectory_container {
+//   border-bottom: 0;
+// }
 .content {
   margin-top: 64px;
   word-wrap: break-word;
