@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <div class="mgtop"></div>
     <div class="user_name">{{title}}</div>
     <p v-for="tag in tags" :key="tag.id" class="user_content ax_default" @click="toRoute(tag.path)">
       <span class="iconfont user_icon" v-html="tag.icon"></span>{{tag.title}}
