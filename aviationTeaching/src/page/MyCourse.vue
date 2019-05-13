@@ -48,7 +48,7 @@
                             </span>
                         </div>
                     </div>
-                    <data-loading v-else></data-loading>
+                    <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
                 </div>
             </div>
         </div>
@@ -90,7 +90,10 @@ export default {
       page_count: 15,
       keyword: '',
       privilege: 'all',
-      disRepet: false
+      disRepet: false,
+      isLoading: false,
+      notData: false
+
     }
   },
   watch: {
@@ -136,6 +139,7 @@ export default {
     },
     getCourseList: function (disRepet) {
       let that = this
+      this.isLoading = true
       let data = {
         'type_id': that.type_id,
         'privilege': that.privilege,
@@ -152,6 +156,10 @@ export default {
           arr1 = []
         }
         this.courses = [...arr1, ...arr]
+        this.isLoading = false
+        if (this.courses.length === 0) {
+          this.notData = true
+        }
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this

@@ -12,7 +12,6 @@
             <a class="albtn" v-if="permissions==='designated'">指定阅读</a>
             <a class="albtn" v-if="permissions==='apply_checking'">申请审核中</a>
             <a class="albtn" v-if="permissions==='mine'">我的课件</a>
-
           </div>
         </div>
       </div>

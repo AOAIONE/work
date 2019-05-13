@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-                <data-loading v-else></data-loading>
+                <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
             </div>
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -79,8 +79,9 @@ export default {
       page_count: 15,
       keyword: '',
       study_status: 2,
-      disRepet: false
-
+      disRepet: false,
+      isLoading: false,
+      notData: false
     }
   },
   mounted () {
@@ -101,6 +102,7 @@ export default {
   },
   methods: {
     getReadStaticList: function (disRepet) {
+      this.isLoading = true
       let data = {
         'study_status': this.study_status,
         'course_ware_id': this.$route.query.id,
@@ -119,6 +121,10 @@ export default {
             arr1 = []
           }
           this.users = [...arr1, ...arr]
+          this.isLoading = false
+          if (this.users.length === 0) {
+            this.notData = true
+          }
           this.$nextTick(() => {
             if (!this.scroll) {
               let that = this

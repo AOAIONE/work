@@ -52,7 +52,7 @@
               </span>
             </div>
           </div>
-          <div v-else class="notData">-----没有数据-----</div>
+          <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
         </div>
       </div>
     </div>
@@ -63,13 +63,16 @@
 import MobileSelect from 'mobile-select'
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
+import dataLoading from '@/components/DataLoading'
+
 import { applyCourseList, courseTypeList } from '@/service/service'
 
 export default {
   name: 'CourseApplyApproval',
   components: {
     'detail-title': detailTitle,
-    'bottom-tabbar': bottomTabbar
+    'bottom-tabbar': bottomTabbar,
+    'data-loading': dataLoading
   },
   data () {
     return {
@@ -91,7 +94,9 @@ export default {
       page_count: 15,
       keyword: '',
       status: 'all',
-      disRepet: false
+      disRepet: false,
+      isLoading: false,
+      notData: false
     }
   },
   filters: {
@@ -153,6 +158,7 @@ export default {
       this.$router.push({path: '/courseApprovalDetail', query: {'application_id': id}})
     },
     getCourseList: function (disRepet) {
+      this.isLoading = true
       let data = {
         'type_id': this.type_id,
         'privilege': this.privilege,
@@ -169,6 +175,10 @@ export default {
           arr1 = []
         }
         this.courses = [...arr1, ...arr]
+        this.isLoading = false
+        if (this.courses.length === 0) {
+          this.notData = true
+        }
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this

@@ -52,7 +52,7 @@
               </span>
             </div>
           </div>
-          <data-loading v-else></data-loading>
+          <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
         </div>
       </div>
     </div>
@@ -96,8 +96,9 @@ export default {
       keyword: '',
       privilege: '',
       status: 'all',
-      disRepet: false
-
+      disRepet: false,
+      isLoading: false,
+      notData: false
     }
   },
   watch: {
@@ -156,6 +157,7 @@ export default {
     },
     getApplyCourseList: function (disRepet) {
       let that = this
+      that.isLoading = true
       let data = {
         'type_id': that.type_id,
         'privilege': '',
@@ -172,6 +174,10 @@ export default {
           arr1 = []
         }
         this.courses = [...arr1, ...arr]
+        this.isLoading = false
+        if (this.courses.length === 0) {
+          this.notData = true
+        }
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
