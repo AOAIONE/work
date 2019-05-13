@@ -1,7 +1,7 @@
 <template>
     <div class="container pdbottom">
         <detail-title :title="title"></detail-title>
-        <div class="ax_default">
+        <div class="item ax_default">
             <div class="item_content">
                 <label class="content_left">姓名:</label>
                 <div class="content_right">
