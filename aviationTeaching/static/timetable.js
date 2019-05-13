@@ -68,7 +68,7 @@
       courseItems.style.height = '100%'
 
       var head = document.createElement('div')
-      head.style= 'position:absolute;z-index:1;display:flex;width:100%;background-color:#fff'
+      head.style= 'position:absolute;z-index:0;display:flex;width:100%;background-color:#fff'
       head.className = 'Courses-head'
       weekDate.forEach(function (item, index) {
         var weekItem = document.createElement('div')
