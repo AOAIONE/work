@@ -3,7 +3,7 @@
   <div class="container">
     <c-title :title="title1"></c-title>
     <div class="top_container">
-    <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
+      <c-drectory v-for="drectory in drectorys" :key="drectory.id" :drectory="drectory"></c-drectory>
     </div>
     <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
   </div>
@@ -46,7 +46,7 @@ export default {
       ]
       let drectorys3 = [{text: '课件目录', id: 1, path: '/courseList', icon: '&#xe8ab;'},
         {text: '我申请的课件', id: 4, path: '/myApplyCourse', icon: '&#xe620;'},
-        {text: '教员指派课件', id: 5, path: '/teacherAssignCourse', icon: '&#xe61f;'}]
+        {text: '教员指派课件', id: 5, path: '/assignRead', icon: '&#xe61f;'}]
       let currentRole = localStorage.getItem('currentRole')
       switch (currentRole) {
         case 'user':

@@ -53,7 +53,6 @@ export default {
     'detail-title': detailTitle,
     'bottom-tabbar': bottomTabbar,
     'data-loading': dataLoading
-
   },
   data () {
     return {

@@ -52,7 +52,7 @@ export default {
   },
   data () {
     return {
-      title: '指定阅读课件',
+      title: '',
       courses: [],
       keyword: '',
       page_index: 1,
@@ -62,6 +62,11 @@ export default {
     }
   },
   mounted () {
+    if (Number(this.$route.query.id) === 5) {
+      this.title = '教员指派课件'
+    } else {
+      this.title = '指定阅读课件'
+    }
     this.getCourseList()
   },
   methods: {
