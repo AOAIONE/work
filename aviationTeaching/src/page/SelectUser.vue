@@ -33,7 +33,7 @@
               </span>
             </div>
           </div>
-          <data-loading v-else></data-loading>
+          <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
         </div>
       </div>
     </div>
@@ -61,7 +61,9 @@ export default {
       keyword: '',
       page_index: 1,
       page_count: 15,
-      disRepet: false
+      disRepet: false,
+      isLoading: false,
+      notData: false
     }
   },
   mounted () {
@@ -69,6 +71,7 @@ export default {
   },
   methods: {
     getTeacherList: function (disRepet) {
+      this.isLoading = true
       let data = {
         'course_ware_id': this.$route.query.id,
         'keyword': this.keyword,
@@ -83,6 +86,10 @@ export default {
           arr1 = []
         }
         this.teachers = [...arr1, ...arr]
+        this.isLoading = false
+        if (this.teachers.length === 0) {
+          this.notData = true
+        }
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this

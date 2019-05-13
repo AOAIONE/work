@@ -12,7 +12,7 @@
           <span class="info_content_right">{{info.add_time}}</span>
         </p>
       </div>
-      <data-loading v-else></data-loading>
+      <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
     </div>
     <bottom-tabbar :activeStatus="'news'"></bottom-tabbar>
   </div>
@@ -37,8 +37,9 @@ export default {
       news: [],
       page_index: 1,
       page_count: 15,
-      disRepet: false
-
+      disRepet: false,
+      isLoading: false,
+      notData: false
     }
   },
   methods: {
@@ -61,6 +62,7 @@ export default {
       this.getMessageList(true)
     },
     getMessageList: function (disRepet) {
+      this.isLoading = true
       let data = {
         'is_read': this.isRead,
         'keyword': '',
@@ -76,6 +78,10 @@ export default {
             arr1 = []
           }
           this.news = [...arr1, ...news]
+          this.isLoading = false
+          if (this.news.length === 0) {
+            this.notData = true
+          }
           this.$nextTick(() => {
             if (!this.scroll) {
               let that = this

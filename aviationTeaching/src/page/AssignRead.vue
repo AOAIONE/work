@@ -29,7 +29,7 @@
             </span>
           </div>
         </div>
-        <data-loading v-else></data-loading>
+        <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
       </div>
     </div>
     <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
@@ -57,7 +57,9 @@ export default {
       keyword: '',
       page_index: 1,
       page_count: 15,
-      disRepet: false
+      disRepet: false,
+      isLoading: false,
+      notData: false
 
     }
   },
@@ -71,6 +73,7 @@ export default {
   },
   methods: {
     getCourseList: function (disRepet) {
+      this.isLoading = true
       let data = {
         'keyword': this.keyword,
         'page_index': this.page_index,
@@ -84,6 +87,10 @@ export default {
           arr1 = []
         }
         this.courses = [...arr1, ...arr]
+        this.isLoading = false
+        if (this.courses.length === 0) {
+          this.notData = true
+        }
         this.$nextTick(() => {
           if (!this.scroll) {
             let that = this
