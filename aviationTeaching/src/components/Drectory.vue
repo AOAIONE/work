@@ -30,8 +30,8 @@ export default {
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   border: 1px solid rgba(242, 242, 242, 1);
-  border-top: 0;
-  border-left: 0;
+  // border-top: 0;
+  // border-left: 0;
   font-family: "FontAwesome Regular", "FontAwesome";
   font-weight: 410;
   font-style: normal;
