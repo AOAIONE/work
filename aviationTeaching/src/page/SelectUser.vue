@@ -122,7 +122,6 @@ export default {
     },
     // 课件指派教员
     courseAssign: function (teacher) {
-      debugger
       let data = {
         'teacherId': teacher.user_id,
         'courseWareId': this.$route.query.id
