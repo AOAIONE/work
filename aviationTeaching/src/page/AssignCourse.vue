@@ -153,6 +153,8 @@ export default {
         that.isLoading = false
         if (this.courses.length === 0) {
           this.notData = true
+        } else {
+          this.notData = false
         }
         this.$nextTick(() => {
           if (!this.scroll) {

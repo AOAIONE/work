@@ -90,6 +90,8 @@ export default {
         this.isLoading = false
         if (this.students.length === 0) {
           this.notData = true
+        } else {
+          this.notData = false
         }
         this.$nextTick(() => {
           if (!this.scroll) {
