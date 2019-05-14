@@ -65,7 +65,8 @@ export default {
         {text: '模拟机排课表', id: 4, path: '/ClassSchedule', icon: '&#xe625;'}]
       let drectorys3 = [{text: '课表', id: 1, path: '/classSchedule', icon: '&#xe639;'},
         {text: '课件中心', id: 2, path: '/courseCenter', icon: '&#xe63b;'},
-        {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'}]
+        {text: '消息通知', id: 3, path: '/news', icon: '&#xe608;'},
+        {text: '模拟机排课表', id: 4, path: '/ClassSchedule', icon: '&#xe625;'}]
       let currentRole = localStorage.getItem('currentRole')
       switch (currentRole) {
         case 'user':
