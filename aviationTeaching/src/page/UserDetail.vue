@@ -30,7 +30,8 @@
                 <label class="content_left">课件分配:</label>
                 <div class="content_right">
                     <div class="content_right_wrap">
-                        <a class="course_tag1" @click="courseDelAssign">解除分配</a>
+                        <a class="course_tag1" v-if="detail.designated_id===0" @click="courseAssign(detail)">课件分配</a>
+                        <a class="course_tag" v-else @click="courseDelAssign">解除分配</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +83,7 @@
 import detailTitle from '@/components/DetailTitle'
 import bottomTabbar from '@/components/BottomTabbar'
 import detailContent from '@/components/DetailContent'
-import { teacherDetail, delCourseAssign, completeTask } from '@/service/service'
+import { teacherDetail, delCourseAssign, completeTask, designateTeacher } from '@/service/service'
 
 export default {
   name: 'UserDetail',
@@ -100,7 +101,7 @@ export default {
   },
   methods: {
     getTeacherDetail: function () {
-      let data = {'taskId': this.$route.query.task_id}
+      let data = {'taskId': this.$route.query.task_id, 'teacherId': this.$route.query.teacherId}
       teacherDetail(data).then(res => {
         this.designatedUserInfo = res.data.data.designated_user_info
         this.detail = res.data.data
@@ -112,9 +113,27 @@ export default {
       let data = {'taskId': this.$route.query.task_id}
       delCourseAssign(data).then(res => {
         if (res.data.is_success) {
-          swal('', '解除分配成功!', 'success').then((value) => {
-            this.$router.push({path: '/selectUser', query: {'id':  this.detail.id}})
+          swal('', '课件解除分配成功!', 'success').then((value) => {
+            this.$router.push({path: '/selectUser', query: {'id': this.$route.query.courseWareId}})
           })
+        } else {
+          swal('', '课件解除分配失败!', 'error')
+        }
+      })
+    },
+    // 课件指派教员
+    courseAssign: function (detail) {
+      let data = {
+        'teacherId': this.$route.query.teacherId,
+        'courseWareId': this.$route.query.courseWareId
+      }
+      designateTeacher(data).then(res => {
+        if (res.data.is_success) {
+          swal('', '课件分配成功!', 'success').then((value) => {
+            this.$router.push({path: '/selectUser', query: {'id': this.$route.query.courseWareId}})
+          })
+        } else {
+          swal('', '课件分配失败!', 'error')
         }
       })
     },

@@ -127,7 +127,7 @@ export default {
     //   if (student.is_designated === 0) {
     //     return false
     //   } else {
-      this.$router.push({path: '/teacherDetail', query: {'task_id': student.task_id}})
+      this.$router.push({path: '/teacherDetail', query: {'task_id': student.task_id, 'studentId': student.user_id, 'courseWareId': this.$route.query.id}})
     //   }
     },
     // 课件指派学员

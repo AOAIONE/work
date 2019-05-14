@@ -126,7 +126,7 @@ export default {
       // if (teacher.is_designated === 0) {
       //   return false
       // } else {
-      this.$router.push({path: '/userDetail', query: {'task_id': teacher.task_id}})
+      this.$router.push({path: '/userDetail', query: {'task_id': teacher.task_id, 'teacherId': teacher.user_id, 'courseWareId': this.$route.query.id}})
       // }
     },
     // 课件指派教员
