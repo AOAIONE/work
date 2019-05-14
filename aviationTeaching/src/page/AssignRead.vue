@@ -1,40 +1,42 @@
 <template>
   <div class="container">
     <detail-title :title="title"></detail-title>
-    <div class="select_bar ax_default pdt10">
-      <div class="search_bar mar_top ax_default ">
-        <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" v-model="keyword" />
-        <a @click="serach()" class="search_btn ">搜索</a>
-      </div>
-    </div>
-    <div class="table_wrap1 ax_default ">
-      <div class="table_title table_common ">
-        <span class="flex1 ">课件ID</span>
-        <span class="flex2 ">课件标题</span>
-        <span class="flex1 ">发布者</span>
-        <span class="flex1 ">指派时间</span>
-      </div>
-      <div class="scall_wrapper" ref="wrapper">
-        <div v-if="courses.length!==0" class="warpper_content">
-          <div class="table_content table_common " v-for="course in courses " :key="course.user_id ">
-            <span class="flex1 ">
-              <a class="linka " @click="toDetail(course.designated_id)">{{course.id}}</a>
-            </span>
-            <span class="flex2 ">
-              <a class="linka " @click="toDetail(course.designated_id)">{{course.name}}</a>
-            </span>
-            <span class="flex1 ">
-              {{course.publisher_name}}
-            </span>
-            <span class="flex1 ">
-              {{course.designated_time}}
-            </span>
-          </div>
+    <div class="courseList_container">
+      <div class="select_bar ax_default pdt10">
+        <div class="search_bar ax_default ">
+          <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" v-model="keyword" />
+          <a @click="serach()" class="search_btn ">搜索</a>
         </div>
-        <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
       </div>
+      <div class="table_wrap1 ax_default ">
+        <div class="table_title table_common ">
+          <span class="flex1 ">课件ID</span>
+          <span class="flex2 ">课件标题</span>
+          <span class="flex1 ">发布者</span>
+          <span class="flex1 ">指派时间</span>
+        </div>
+        <div class="scall_wrapper" ref="wrapper">
+          <div v-if="courses.length!==0" class="warpper_content">
+            <div class="table_content table_common " v-for="course in courses " :key="course.user_id ">
+              <span class="flex1 ">
+                <a class="linka " @click="toDetail(course.designated_id)">{{course.id}}</a>
+              </span>
+              <span class="flex2 ">
+                <a class="linka " @click="toDetail(course.designated_id)">{{course.name}}</a>
+              </span>
+              <span class="flex1 ">
+                {{course.publisher_name}}
+              </span>
+              <span class="flex1 ">
+                {{course.designated_time}}
+              </span>
+            </div>
+          </div>
+          <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
+        </div>
+      </div>
+      <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
-    <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
   </div>
 </template>
 <script>

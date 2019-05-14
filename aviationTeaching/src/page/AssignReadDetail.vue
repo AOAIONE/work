@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="detail">
+        <div class="courseList_container">
             <div class="video_wrap">
                 <my-player :video="video"></my-player>
             </div>
@@ -48,8 +48,8 @@
                     </div>
                 </div>
             </div>
-            <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
         </div>
+        <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
 </template>
 <script>
@@ -122,8 +122,11 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.detail {
-  margin-bottom: 200px;
+.courseList_container {
+  height: 100%;
+  margin-top: 110px;
+  margin-bottom: 110px;
+  box-sizing: border-box;
 }
 .myitem {
   margin-top: 70px;
@@ -150,7 +153,7 @@ export default {
 .video_wrap {
   width: 750px;
   height: 408px;
-  margin-top: 100px;
+  //   margin-top: 100px;
   -webkit-overflow-scrolling: touch;
   // position: relative;
   // overflow-y: scroll;

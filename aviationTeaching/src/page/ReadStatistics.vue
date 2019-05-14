@@ -1,47 +1,49 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="select_bar ax_default">
-            <span>结业状态:&nbsp;</span>
-            <div id="trigger" class="select_wrap">
-                <select onmousedown="javascript:return false;" class="select_common">
-                    <option>{{courseList}}</option>
-                </select>
-            </div>
-            <div class="bar_right">
-                <input placeholder="请输入课程代码、课程课号" v-model="keyword" class="search_input" />
-                <a class="search_btn" @click="getReadStaticList(true)">搜索</a>
-            </div>
-        </div>
-        <div class="table_wrap ax_default">
-            <div class="table_title table_common">
-                <span class="flex1">用户ID</span>
-                <span class="flex1">姓名</span>
-                <span class="flex1">身份类型</span>
-                <span class="flex1">阅读方式</span>
-                <span class="flex2">查阅总时长</span>
-            </div>
-            <div class="scall_wrapper" ref="wrapper">
-                <div v-if="users.length!==0" class="warpper_content">
-                    <div class="table_content table_common" v-for="user in users" :key="user.designated_user_info|getUserId">
-                        <span class="flex1">
-                            <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getUserId}}</a>
-                        </span>
-                        <span class="flex1">
-                            <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getName}}</a>
-                        </span>
-                        <span class="flex1">
-                            {{user.designated_user_info | getRole}}
-                        </span>
-                        <span class="flex1">
-                            {{user.read_type}}
-                        </span>
-                        <span class="flex2">
-                            {{user.total_learning_time}}
-                        </span>
-                    </div>
+        <div class="courseList_container">
+            <div class="select_bar ax_default">
+                <span>结业状态:&nbsp;</span>
+                <div id="trigger" class="select_wrap">
+                    <select onmousedown="javascript:return false;" class="select_common">
+                        <option>{{courseList}}</option>
+                    </select>
                 </div>
-                <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
+                <div class="bar_right">
+                    <input placeholder="请输入课程代码、课程课号" v-model="keyword" class="search_input" />
+                    <a class="search_btn" @click="getReadStaticList(true)">搜索</a>
+                </div>
+            </div>
+            <div class="table_wrap ax_default">
+                <div class="table_title table_common">
+                    <span class="flex1">用户ID</span>
+                    <span class="flex1">姓名</span>
+                    <span class="flex15">身份类型</span>
+                    <span class="flex15">阅读方式</span>
+                    <span class="flex15">查阅总时长</span>
+                </div>
+                <div class="scall_wrapper" ref="wrapper">
+                    <div v-if="users.length!==0" class="warpper_content">
+                        <div class="table_content table_common" v-for="user in users" :key="user.designated_user_info|getUserId">
+                            <span class="flex1">
+                                <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getUserId}}</a>
+                            </span>
+                            <span class="flex1">
+                                <a class="linka" @click="toRoute(user)">{{user.designated_user_info | getName}}</a>
+                            </span>
+                            <span class="flex1">
+                                {{user.designated_user_info | getRole}}
+                            </span>
+                            <span class="flex1">
+                                {{user.read_type}}
+                            </span>
+                            <span class="flex1.5">
+                                {{user.total_learning_time}}
+                            </span>
+                        </div>
+                    </div>
+                    <data-loading :isLoading="isLoading" :notData="notData"></data-loading>
+                </div>
             </div>
         </div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
