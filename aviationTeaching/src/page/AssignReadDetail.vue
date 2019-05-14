@@ -1,53 +1,55 @@
 <template>
-    <div class="container pdbottom">
+    <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="video_wrap">
-            <my-player :video="video"></my-player>
+        <div class="detail">
+            <div class="video_wrap">
+                <my-player :video="video"></my-player>
+            </div>
+            <div class="ax_default">
+                <course-base-info :courseBase="detail"></course-base-info>
+                <div class="item_content">
+                    <label class="content_left">指派时间:</label>
+                    <div class="content_right">
+                        <div class="content_right_wrap">
+                            {{detail.designated_time}}
+                        </div>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <label class="content_left">状态:</label>
+                    <div class="content_right">
+                        <div class="content_right_wrap">
+                            {{detail.learning_status}}
+                        </div>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <label class="content_left">学习次数:</label>
+                    <div class="content_right">
+                        <div class="content_right_wrap">
+                            {{detail.learning_count}}
+                        </div>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <label class="content_left">总学习时长:</label>
+                    <div class="content_right">
+                        <div class="content_right_wrap">
+                            {{detail.total_learning_time}}
+                        </div>
+                    </div>
+                </div>
+                <div class="item_content">
+                    <label class="content_left">最近学习时间:</label>
+                    <div class="content_right">
+                        <div class="content_right_wrap">
+                            {{detail.last_learning_time}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
         </div>
-        <div class="ax_default">
-            <course-base-info :courseBase="detail"></course-base-info>
-            <div class="item_content">
-                <label class="content_left">指派时间:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.designated_time}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">状态:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.learning_status}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">学习次数:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.learning_count}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">总学习时长:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.total_learning_time}}
-                    </div>
-                </div>
-            </div>
-            <div class="item_content">
-                <label class="content_left">最近学习时间:</label>
-                <div class="content_right">
-                    <div class="content_right_wrap">
-                        {{detail.last_learning_time}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
 </template>
 <script>
@@ -120,6 +122,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.detail {
+  margin-bottom: 200px;
+}
 .myitem {
   margin-top: 70px;
 }
