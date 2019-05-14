@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="select_bar item ax_default">
+        <div class="select_bar ax_default">
             <span>结业状态:&nbsp;</span>
             <div id="trigger" class="select_wrap">
                 <select onmousedown="javascript:return false;" class="select_common">

@@ -203,6 +203,6 @@ export default {
 
 }
 </script>
-<style type='less'>
+<style lang='less' scoped>
 @import "../styles/course-common.less";
 </style>

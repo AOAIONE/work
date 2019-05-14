@@ -1,9 +1,11 @@
 <template>
   <div class="container">
     <detail-title :title="title"></detail-title>
-    <div class="search_bar mar_top ax_default ">
-      <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" v-model="keyword" />
-      <a @click="serach()" class="search_btn ">搜索</a>
+    <div class="select_bar ax_default pdt10">
+      <div class="search_bar mar_top ax_default ">
+        <input placeholder="请输入关键词,例如: 教员ID、姓名、手机号" class="search_input" v-model="keyword" />
+        <a @click="serach()" class="search_btn ">搜索</a>
+      </div>
     </div>
     <div class="table_wrap1 ax_default ">
       <div class="table_title table_common ">
@@ -130,6 +132,6 @@ export default {
 
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "../styles/course-common.less";
 </style>
