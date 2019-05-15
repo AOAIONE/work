@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div class="user_name">{{title}}</div>
-    <img class="user_head" :src="userPic">
+    <div class="user_head">
+      <img :src="userPic">
+    </div>
     <p v-for="tag in tags" :key="tag.id" class="user_content ax_default" @click="toRoute(tag.path)">
       <span class="iconfont user_icon" v-html="tag.icon"></span>{{tag.title}}
     </p>
@@ -38,7 +40,6 @@ export default {
   mounted () {
     let that = this
     myInfo().then(res => {
-      debugger
       this.userPic = res.data.data.avatar_url
     })
     let currentRole = localStorage.getItem('currentRole')
