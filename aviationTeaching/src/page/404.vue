@@ -7,6 +7,9 @@
                 <a class="btn" @click="toHome">返回首页</a>
                 <a class="btn btn_brown" @click="go">返回上一步</a>
             </div>
+            <div class="pic">
+                <img src="../assets/404.gif">
+            </div>
         </div>
     </div>
 </template>
@@ -85,5 +88,15 @@ export default {
 .error404 .info .btn_brown {
   border-color: #7b7b7b;
   background-color: #9f9f9f;
+}
+.error404 .pic {
+  width: 100%;
+  clear: both;
+  text-align: center;
+  margin-top: 0;
+}
+.error404 .pic img {
+  max-width: 560px;
+  margin-top: 80px;
 }
 </style>
