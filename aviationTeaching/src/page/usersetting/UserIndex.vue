@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="user_name">{{title}}</div>
+    <img class="user_head" :src="userPic">
     <p v-for="tag in tags" :key="tag.id" class="user_content ax_default" @click="toRoute(tag.path)">
       <span class="iconfont user_icon" v-html="tag.icon"></span>{{tag.title}}
     </p>
@@ -9,6 +10,7 @@
 </template>
 <script>
 import bottomTabbar from '@/components/BottomTabbar'
+import { myInfo } from '@/service/service'
 
 export default {
   name: 'UserIndex',
@@ -24,7 +26,8 @@ export default {
         {title: '系统意见反馈', id: 3, path: '/feedBack', icon: '&#xe6ae;'},
         {title: '切换身份', id: 4, path: '/converRole', icon: '&#xe60b;'},
         {title: '解除绑定', id: 5, path: '/unbound', icon: '&#xe67f;'}
-      ]
+      ],
+      userPic: ''
     }
   },
   methods: {
@@ -34,6 +37,10 @@ export default {
   },
   mounted () {
     let that = this
+    myInfo().then(res => {
+      debugger
+      this.userPic = res.data.data.avatar_url
+    })
     let currentRole = localStorage.getItem('currentRole')
     let roles = JSON.parse(this.$myUtil.decrypt(localStorage.getItem('role'))).roleMapperNames // 使用CryptoJS方法解密
     for (let i = 0; i < roles.length; i++) {

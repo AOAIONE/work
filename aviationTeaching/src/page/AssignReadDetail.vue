@@ -1,54 +1,53 @@
 <template>
     <div class="container">
         <detail-title :title="title"></detail-title>
-        <div class="courseList_container">
-            <div class="video_wrap">
-                <my-player :video="video"></my-player>
+        <div class="video_wrap">
+            <my-player :video="video"></my-player>
+        </div>
+        <div class="ax_default">
+            <course-base-info :courseBase="detail"></course-base-info>
+            <div class="item_content">
+                <label class="content_left">指派时间:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.designated_time}}
+                    </div>
+                </div>
             </div>
-            <div class="ax_default">
-                <course-base-info :courseBase="detail"></course-base-info>
-                <div class="item_content">
-                    <label class="content_left">指派时间:</label>
-                    <div class="content_right">
-                        <div class="content_right_wrap">
-                            {{detail.designated_time}}
-                        </div>
+            <div class="item_content">
+                <label class="content_left">状态:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.learning_status}}
                     </div>
                 </div>
-                <div class="item_content">
-                    <label class="content_left">状态:</label>
-                    <div class="content_right">
-                        <div class="content_right_wrap">
-                            {{detail.learning_status}}
-                        </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">学习次数:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.learning_count}}
                     </div>
                 </div>
-                <div class="item_content">
-                    <label class="content_left">学习次数:</label>
-                    <div class="content_right">
-                        <div class="content_right_wrap">
-                            {{detail.learning_count}}
-                        </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">总学习时长:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.total_learning_time}}
                     </div>
                 </div>
-                <div class="item_content">
-                    <label class="content_left">总学习时长:</label>
-                    <div class="content_right">
-                        <div class="content_right_wrap">
-                            {{detail.total_learning_time}}
-                        </div>
-                    </div>
-                </div>
-                <div class="item_content">
-                    <label class="content_left">最近学习时间:</label>
-                    <div class="content_right">
-                        <div class="content_right_wrap">
-                            {{detail.last_learning_time}}
-                        </div>
+            </div>
+            <div class="item_content">
+                <label class="content_left">最近学习时间:</label>
+                <div class="content_right">
+                    <div class="content_right_wrap">
+                        {{detail.last_learning_time}}
                     </div>
                 </div>
             </div>
         </div>
+        <div class="stance"></div>
         <bottom-tabbar :activeStatus="'course'"></bottom-tabbar>
     </div>
 </template>
@@ -122,38 +121,19 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.courseList_container {
-  height: 100%;
-  margin-top: 110px;
-  margin-bottom: 110px;
-  box-sizing: border-box;
-}
-.myitem {
-  margin-top: 70px;
-}
-.ifr {
+// .courseList_container {
+//   height: 100%;
+//   padding-top: 110px;
+//   box-sizing: border-box;
+// }
+.stance {
   width: 100%;
-  height: 100%;
-}
-.btn {
-  display: inline-block;
-  width: 170px;
-  height: 52px;
-  color: #000000;
-  font-family: "微软雅黑";
-  font-weight: 410;
-  font-style: normal;
-  font-size: 24px;
-  text-align: center;
-  line-height: 52px;
-  box-sizing: border-box;
-  background-color: #fecd02;
-  border-radius: 10px;
+  height: 120px;
 }
 .video_wrap {
   width: 750px;
   height: 408px;
-  //   margin-top: 100px;
+  margin-top: 100px;
   -webkit-overflow-scrolling: touch;
   // position: relative;
   // overflow-y: scroll;

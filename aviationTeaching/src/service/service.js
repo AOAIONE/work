@@ -165,3 +165,7 @@ export const messageRead = data => {
 export const upLoadFile = data => {
   return file('/api/uploadFile', data)
 }
+// 当前登录信息
+export const myInfo = data => {
+  return get('/api/account/my_info', data)
+}
