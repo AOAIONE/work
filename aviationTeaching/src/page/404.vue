@@ -7,9 +7,9 @@
                 <a class="btn" @click="toHome">返回首页</a>
                 <a class="btn btn_brown" @click="go">返回上一步</a>
             </div>
-            <div class="pic">
+            <!-- <div class="pic">
                 <img src="../assets/404.gif">
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
